@@ -30,8 +30,9 @@
 <li><a href="#clearing-all-entries-code-clear-code">3.15. Clearing all entries : <code>clear</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-the-data">3.17. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-password-code">3.18. Encrypting data files <code>password</code></a></li>
-<li><a href="#text-prediction">3.19. Text prediction</a></li>
+<li><a href="#encrypting-data-files-code-password-code">3.18. Encrypting data files : <code>password</code></a></li>
+<li><a href="#email-contacts-code-mail-code">3.19. Email contacts : <code>mail</code></a></li>
+<li><a href="#text-prediction">3.20. Text prediction</a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -43,7 +44,7 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook Level 4 (AB4) is for those who <strong>prefer to use a desktop app for managing contacts</strong>. More importantly, AB4 is <strong>optimized for those who prefer to work with a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
+<p>This address book is optimised and made for corporate users. It is able to store essential and critical information of each contact and boasts a friendly user interface for efficiency. Autocompletion and an ability to approximate word search allows for productivity when information is needed fast. It features proper tagging and groupings for better organisation of contacts. It is also able to store confidential information securely and has a backup file to prevent any accidental deletion.</p>
 </div>
 </div>
 </div>
@@ -241,7 +242,7 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+<p>The search is not case insensitive.</p>
 </li>
 <li>
 <p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
@@ -250,7 +251,7 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <p>Only the name is searched.</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+<p>Partial words or words with typos will be matched too eg. 'Hangs' will be matched to 'Hans'</p>
 </li>
 <li>
 <p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
@@ -473,14 +474,14 @@ Format: <code>restore INDEX</code></p>
 <h3 id="exports-the-address-book-to-a-directory-code-export-code"><a class="link" href="#exports-the-address-book-to-a-directory-code-export-code">3.13. Exports the address book to a directory : <code>export</code></a></h3>
 <div class="paragraph">
 <p>Export the data to a designated directory with choice of filters.<br>
-Format: <code>export [-d OUTPUT_PATH] [-f FILTER_FIELD]</code></p>
+Format: <code>export [d/ OUTPUT_PATH] [f/ FILTER_FIELD]</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="imports-the-address-book-from-a-directory-code-import-code"><a class="link" href="#imports-the-address-book-from-a-directory-code-import-code">3.14. Imports the address book from a directory : <code>import</code></a></h3>
 <div class="paragraph">
 <p>Import the data from a designated directory with choice of filters.<br>
-Format: <code>import [-d TARGET_PATH] [-f FILTER_FIELD]</code></p>
+Format: <code>import [d/ TARGET_PATH] [f/ FILTER_FIELD]</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -505,14 +506,32 @@ There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-password-code"><a class="link" href="#encrypting-data-files-code-password-code">3.18. Encrypting data files <code>password</code></a></h3>
+<h3 id="encrypting-data-files-code-password-code"><a class="link" href="#encrypting-data-files-code-password-code">3.18. Encrypting data files : <code>password</code></a></h3>
 <div class="paragraph">
 <p>Encrypts the data file with your password.<br>
-Format: <code>password YOURPASSWORD</code></p>
+Format: <code>password YOURPASSWORD</code><br>
+All commands will be disabled during encryption, your data will be safely protected.<br>
+Please close the application after encrypting to clear the application and prevent others from accessing your data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="text-prediction"><a class="link" href="#text-prediction">3.19. Text prediction</a></h3>
+<h3 id="email-contacts-code-mail-code"><a class="link" href="#email-contacts-code-mail-code">3.19. Email contacts : <code>mail</code></a></h3>
+<div class="paragraph">
+<p>Opens your system&#8217;s default email application.<br>
+Format: <code>mail all/</code> or <code>mail t/TAG</code> or <code>mail</code></p>
+</div>
+<div class="paragraph">
+<p><code>all/</code> flag can be specified to open the email application with all contacts as recipients.<br></p>
+</div>
+<div class="paragraph">
+<p><code>t/TAG</code> flag can specified with a tag to open the email applications with all contacts belonging to that tag as recipients.<br></p>
+</div>
+<div class="paragraph">
+<p>If no flags are specified, selected contacts are chosen as recipients.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="text-prediction"><a class="link" href="#text-prediction">3.20. Text prediction</a></h3>
 <div class="paragraph">
 <p>The command box is able to do smart prediction on the current text in the box.<br>
 This is similar to text prediction on shell programs and can be invoked by pressing the <code>Tab</code> key on the keyboard.<br>
@@ -520,7 +539,7 @@ If there are more than one prediction, the predictions will be listed in results
 </div>
 <div class="paragraph">
 <p>For example, typing <code>c</code> in the box and pressing <code>Tab</code> will auto complete to the <code>clear</code> command.<br>
-Typing <code>e</code> in the box and pressing <code>Tab</code> will list <code>edit</code> and <code>exit</code> in results window.<br></p>
+Typing <code>e</code> in the box and pressing <code>Tab</code> will list <code>edit</code>, <code>exit</code> and <code>export</code> in results window.<br></p>
 </div>
 <div class="paragraph">
 <p>In general, text prediction works on all commands.<br>
@@ -529,16 +548,16 @@ In particular, text prediction also works on the following attributes of a conta
 <div class="ulist">
 <ul>
 <li>
-<p><code>name</code> (flag: <code>n/</code>)<br></p>
+<p><code>name</code><br></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>This feature is supported by the <code>find</code> command. When using <code>find</code>, first input the attribute&#8217;s flag, followed by the argument, then pressing <code>Tab</code> will invoke this feature.<br></p>
+<p>This feature is supported by the <code>find</code> command. When using <code>find</code>, first input the command, followed by any string of characters, then pressing <code>Tab</code> will invoke this feature.<br></p>
 </div>
 <div class="paragraph">
-<p>For example in an address book consisting a contact with the name <code>Alex Yeoh</code>, typing <code>find n/ A</code> and pressing <code>Tab</code> will auto complete to <code>find n/ Alex Yeoh</code>.<br>
-If no flags are given, be default, names are assumed to be predicted.</p>
+<p>For example in an address book consisting of a contact with the name <code>Alex Yeoh</code>, typing <code>find A</code> and pressing <code>Tab</code> will auto complete to <code>find Alex Yeoh</code>.<br>
+If no flags are given, by default, names are assumed to be predicted.</p>
 </div>
 </div>
 </div>
@@ -596,9 +615,25 @@ e.g.<code>select 2</code></p>
 <p><strong>Redo</strong> : <code>redo</code></p>
 </li>
 <li>
+<p><strong>Backup</strong> : <code>backup</code></p>
+</li>
+<li>
+<p><strong>Restore</strong> : <code>restore</code></p>
+</li>
+<li>
+<p><strong>Export</strong> : <code>export</code></p>
+</li>
+<li>
+<p><strong>Import</strong> : <code>import</code></p>
+</li>
+<li>
 <p><strong>Password</strong> : <code>password</code></p>
+</li>
+<li>
+<p><strong>Email</strong> : <code>mail</code><br>
+e.g. <code>mail all/</code> or <code>mail t/TAG</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-02 03:54:26 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-02 13:24:10 UTC</div></div></div></body></html>
