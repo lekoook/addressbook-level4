@@ -24,7 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedAddressBook versionedAddressBook;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons;
     private CommandCompleter commandCompleter;
     private List<Person> selectedPersons;
 
@@ -208,5 +208,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     public List<Person> getSelectedPersons() {
         return this.selectedPersons;
+    }
+
+    public void setPersons(List<Person> personList) {
+        versionedAddressBook.setPersons(personList);
     }
 }

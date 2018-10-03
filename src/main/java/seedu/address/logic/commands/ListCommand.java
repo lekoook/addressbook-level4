@@ -7,6 +7,7 @@ import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.sorter.Sorter;
 import seedu.address.model.Model;
 
 /**
@@ -27,8 +28,8 @@ public class ListCommand extends Command {
         if (fe.isLocked()) {
             throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
         }
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        Sorter.sortByName(model);
+//        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

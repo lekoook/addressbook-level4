@@ -113,4 +113,6 @@ public interface Model {
     void setSelectedPersons(List<Person> personListView);
 
     List<Person> getSelectedPersons();
+
+    void setPersons(List<Person> personList);
 }
