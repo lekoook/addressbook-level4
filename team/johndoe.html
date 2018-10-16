@@ -228,44 +228,71 @@ Please close the application after encrypting to clear the application and preve
 <p>Opens your system&#8217;s default email application.<br>
 Format: <code>mail all/</code> or <code>mail t/TAG</code> or <code>mail</code></p>
 </div>
-<div class="paragraph">
-<p><code>all/</code> flag can be specified to open the email application with all contacts as recipients.<br></p>
-</div>
-<div class="paragraph">
-<p><code>t/TAG</code> flag can specified with a tag to open the email applications with all contacts belonging to that tag as recipients.<br></p>
-</div>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
+<p><code>all/</code> flag can be specified to open the email application with <em>all contacts</em> as recipients.<br></p>
+</li>
+<li>
+<p><code>t/TAG</code> flag can be specified with a tag to open the email applications with <em>all contacts belonging to that tag</em> as recipients.<br></p>
+</li>
+<li>
 <p>If no flags are specified, selected contacts are chosen as recipients.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>mail t/accountant</code><br>
+opens your email application with all accountants as recipients.<br></p>
+</li>
+<li>
+<p><code>select 3</code><br>
+<code>mail</code><br>
+opens your email application with person (3rd person in the list panel) as recipient.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="text-prediction"><a class="link" href="#text-prediction">Text prediction</a></h3>
 <div class="paragraph">
-<p>The command box is able to do smart prediction on the current text in the box.<br>
-This is similar to text prediction on shell programs and can be invoked by pressing the <code>Tab</code> key on the keyboard.<br>
-If there are more than one prediction, the predictions will be listed in results window.<br></p>
+<p>Text prediction feature allows you to complete your command faster with less typing.<br>
+Invoke this feature by pressing the <em>Tab</em> key on the keyboard.<br></p>
 </div>
 <div class="paragraph">
-<p>For example, typing <code>c</code> in the box and pressing <code>Tab</code> will auto complete to the <code>clear</code> command.<br>
-Typing <code>e</code> in the box and pressing <code>Tab</code> will list <code>edit</code>, <code>exit</code> and <code>export</code> in results window.<br></p>
-</div>
-<div class="paragraph">
-<p>In general, text prediction works on all commands.<br>
-In particular, text prediction also works on the following attributes of a contact:<br></p>
+<p>You can invoke this feature on:<br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>name</code><br></p>
+<p>Command keywords (<code>mail</code>, <code>add</code>, <code>find</code>, etc.) .</p>
+</li>
+<li>
+<p>Flag arguments (<code>n/</code>, <code>a/</code>, <code>t/</code>, etc.) .</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>This feature is supported by the <code>find</code> command. When using <code>find</code>, first input the command, followed by any string of characters, then pressing <code>Tab</code> will invoke this feature.<br></p>
+<p>For example, given an address book consisting of a contact with the name <em>Alex Yeoh</em>:<br>
+Typing <code>m</code> in the box and pressing <em>Tab</em> will auto complete to the <code>mail</code> command. Then, typing <code>mail n/A</code> and pressing <em>Tab</em> will auto complete to <code>mail n/Alex Yeoh</code> for you.<br></p>
 </div>
 <div class="paragraph">
-<p>For example in an address book consisting of a contact with the name <code>Alex Yeoh</code>, typing <code>find A</code> and pressing <code>Tab</code> will auto complete to <code>find Alex Yeoh</code>.<br>
-If no flags are given, by default, names are assumed to be predicted.</p>
+<p>Note:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If there are multiple predicted values, they will be listed down.<br></p>
+</li>
+<li>
+<p>If no argument flags are specified, the default value predicted is based on the command&#8217;s default argument.<br></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -585,4 +612,4 @@ Encryption of the XML data file is done in <code>FileEncryptor</code> class usin
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-12 09:13:08 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 15:24:56 UTC</div></div></div></body></html>
