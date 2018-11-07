@@ -1,0 +1,751 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Low Gin Wee - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">AddressBook-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Low Gin Wee - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-corppro"><a class="link" href="#project-corppro">PROJECT: CorpPro</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>CorpPro</strong> is a desktop address book application which targets Corporate Users. It helps its users better manage
+their information to increase efficiency and to produce effective results. <strong>CorpPro</strong>’s features aid users to find relevant
+details quickly, in addition to being able to create a schedule to plan and set goals. Users can create and update entries
+in <strong>CorpPro</strong> through the command-line interface(CLI), as well as having an uncluttered user interface(UI) to display corresponding
+information. It is made using Java, a widely used programming language, with over 10 thousand lines written.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: Added <strong>additional attributes</strong> to each contact in the address book</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: The following attributes have been added:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Position/rank</p>
+</li>
+<li>
+<p>Tag priority</p>
+</li>
+<li>
+<p>Key Performance Index(KPI)</p>
+</li>
+<li>
+<p>Note/Description</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Justification: As a corporate user with many contacts, there is a need to tag or describe each contact to catagorize or
+search them quickly. Users can use tags to assign an importance level to each contact. The Key Performing Index (KPI)
+is also included in the attributes to enable managers or supervisors in rate or rank their employees.</p>
+</li>
+<li>
+<p>Highlights: This feature affects existing commands and facilitates listing or finding contacts via these additional attributes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major enhancement</strong>: <strong>Added schedule</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Users are able to create activities or tasks and add them to their schedule in <strong>CorpPro</strong>. These activities
+are sorted by date and can be edited or deleted when completed. The schedule is also saved when the user closes the application</p>
+</li>
+<li>
+<p>Justification: Corporate users may need to organise their assignments in a schedule to maintain a methodical workstyle
+to increase efficiency and not to neglect any important tasks.</p>
+</li>
+<li>
+<p>Highlights: This feature required the creation of additional commands and the implementation of exporting the schedule to save
+its contents after the user has exit the application.In addition, a unique data structure had to be used to maintain a sorted schedule(by date).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Enhanced the edit command to edit all listed entries in one command.</p>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2113-AY1819S1-W12-3/main/blob/master/collated/functional/LowGinWee.md">Functional code</a>] [<a href="https://github.com/CS2113-AY1819S1-W12-3/main/blob/master/collated/test/LowGinWee.md">Test code</a>]</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Updated the colour scheme(Pull Requests:)</p>
+</li>
+<li>
+<p>Cosmetic tweaks of UI</p>
+</li>
+<li>
+<p>Information panel</p>
+</li>
+<li>
+<p>Labels</p>
+</li>
+<li>
+<p>Schedule Panel</p>
+</li>
+<li>
+<p>Icon</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed (with non-trivial review comments):</p>
+</li>
+<li>
+<p>Contributed to forum discussions (examples: )</p>
+</li>
+<li>
+<p>Created meeting minutes during each team meeting (examples: )</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="schedule-code-schedule-code"><a class="link" href="#schedule-code-schedule-code">Schedule : <code>schedule</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleExample.png" alt="scheduleExample" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The Schedule feature helps you remember important activities by listing out important events and dates!<br></p>
+</div>
+<div class="paragraph">
+<p><strong>To add an activity to your schedule:</strong><br>
+Format: <code>schedule-add d/DATE a/ACTIVITY</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Date specified must be in the "DD/MM/YYYY" format.<br></p>
+</li>
+<li>
+<p>The activity name <strong>must contain only</strong> letters, numbers, spaces and fullstops.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>schedule-add d/30/10/2018 a/Attend meeting with Alex.</code><br>
+Adds activity "Attend meeting with Alex." on "30/10/2018" to your schedule:</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleAddExample.png" alt="scheduleAddExample" width="400">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>To edit an activity from your schedule:</strong><br>
+Format: <code>schedule-edit INDEX a/ACTIVITY</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the activity at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The <code>INDEX</code> refers to the index number shown in the displayed schedule.</p>
+</li>
+<li>
+<p>The <code>INDEX</code> <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>The activity name <strong>must contain only</strong> letters, numbers, spaces and fullstops.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>schedule-edit 1 a/Attend meeting with Alexia.</code><br>
+To edit the following activity at <code>INDEX 1</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleEditExample.png" alt="scheduleEditExample" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>to "Attend meeting with Alexia.":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleResultExample.png" alt="scheduleResultExample" width="400">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>To delete an activity from your schedule:</strong><br>
+Format: <code>schedule-delete INDEX</code><br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the activity at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The <code>INDEX</code> refers to the index number shown in the displayed schedule.</p>
+</li>
+<li>
+<p>The <code>INDEX</code> <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Example: <code>schedule-delete 1</code><br>
+Deletes the following activity at <code>INDEX 1</code> in your schedule:</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleDeleteExample.png" alt="scheduleDeleteExample" width="400">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="schedule"><a class="link" href="#schedule">Schedule</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
+<div class="paragraph">
+<p>Updating the Schedule is facilitated by the <code>ScheduleCommand</code> class which extends the <code>Command</code> class.
+<code>ScheduleAddCommand</code>, <code>ScheduleEditCommand</code> and <code>ScheduleDeleteCommand</code> further extends <code>ScheduleCommand</code> to add, edit and
+delete entries in the Schedule respectively.</p>
+</div>
+<div class="sect4">
+<h5 id="activity"><a class="link" href="#activity">Activity</a></h5>
+<div class="paragraph">
+<p>Each entry in the Schedule is an <code>Activity</code>. It consist of a <code>String</code> which takes the name of the activity
+and the <code>Date</code>, of which the activity is due.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="schedule-2"><a class="link" href="#schedule-2">Schedule</a></h5>
+<div class="paragraph">
+<p><code>Schedule</code> is implemented with a <code>TreeMap</code>. It has the <code>Date</code> of activities as its <code>key</code> and a <code>list</code> of activities, which is due on the same
+date, as its <code>value</code>.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, it implements the following main operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Schedule#add()</code>&#8201;&#8212;&#8201;Add an <code>Activity</code> to <code>schedule</code>.<br></p>
+</li>
+<li>
+<p><code>Schedule#delete()</code>&#8201;&#8212;&#8201;Deletes an <code>Activity</code> from <code>schedule</code>.<br></p>
+</li>
+<li>
+<p><code>Schedule#setSchedule</code>&#8201;&#8212;&#8201;Sets <code>schedule</code> from a <code>list</code> of activities. This operation is executed when importing data from an <code>XML</code> file.
+This happens when you first start <strong>CorpPro</strong>.</p>
+</li>
+<li>
+<p><code>Schedule#getSchedule()</code>&#8201;&#8212;&#8201;Returns the schedule with activities sorted by <code>Date</code> to be displayed in the GUI by <code>SchedulePanel</code> in the <code>UI</code> component.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The schedule is instantiated in the <code>AddressBook</code> and have the main operations exposed in the <code>Model</code> interface as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#addActivity()</code>&#8201;&#8212;&#8201;Exposes <code>Schedule#add()</code> .</p>
+</li>
+<li>
+<p><code>Model#deleteActivity()</code>&#8201;&#8212;&#8201;Exposes <code>Schedule#delete()</code>.</p>
+</li>
+<li>
+<p><code>Model#updateActivity()</code>&#8201;&#8212;&#8201;This operation edits an <code>Activity</code> in <code>schedule</code> by first executing <code>Schedule#delete()</code>, followed
+by <code>Schedule#add()</code>.</p>
+</li>
+<li>
+<p><code>Model#getSchedule()</code>&#8201;&#8212;&#8201;Exposes <code>Schedule#getSchedule()</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="storage"><a class="link" href="#storage">Storage</a></h5>
+<div class="paragraph">
+<p>In addition to the CRUD (create, read, update and delete) functions, the schedule is also saved to an <code>XML</code> file
+whenever you update it. This is facilitated by <code>XmlAdaptedActivity</code> which stores an <code>Activity</code> in an <code>XML</code> format.
+<code>XmlSerializableAddressBook</code> then appends each <code>XmlAdaptedActivity</code> into a list and is saved in <code>addressbook.xml</code>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="usage-scenarios"><a class="link" href="#usage-scenarios">Usage scenarios</a></h5>
+<div class="paragraph">
+<p>Given below is are examples of usage scenarios of how the schedule behaves when you carry out <code>schedule</code> commands.<br></p>
+</div>
+<div class="sect5">
+<h6 id="adding-an-activity"><a class="link" href="#adding-an-activity">Adding an activity:</a></h6>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>schedule-add d/01/01/2018 a/Complete report.</code> to add an activity to their schedule.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>ScheduleAddCommandParser</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> The arguments, <code>d/01/01/2018 a/Complete report.</code>, are then parsed by <code>ScheduleAddCommandParser</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>ScheduleAddCommandParser</code> checks the validity of the date and activity as input by the user. It then creates an
+<code>Activity</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>ScheduleAddCommandParser</code> then creates a new <code>ScheduleAddCommand</code> with the <code>activity</code> as its argument.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> <code>ScheduleAddCommand</code> calls <code>Model#addActivity()</code> which creates the <code>activity</code> in the <code>schedule</code>.
+<code>indicateAddressBookChanged()</code> is called within <code>Model#addActivity()</code> to raise an <code>AddressBookChangedEvent</code> that the information within the
+address book is changed. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> The <code>UI</code> object, <code>schedulePanel</code> which is subscribed to the event, receives this updated information and updates
+the display to show the correct information to the user.<br></p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagrams shows you how the add operation works:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleAddSequenceDiagramLogic.png" alt="scheduleAddSequenceDiagramLogic" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 1. Interactions inside the Logic component for the <code>schedule-add d/01/01/2018 a/Complete report.</code> command</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The figure above illustrates the sequence from <strong>Step 1.</strong> to <strong>Step 5.</strong><br>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the date or the activity name is not valid, an error would be returned to the user instead of creating an <code>Activity</code> object.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleAddSequenceDiagramStorage.png" alt="scheduleAddSequenceDiagramStorage" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 2. Interactions inside the Storage component for the <code>schedule-add d/01/01/2018 a/Complete report.</code> command</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The figure above illustrates the sequence of <strong>Step 6.</strong><br>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleAddSequenceDiagramEvent.png" alt="scheduleAddSequenceDiagramEvent" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 3. Interactions between the <code>EventCenter</code>, <code>UI</code> and <code>Storage</code> components for the <code>schedule-add d/01/01/2018 a/Complete report.</code> command</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The figure above illustrates the sequence of <strong>Step 7.</strong><br>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Storage of each activity is facilitated by <code>XmlAdaptedActivity</code> which stores an <code>Activity</code> in an <code>XML</code> format. <code>XmlSerializableAddressBook</code> then appends each <code>XmlAdaptedActivity</code> into a list and is saved in <code>addressbook.xml</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect5">
+<h6 id="deleting-an-activity"><a class="link" href="#deleting-an-activity">Deleting an activity:</a></h6>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>schedule-delete 2</code> to delete the activity at <code>INDEX 2</code> in their schedule.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>ScheduleDeleteCommandParser</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> <code>ScheduleDeleteCommandParser</code> checks the validity of the index as input by the user.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>ScheduleDeleteCommandParser</code> then creates a new <code>ScheduleDeleteCommand</code> with the <code>INDEX</code> as its argument.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>ScheduleDeleteCommand</code> checks if the <code>INDEX</code> given is valid (within the size of the listed schedule) and calls
+<code>Model#deleteActivity()</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> <code>Model#deleteActivity</code> deletes the corresponding <code>activity</code> from the <code>schedule</code>. <code>indicateAddressBookChanged()</code> is called
+within <code>Model#deleteActivity()</code> to raise an <code>AddressBookChangedEvent</code>, that the information within the
+address book is changed. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> The <code>UI</code> object, <code>schedulePanel</code> which is subscribed to the event, receives this updated information and updates
+the display to show the correct information to the user.<br></p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagrams shows you how the delete operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleDeleteSequenceDiagramLogic.png" alt="scheduleDeleteSequenceDiagramLogic" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 4. Interactions inside the Logic component for the <code>schedule-delete 2</code> command</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The figure above illustrates the sequence from <strong>Step 1.</strong> to <strong>Step 5.</strong><br>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the index is not valid, i.e. out of range, an error would be returned to the user instead of deleting an activity.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleDeleteSequenceDiagramStorage.png" alt="scheduleDeleteSequenceDiagramStorage" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 5. Interactions inside the Model component for the <code>schedule-delete 2</code> command</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The figure above illustrates the sequence of <strong>Step 6.</strong><br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The interactions between the <code>EventCenter</code>, <code>UI</code> and <code>Storage</code> components for the <code>schedule-delete 2</code> command (<strong>Step 7.</strong>) are similar to <strong>adding
+an activity</strong> (see <strong>Figure 3.</strong>)</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="editing-an-activity"><a class="link" href="#editing-an-activity">Editing an activity:</a></h6>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>schedule-edit 2 a/Interview intern.</code> to edit an activity at <code>INDEX 2</code> in their schedule.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>ScheduleEditCommandParser</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> The arguments, <code>2 a/Interview intern.</code>, are then parsed by <code>ScheduleEditCommandParser</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>ScheduleEditCommandParser</code> checks the validity of the index and activity as input by the user.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>ScheduleEditCommandParser</code> then creates a new <code>ScheduleEditCommand</code> with the <code>INDEX</code> and the activity
+ <code>String</code> as its argument.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> <code>ScheduleEditCommand</code> checks if the <code>INDEX</code> given is valid (within the size of the listed schedule) and calls
+<code>Model#updateActivity()</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> <code>Model#updateActivity()</code> updates the corresponding <code>activity</code> in the <code>schedule</code>.
+<code>indicateAddressBookChanged()</code> is called within <code>Model#updateActivity()</code> to raise an <code>AddressBookChangedEvent</code> that the information within the
+address book is changed. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 8.</strong> The <code>UI</code> object, <code>schedulePanel</code> which is subscribed to the event, receives this updated information and
+updates the display to show the correct information to the user.<br></p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagrams shows you how the edit operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleEditSequenceDiagramLogic.png" alt="scheduleEditSequenceDiagramLogic" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 6. Interactions inside the Logic component for the <code>schedule-edit 2 a/Interview intern.</code> command</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The figure above illustrates the sequence from <strong>Step 1.</strong> to <strong>Step 6.</strong><br>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the activity name or index is not valid, i.e. out of range, an error would be returned to the user instead of editing
+an activity.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/scheduleEditSequenceDiagramStorage.png" alt="scheduleEditSequenceDiagramStorage" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 7. Interactions inside the Model component for the <code>schedule-edit 2 a/Interview intern.</code> command</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The figure above illustrates the sequence of  <strong>Step 7.</strong><br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The interactions between the <code>EventCenter</code>, <code>UI</code> and <code>Storage</code> components for the <code>schedule-edit 2 a/Interview intern.</code>
+command (<strong>Step 8.</strong>) are similar to <strong>adding
+an activity</strong> (see <strong>Figure 3.</strong>)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-of-schedule"><a class="link" href="#aspect-data-structure-of-schedule">Aspect: Data structure of Schedule</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> <code>List</code> of Activities</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Need to sort each activity by its date whenever the schedule is updated.</p>
+</li>
+<li>
+<p>Cons: Larger time complexity.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current choice):</strong> <code>TreeMap</code> of Activities</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Activities are automatically sorted by their dates whenever the schedule is updated.</p>
+</li>
+<li>
+<p>Pros: Faster time complexity.</p>
+</li>
+<li>
+<p>Cons: Harder to implement.</p>
+</li>
+<li>
+<p>Cons: Larger space complexity.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-date-of-activity"><a class="link" href="#aspect-date-of-activity">Aspect: Date of Activity</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> <code>String</code> of date in DD/MM/YYYY format</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement and do not need to parse user input.</p>
+</li>
+<li>
+<p>Cons: Need to implement comparators to sort the dates of activity.</p>
+</li>
+<li>
+<p>Cons: Not flexible. Unable to include and sort by time in future implementations</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current choice):</strong> Usage of <code>java.util.Date</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Pros: Able to sort by time in future implementations.</p>
+</li>
+<li>
+<p>Cons: Need to parse <code>Date</code> when converting it to <code>String</code>.</p>
+</li>
+<li>
+<p>Cons: Need to parse user inputs to convert <code>String</code> to <code>Date</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 17:31:41 UTC</div></div></div></body></html>
