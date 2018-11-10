@@ -40,9 +40,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
-[[Features]]
-
 == Command Summary
+
+This section shows you usage example(s) of each command. For detailed explanations refer to <<Features>>.
 
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/POSITION] [k/KPI] [d/NOTE] [t/TAG [PRIORITY]]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/Boss k/4.5 d/James is a good friend t/friend t/colleague 2`
@@ -77,6 +77,8 @@ e.g. `schedule-delete 1` +
 * *Email* : `mail` +
 e.g. `mail all/` or `mail t/TAG`
 
+[[Features]]
+
 == Features
 
 ====
@@ -90,11 +92,12 @@ e.g. `mail all/` or `mail t/TAG`
 
 === Viewing help : `help`
 
+Opens the User Guide window. +
 Format: `help`
 
 === Adding a person: `add`
 
-Adds a person to the address book +
+Adds a contact to the address book +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/POSITION] [k/KPI] [d/NOTE] [t/TAG [PRIORITY]]...`
 
 [TIP]
@@ -108,8 +111,8 @@ A person can have any number of tags (including 0). Priorities, high(2) or mediu
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Secretary k/4.99 d/John is forgetful t/friends t/owesMoney 2`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/prisoner t/criminal`
+* `add n/John Doe p/98765432 e/johnd@nus.com a/311, Clementi Ave 2, #02-25 r/Secretary k/4.99 d/John is forgetful t/Accounting t/To Liase 2`
+* `add n/Betsy Crowe t/same office e/betsycrowe@microhard.com a/Microhard p/1234567 r/CEO t/boss`
 
 === Listing all persons : `list`
 
@@ -123,7 +126,7 @@ Format: `list` or `list t/TAG` or `list k/KPI`
 * If no flags are specified, _all persons_ are listed by default.
 
 Example: +
-You can input `list t/friends` to display all persons with that tag in your address book.
+You can input `list t/HumanResource` to display all persons with `HumanResource` tag in your address book.
 
 === Editing a person : `edit`
 
@@ -142,12 +145,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/POSITION] [k/KPI
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 1 p/91234567 e/johndoe@nus.com` +
+Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@nus.com` respectively.
 * `edit 2 n/Betsy Crower r/ t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears current position and all existing tags.
-* `edit all/ t/friends k/1.0` +
-Replaces all listed persons' tag to be `friends` and edits their KPI to be `1.0`. +
+* `edit all/ t/HR k/1.0` +
+Replaces all listed persons' tag to be `HR` and edits their KPI to be `1.0`. +
 
 // tag::search[]
 === Finding persons by attribute : `find`
@@ -186,8 +189,8 @@ TIP: To better your experience with search, you should search for specific keywo
 Displays any person who has a KPI of `4.0`
 * `find d/John is forgetful` +
 Displays any person who has a note containing `John is forgetful`
-* `find t/friends` +
-Displays any person who is tagged as `friends`
+* `find t/tester` +
+Displays any person who is tagged as `tester`
 * `find n/John Betsy r/secretary a/jurong west ave` +
 Displays any person having names `John` and `Betsy` who is a `secretary` and lives in `jurong west ave`
 
@@ -210,35 +213,42 @@ TIP: To narrow down your searches, try to be more specific in the phone number y
 
 // end::search[]
 
-=== Deleting a person : `delete`
+=== Selecting a person : `delete`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+Deletes a single or multiple contacts identified by their index number in the contacts list displayed on the left. +
+Format: `delete INDEX` or `delete START_INDEX - END_INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed person list.
-* The `INDEX` *must be a positive integer* 1, 2, 3, ...
+* Deletes the contact at the specified `INDEX`.
+* The `INDEX` refers to the index number to left of each contact entry shown in the displayed person list.
+* You *must enter positive integers* `1, 2, 3, ...` for the `INDEX`.
+* In the case of multiple deletions, the range is denoted with a dash  ( - ) and you can separate multiple ranges with comma ( , ).
 ****
 
 Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
+Deletes the 2nd contact in the address book.
+* `list` +
+`delete 1 - 3` +
+Deletes the 1st to the 3rd contact in the address book.
+* `list` +
+`delete 1 - 3, 6 - 9` +
+Deletes the 1st to the 3rd contact and 6th to the 9th contact in the address book.
+* `find n/Betsy` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st contact in the results of the `find` command.
 
 === Selecting a person : `select`
 
-Selects a single or multiple persons identified by their index number in the persons list displayed on the left. +
+Selects a single or multiple contacts identified by their index number in the contacts list displayed on the left. +
 Format: `select INDEX` or `select START_INDEX - END_INDEX`
 
 ****
-* The person you selected will have their information loaded in the information panel displayed in the centre.
-* The `INDEX` refers to the index number to left of each person entry shown in the displayed person list.
-* You *must enter positive integers* `1, 2, 3, ...` for the index.
+* The contact you selected will have their information loaded in the information panel displayed in the centre.
+* The `INDEX` refers to the index number to left of each contact entry shown in the displayed person list.
+* You *must enter positive integers* `1, 2, 3, ...` for the `INDEX`.
 * In the case of multiple selections, the range is denoted with a dash  ( - ) and you can separate multiple ranges with comma ( , ).
 ****
 
@@ -246,16 +256,16 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
+Selects the 2nd contact in the address book.
 * `list` +
 `select 1 - 3` +
-Selects from the 1st to the 3rd person in the address book.
+Selects the 1st to the 3rd contact in the address book.
 * `list` +
 `select 1 - 3, 6 - 9` +
-Selects from the 1st to the 3rd person and 6th to the 9th person in the address book.
+Selects the 1st to the 3rd contact and 6th to the 9th contact in the address book.
 * `find n/Betsy` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st contact in the results of the `find` command.
 
 === Listing entered commands : `history`
 
@@ -394,23 +404,26 @@ Unlocks addressbook and restores all data.
 
 === Email contacts : `mail`
 
-Opens your system's default email application. +
+Opens your system's default email application with specified contacts as recipients. +
 Format: `mail all/` or `mail t/TAG` or `mail`
 
 * `all/` flag can be specified to open the email application with _all contacts_ as recipients. +
 
 * `t/TAG` flag can be specified with a tag to open the email applications with _all contacts belonging to that tag_ as recipients. +
 
-* If no flags are specified, selected contacts are chosen as recipients.
+* If no flags are specified, contacts selected with `select` command are chosen as recipients.
 
 Examples: +
 
+* `mail all/` +
+opens your email application with all contacts as recipients. +
+
 * `mail t/accountant` +
-opens your email application with all accountants as recipients. +
+opens your email application with contacts tagged with `accountant` as recipients. +
 
 * `select 3` +
 `mail` +
-opens your email application with person (3rd person in the list panel) as recipient.
+opens your email application with person (3rd person in the list panel) as recipient. +
 
 // tag::schedule[]
 === Schedule : `schedule`
@@ -476,11 +489,19 @@ Typing `m` in the box and pressing _Tab_ will auto complete to the `mail` comman
 
 Note: +
 
-* This feature does not work with some flag arguments when used with certain commands. +
-E.g. `add n/...` +
+* If there are multiple predicted values, they will be listed down.
+* If no argument flags are specified, the default value predicted is based on the command's default argument.
+* This feature does not work with some flag arguments when used with certain commands.
+E.g. `add n/Alex`. +
 If text prediction returns no predictions, it means text prediction is unsupported in that context.
-* If there are multiple predicted values, they will be listed down. +
-* If no argument flags are specified, the default value predicted is based on the command's default argument. +
+For full list, refer below.
+
+List of commands and it's arguments prefix supported: +
+
+* `list` : `t/`, `k/` +
+* `find` : `n/`, `e/`, `p/`, `a/`, `t/`, `k/`, `r/`
+* `mail` : `t/`, `all/`
+* For the remaining commands, all *command keywords are supported* but their *arguments are unsupported*.
 
 === Custom XML path
 All addressbook data is stored in addressbook.xml file located in *data/* folder in the same directory as your jar file.
@@ -509,6 +530,9 @@ Secondly, with the all new backup/restore feature, you can backup your address b
 
 *Q*: What happens if I forget my password? +
 *A*: Your Address book will not be recoverable. You will have to delete addressbook.xml.encrypted and choose a backup to restore from.
+
+*Q*: Strange... sometimes the text prediction doesn't seem to work? +
+*A*: All command keywords are supported by text prediction. However, some command's arguments are _not_ supported. Check <<Text prediction>> for more details. +
 
 // tag::appendixA[]
 [[CSVFormat]]
