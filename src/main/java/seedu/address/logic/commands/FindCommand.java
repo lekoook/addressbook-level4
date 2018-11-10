@@ -15,6 +15,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -102,50 +103,51 @@ public class FindCommand extends Command {
     private Predicate<Person> getPersonPredicate(Model model, Predicate<Person> combinedPredicate) {
         for (Prefix type : types) {
             ClosestMatchList closestMatch = new ClosestMatchList(model, type, prefixKeywordMap.get(type));
-            String[] approvedList = closestMatch.getApprovedList();
-            String[] keywordsForType = prefixKeywordMap.get(type);
-            Set<String> approvedSet = new HashSet<>(
-                    Arrays.asList(approvedList).stream().distinct().collect(Collectors.toList()));
-
-            Set<String> keywordsForTypeSet = new HashSet<>(
-                    Arrays.asList(keywordsForType).stream().distinct().collect(Collectors.toList()));
-
-
-            findActualMatches(approvedSet, keywordsForTypeSet);
+            List<String> approvedList = Arrays.asList(closestMatch.getApprovedList());
+            List<String> keywordsForType = Arrays.asList(prefixKeywordMap.get(type));
 
             if (type == PREFIX_PHONE) {
                 combinedPredicate = combinedPredicate.and(
-                        new PhoneContainsKeywordPredicate(Arrays.asList(approvedList))
+                        new PhoneContainsKeywordPredicate(approvedList)
                 );
             } else if (type == PREFIX_NAME) {
                 combinedPredicate = combinedPredicate.and(
-                        new NameContainsKeywordsPredicate(Arrays.asList(approvedList))
+                        new NameContainsKeywordsPredicate(approvedList)
                 );
             } else if (type == PREFIX_ADDRESS) {
                 combinedPredicate = combinedPredicate.and(
-                        new AddressContainsKeywordsPredicate(Arrays.asList(approvedList))
+                        new AddressContainsKeywordsPredicate(approvedList)
                 );
             } else if (type == PREFIX_EMAIL) {
                 combinedPredicate = combinedPredicate.and(
-                        new EmailContainsKeywordsPredicate(Arrays.asList(approvedList))
+                        new EmailContainsKeywordsPredicate(approvedList)
                 );
             } else if (type == PREFIX_NOTE) {
                 combinedPredicate = combinedPredicate.and(
-                        new NoteContainsKeywordsPredicate(Arrays.asList(approvedList))
+                        new NoteContainsKeywordsPredicate(approvedList)
                 );
             } else if (type == PREFIX_POSITION) {
                 combinedPredicate = combinedPredicate.and(
-                        new PositionContainsKeywordsPredicate(Arrays.asList(approvedList))
+                        new PositionContainsKeywordsPredicate(approvedList)
                 );
             } else if (type == PREFIX_TAG) {
                 combinedPredicate = combinedPredicate.and(
-                        new TagContainsKeywordsPredicate(Arrays.asList(approvedList))
+                        new TagContainsKeywordsPredicate(approvedList)
                 );
             } else if (type == PREFIX_KPI) {
                 combinedPredicate = combinedPredicate.and(
-                        new KpiContainsKeywordPredicate(Arrays.asList(approvedList))
+                        new KpiContainsKeywordPredicate(approvedList)
                 );
             }
+
+            Set<String> approvedSet = new HashSet<>(
+                    approvedList.stream().distinct().collect(Collectors.toList()));
+
+            Set<String> keywordsForTypeSet = new HashSet<>(
+                    keywordsForType.stream().distinct().collect(Collectors.toList()));
+
+            findActualMatches(approvedSet, keywordsForTypeSet);
+
         }
         return combinedPredicate;
     }
@@ -158,10 +160,10 @@ public class FindCommand extends Command {
      */
     private void findActualMatches (final Set<String> closestMatchesSet, final Set<String> keywordsSet) {
         for (String match: closestMatchesSet) {
-            if (keywordsSet.contains(match)) {
-                actualMatchesStrings.add(match);
+            if (keywordsSet.contains(match) || keywordsSet.contains(match.replaceAll(",", ""))) {
+                actualMatchesStrings.add(match.replaceAll(",", ""));
             } else {
-                guessedMatchesStrings.add(match);
+                guessedMatchesStrings.add(match.replaceAll(",", ""));
             }
         }
     }
