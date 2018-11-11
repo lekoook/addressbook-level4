@@ -3,6 +3,7 @@ package seedu.address.model.autocomplete;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -27,8 +28,7 @@ public class CommandCompleterTest {
 
     @Test
     public void predictText_validArgs_returnCorrectPredictions() {
-        ModelStubWithDefaultPersons modelStubWithDefaultPersons = new ModelStubWithDefaultPersons();
-        CommandCompleter commandCompleter = new CommandCompleter(modelStubWithDefaultPersons);
+        CommandCompleter commandCompleter = new CommandCompleter(getTypicalPersons());
 
         ArrayList<String> actualCommandPredictions = commandCompleter.predictText("e");
         ArrayList<String> expectedCommandPredictions = new ArrayList<>(Arrays.asList("dit ", "xit ", "xport "));
@@ -44,8 +44,7 @@ public class CommandCompleterTest {
                 new ArrayList<>(Arrays.asList("4351253 ", "482224 ", "482427 ", "8765432 ", "5352563 ", "667777 "));
 
         ArrayList<String> actualEmailPredictions = commandCompleter.predictText("find e/a");
-        ArrayList<String> expectedEmailPredictions =
-                new ArrayList<>(Arrays.asList("lice@example.com "));
+        ArrayList<String> expectedEmailPredictions = new ArrayList<>(Arrays.asList("lice@example.com "));
 
         ArrayList<String> actualTagPredictions = commandCompleter.predictText("list t/f");
         ArrayList<String> expectedTagPredictions = new ArrayList<>(Arrays.asList("riends "));
@@ -73,8 +72,7 @@ public class CommandCompleterTest {
 
     @Test
     public void insertPerson_returnCorrectPredictions() {
-        ModelStubWithDefaultPersons modelStubWithDefaultPersons = new ModelStubWithDefaultPersons();
-        CommandCompleter commandCompleter = new CommandCompleter(modelStubWithDefaultPersons);
+        CommandCompleter commandCompleter = new CommandCompleter(getTypicalPersons());
 
         commandCompleter.insertPerson(TypicalPersons.ANNABELLE);
 
@@ -111,8 +109,7 @@ public class CommandCompleterTest {
 
     @Test
     public void removePerson_returnCorrectPrediction() {
-        ModelStubWithDefaultPersons modelStubWithDefaultPersons = new ModelStubWithDefaultPersons();
-        CommandCompleter commandCompleter = new CommandCompleter(modelStubWithDefaultPersons);
+        CommandCompleter commandCompleter = new CommandCompleter(getTypicalPersons());
 
         commandCompleter.removePerson(TypicalPersons.ALICE);
 
@@ -149,8 +146,7 @@ public class CommandCompleterTest {
 
     @Test
     public void editPersons_returnCorrectPredictions() {
-        ModelStubWithDefaultPersons modelStubWithDefaultPersons = new ModelStubWithDefaultPersons();
-        CommandCompleter commandCompleter = new CommandCompleter(modelStubWithDefaultPersons);
+        CommandCompleter commandCompleter = new CommandCompleter(getTypicalPersons());
 
         commandCompleter.editPerson(TypicalPersons.ALICE, TypicalPersons.ANNABELLE);
 
@@ -187,8 +183,7 @@ public class CommandCompleterTest {
 
     @Test
     public void clearData_initialModelWithPerson_emptyEntries() {
-        ModelStubWithDefaultPersons modelStubWithDefaultPersons = new ModelStubWithDefaultPersons();
-        CommandCompleter commandCompleter = new CommandCompleter(modelStubWithDefaultPersons);
+        CommandCompleter commandCompleter = new CommandCompleter(getTypicalPersons());
 
         commandCompleter.clearData();
 
@@ -200,12 +195,13 @@ public class CommandCompleterTest {
 
     @Test
     public void reinitialise_initialModelWithPerson_updatedEntries() {
-        ModelStub modelStubWithAddPerson = new ModelStubWithAddPerson();
-        CommandCompleter commandCompleter = new CommandCompleter(modelStubWithAddPerson);
+        ModelStub modelStubWithAddPerson = new ModelStub();
+        CommandCompleter commandCompleter =
+                new CommandCompleter(modelStubWithAddPerson.getAddressBook().getPersonList());
 
         // Adding a new person into the Model directly.
         modelStubWithAddPerson.addPerson(TypicalPersons.ANNABELLE);
-        commandCompleter.reinitialise();
+        commandCompleter.reinitialise(modelStubWithAddPerson.getAddressBook().getPersonList());
 
         ArrayList<String> actualNewPredictions = commandCompleter.predictText("find n/A");
         ArrayList<String> expectedNewPredictions = new ArrayList<>(Arrays.asList("lice Pauline ", "nnabelle "));
@@ -214,9 +210,11 @@ public class CommandCompleterTest {
     }
 
     private class ModelStub implements Model {
+        private AddressBook addressBook = getTypicalAddressBook();
+
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            addressBook.addPerson(person);
         }
 
         @Override
@@ -226,7 +224,7 @@ public class CommandCompleterTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            return addressBook;
         }
 
         @Override
@@ -363,28 +361,6 @@ public class CommandCompleterTest {
         @Override
         public List<Tag> getUniqueTagList() {
             throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    private class ModelStubWithDefaultPersons extends ModelStub {
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return getTypicalAddressBook();
-        }
-    }
-
-
-    private class ModelStubWithAddPerson extends ModelStub {
-        private AddressBook addressBook = getTypicalAddressBook();
-
-        @Override
-        public void addPerson(Person person) {
-            addressBook.addPerson(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return addressBook;
         }
     }
 }
