@@ -147,15 +147,12 @@ public class StringUtil {
     }
 
     /**
-     * Determines if a user input has a valid select command format.
+     * Determines if a command with index input has valid format.
      *
      * @param input the user input string.
      * @return true if confirms, false otherwise.
      */
     public static boolean isValidMultipleIndexFormat(String input) {
-        if (isRangeIndexFormat(input) || areNonZeroUnsignedInteger(input)) {
-            return true;
-        }
-        return false;
+        return !input.isEmpty() && (isRangeIndexFormat(input) || areNonZeroUnsignedInteger(input));
     }
 }

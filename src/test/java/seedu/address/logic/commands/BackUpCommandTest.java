@@ -6,8 +6,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.util.logging.Logger;
 
+import org.junit.After;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -41,7 +41,7 @@ public class BackUpCommandTest {
     /**
      * Cleanup stubs created in setup
      */
-    @AfterEach
+    @After
     public void tearDown() {
         tmpDest = new File(fileName);
         tmpDest.delete();

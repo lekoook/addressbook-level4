@@ -8,6 +8,7 @@
 :stylesDir: stylesheets
 :xrefstyle: full
 :experimental:
+:linkattrs:
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -1814,25 +1815,10 @@ Given below are instructions to test the app manually.
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
-=== Launch and Shutdown
-
-. Initial launch
-
-.. Download the jar file and copy into an empty folder
-.. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-. Saving window preferences
-
-.. Resize the window to an optimum size. Move the window to a different location. Close the window.
-.. Re-launch the app by double-clicking the jar file. +
-   Expected: The most recent window size and location is retained.
-
-_{ more test cases ... }_
-
 === Adding a person
 
-Adding a person to the address book. Prerequisites: Carry out the following commands sequentially:
+Adding a person to the address book. +
+Prerequisites: Carry out the following commands sequentially:
 
 . Test case: `add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
 Expected: The person is added to the contact list.
@@ -1853,7 +1839,8 @@ Expected: No person is added as the tag is invalid. Error details shown in the s
 
 === Editing a person
 
-Editing a person in the address book. Prerequisites: There are multiple persons in the contact list.
+Editing a person in the address book. +
+Prerequisites: There are multiple persons in the contact list.
 
 . Test case: `edit 1 p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
 Expected: The first person in the contact list is edited.
@@ -1864,7 +1851,8 @@ Expected: No persons is edited. Error details shown in status message.
 
 === Listing persons
 
-Listing persons in the address book. Prerequisites: There are multiple persons in the contact list.
+Listing persons in the address book. +
+Prerequisites: There are multiple persons in the contact list.
 
 . Test case: `list` +
 Expected: All contacts in the address book will be listed and shown in the contacts panel.
@@ -1877,20 +1865,22 @@ Expected: All contacts with KPI value of `5.0` will be listed and shown.
 
 === Selecting persons
 
-Selecting persons in the address book. Prerequisites: There are at least 7 persons in the contacts list. +
+Selecting persons in the address book. +
+Prerequisites: There are at least 7 persons in the contacts list. +
 
-. Test case: `select 1`
+. Test case: `select 1` +
 Expected: First contact will be highlighted in the contacts panel and information shown in information panel.
 
-. Test case: `select 1 2 3`
+. Test case: `select 1 2 3` +
 Expected: First three contacts will be highlighted.
 
-. Test case: `select 1-3, 5-7`
+. Test case: `select 1-3, 5-7` +
 Expected: First three and 5th to 7th contacts will be highlighted.
 
 === Predicting text
 
-Invoking text prediction in the address book. Prerequisites: There are the sample contacts in the address book.
+Invoking text prediction in the address book. +
+Prerequisites: There are the sample contacts in the address book.
 
 . Test case: `f` and press kbd:[Tab]. +
 Expected: The command box should automatically be filled to the command `find `.
@@ -1899,11 +1889,13 @@ Expected: The command box should automatically be filled to the command `find `.
 Expected: The command box should be automatically filled to `find n/Alex Yeoh`.
 
 . Other commands to try: `add`, `delete`, `password`. +
-Note: Some arguments do not work since they are unsupported. Refer to _Text Prediction_ section in the User Guide for more details.
+
+NOTE: Some arguments do not work since they are unsupported. Refer to <<UserGuide.adoc#,Text Prediction>> in the User Guide for more details.
 
 === Searching for a person
 
-Finding a person in the address book. Prerequisites: The following commands must be entered, "Alexia Tok" and "Marcus Tok" must exist within the contact list: +
+Finding a person in the address book. +
+Prerequisites: The following commands must be entered, "Alexia Tok" and "Marcus Tok" must exist within the contact list: +
 
 * `add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
 * `add n/Marcus Tok p/12341234 e/MT@example.com a/123, Admiraly, 1234665 r/Cleaner k/4.0 d/MT is a bad cleaner t/notFriend t/colleague 2` +
@@ -1919,7 +1911,8 @@ Expected: "Alexia Tok" with position "Boss" will show up in the contacts panel. 
 
 === Locking and unlocking
 
-Locking and unlocking of the address book. Prerequisites: Address book should not be locked. Check path at `./data/addressbook.xml` to ensure that it is not encrypted: `addressbook.xml.encrypted` and that `addressbook.xml` exists.
+Locking and unlocking of the address book. +
+Prerequisites: Address book should not be locked. Check path at `./data/addressbook.xml` to ensure that it is not encrypted: `addressbook.xml.encrypted` and that `addressbook.xml` exists.
 
 . Test case: `password hello` +
 Expected: A status message "File encrypted!" will be displayed to the user and the contacts panel will be cleared. All further commands at this point will show a message "Address book is locked, please key in password". +
@@ -1936,7 +1929,8 @@ Expected: A status message "File decrypted!" will be displayed to the user, the 
 
 === Deleting a person
 
-Deleting a person while all persons are listed. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+Deleting a person while all persons are listed. +
+Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
 . Test case: `delete 1` +
 Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -1951,7 +1945,8 @@ Expected: Similar to previous.
 
 === Updating the Schedule
 
-Updating activities in the schedule. Prerequisites: Carry out the following commands sequentially:
+Updating activities in the schedule. +
+Prerequisites: Carry out the following commands sequentially:
 
 . Test case: `schedule-add d/30/10/2018 a/Attend meeting with Alex.` +
 Expected: activity "Attend meeting with Alex." is added to the schedule.
@@ -1968,9 +1963,46 @@ Expected: No activity is deleted. Error details shown in the status message.
 
 === Saving data
 
-Dealing with missing/corrupted data files
+Dealing with missing/corrupted data files. +
+Prerequisites: List all persons using the `list` command. Multiple persons in the list. +
 
-. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+. Test case: `delete 1` +
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+. Test case: `delete 0` +
+Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
+Expected: Similar to previous.
 
+=== Backing up and restoring data in the address book
 
+Backing up and restoring data in the address book. +
+Prerequisites: Make a backup with the `backup` command. +
 
+. Test case: `restore-snapshot` +
+Expected: One snapshot will be shown on the screen if this is your first backup. If this is not your first backup, the list will be populated with older snapshots. +
+. Test case: `restore 0` +
+Expected: No data restored. Error details shown in the status message. Status bar remains the same.
+. Other incorrect restore commands to try: `restore`, `delete x` (where x is larger than the list size) +
+Expected: Similar to previous.
+
+=== Exporting data from the address book
+
+Exporting data from the address book. Prerequisites: Make sure the address book is populated with people +
+
+. Test case: `export` +
+Expected: A copy of the contacts in `CSV` format will be created in a `exports` folder in the root directory +
+. Test case: `export DIRECTORY FILENAME` +
+Expected: A copy of the contacts in `CSV` format will be created in the designated folder with the designated name.
+. Any directory or file name that does not exist: `export FALSE_DIRECTORY FILENAME`, `export DIRECTORY FALSE_FILENAME`. +
+Expected: Nothing will be created. An error will be thrown to the user. Status bar will remain the same.
+
+=== Importing data to the address book
+
+Importing data from the address book.
+
+. Test case: `import DIRECTORY FILENAME` +
+Expected: A copy of the contacts in `CSV` format will be created in the designated folder with the designated name.
+. Test case: `import` +
+Expected: Nothing will be created. An error will be thrown to the user. Status bar will remain the same.
+. Any directory or file name that does not exist: `import FALSE_DIRECTORY FILENAME`, `import DIRECTORY FALSE_FILENAME`. +
+Expected: Similar to previous
