@@ -388,7 +388,7 @@ Format: `password YOURPASSWORD` +
 
 NOTE: You can use the same command to decrypt the file, just hit `password` and your correct password.
 
-===== Safe analogy
+==== Safe analogy
 
 image::safe.png[width="150"]
 

@@ -521,7 +521,7 @@ This feature implements a new method in `Model` +
 ==== Usage Scenarios
 Given below is the sequence of actions done by the address book when you back up and restore your data. +
 
-====== Saving a Backup
+===== Saving a Backup
 *Step 1.* The user executes `backup` to create a backup snapshot +
 
 *Step 2.* The user input is first parsed by `AddressBookParser` which creates a new `BackupCommand` object. +
@@ -555,7 +555,7 @@ The following sequence diagrams shows you how the add operation works: +
 image::restoreSnapshotsSequenceDiagramLogic.png[width="900"]
 Figure 3. Interactions inside the Logic component for the `restore-snapshots` command.
 
-====== Restoring from a backup
+===== Restoring from a backup
 *Step 1.* The user executes `restore 1` to restore their data with a backup snapshot denoted by an `index of 1` +
 
 *Step 2.* The user input is first parsed by `AddressBookParser` which creates a new `RestoreCommandParser` object. +
@@ -614,7 +614,7 @@ The conversion is as follows: +
 ==== Usage Scenarios
 Given below is the sequence of actions done by the address book when you export and import an address book. +
 
-====== Exporting your address book
+===== Exporting your address book
 *Step 1.* The user executes `export d/C:\Users\USER\Desktop\DemoExport f/test` to export their data to the directory with the file name the user wants. +
 
 *Step 2.* The user input is first parsed by `AddressBookParser` which creates a new `ExportCommandParser` object. +
@@ -643,7 +643,7 @@ Figure 1. Interactions inside the Logic component for the `export d/C:\Users\USE
 image::exportSequenceDiagramStorage.png[Height="200"]
 Figure 2. Interactions inside the Storage component for the `export d/C:\Users\USER\Desktop\DemoExport f/test` command.
 
-====== Importing to your address book
+===== Importing to your address book
 *Step 1.* The user executes `import d/C:\Users\USER\Desktop\DemoExport f/test` to import their data from the directory with the name of the file. +
 
 *Step 2.* The user input is first parsed by `AddressBookParser` which creates a new `ImportCommandParser` object. +
@@ -1890,7 +1890,7 @@ Expected: The command box should be automatically filled to `find n/Alex Yeoh`.
 
 . Other commands to try: `add`, `delete`, `password`. +
 
-NOTE: Some arguments do not work since they are unsupported. Refer to <<UserGuide.adoc#,Text Prediction>> in the User Guide for more details.
+NOTE: Some arguments do not work since they are unsupported. Refer to <<UserGuide.adoc#text-prediction,Text Prediction>> in the User Guide for more details.
 
 === Searching for a person
 
