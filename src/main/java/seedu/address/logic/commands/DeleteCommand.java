@@ -23,9 +23,10 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = CliSyntax.COMMAND_DELETE;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes single or multiple persons identified by the index numbers used "
+            + "in the displayed person list.\n"
+            + "Parameters: INDEX INDEX ... INDEX   or   START - END, ... , START - END\n"
+            + "Example: " + COMMAND_WORD + " 1 2 4 5   or   1 - 3, 5 - 9";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted persons: %1$s\n%2$s";
 
