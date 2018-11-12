@@ -33,10 +33,10 @@
 <li><a href="#data-encryption">3.2. Data Encryption</a></li>
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
-<li><a href="#text-prediction">3.5. Text prediction</a></li>
-<li><a href="#back-up-and-restore">3.6. Back Up and Restore</a></li>
-<li><a href="#export-and-import">3.7. Export and Import</a></li>
-<li><a href="#import-csv-to-address-book">3.8. Import CSV to address book</a></li>
+<li><a href="#text-prediction">3.5. Text Prediction</a></li>
+<li><a href="#email-contacts">3.6. Email Contacts</a></li>
+<li><a href="#back-up-and-restore">3.7. Back Up and Restore</a></li>
+<li><a href="#export-and-import">3.8. Export and Import</a></li>
 <li><a href="#find-and-search">3.9. Find and Search</a></li>
 <li><a href="#schedule">3.10. Schedule</a></li>
 </ul>
@@ -68,23 +68,38 @@
 <li><a href="#managing-dependencies">6.6. Managing Dependencies</a></li>
 </ul>
 </li>
-<li><a href="#GetStartedProgramming">Appendix A: Suggested Programming Tasks to Get Started</a>
+<li><a href="#TextPredictionDetails">Appendix A: Text Prediction low level details</a></li>
+<li><a href="#GetStartedProgramming">Appendix B: Suggested Programming Tasks to Get Started</a>
 <ul class="sectlevel2">
-<li><a href="#GetStartedProgramming-EachComponent">A.1. Improving each component</a></li>
-<li><a href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a></li>
+<li><a href="#GetStartedProgramming-EachComponent">B.1. Improving each component</a></li>
+<li><a href="#GetStartedProgramming-RemarkCommand">B.2. Creating a new command: <code>remark</code></a></li>
 </ul>
 </li>
-<li><a href="#product-scope">Appendix B: Product Scope</a></li>
-<li><a href="#user-stories">Appendix C: User Stories</a></li>
-<li><a href="#use-cases">Appendix D: Use Cases</a></li>
-<li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
-<li><a href="#glossary">Appendix F: Glossary</a></li>
-<li><a href="#product-survey">Appendix G: Product Survey</a></li>
+<li><a href="#product-scope">Appendix C: Product Scope</a></li>
+<li><a href="#user-stories">Appendix D: User Stories</a></li>
+<li><a href="#use-cases">Appendix E: Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#use-case-edit-an-activity-in-the-schedule">E.1. Use case: Edit an activity in the schedule</a></li>
+<li><a href="#use-case-delete-an-activity-from-the-schedule">E.2. Use case: Delete an activity from the schedule</a></li>
+</ul>
+</li>
+<li><a href="#non-functional-requirements">Appendix F: Non Functional Requirements</a></li>
+<li><a href="#glossary">Appendix G: Glossary</a></li>
 <li><a href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">H.2. Deleting a person</a></li>
-<li><a href="#saving-data">H.3. Saving data</a></li>
+<li><a href="#adding-a-person">H.1. Adding a person</a></li>
+<li><a href="#editing-a-person">H.2. Editing a person</a></li>
+<li><a href="#listing-persons">H.3. Listing persons</a></li>
+<li><a href="#selecting-persons">H.4. Selecting persons</a></li>
+<li><a href="#predicting-text">H.5. Predicting text</a></li>
+<li><a href="#searching-for-a-person">H.6. Searching for a person</a></li>
+<li><a href="#locking-and-unlocking">H.7. Locking and unlocking</a></li>
+<li><a href="#deleting-a-person">H.8. Deleting a person</a></li>
+<li><a href="#updating-the-schedule">H.9. Updating the Schedule</a></li>
+<li><a href="#saving-data">H.10. Saving data</a></li>
+<li><a href="#backing-up-and-restoring-data-in-the-address-book">H.11. Backing up and restoring data in the address book</a></li>
+<li><a href="#exporting-data-from-the-address-book">H.12. Exporting data from the address book</a></li>
+<li><a href="#importing-data-to-the-address-book">H.13. Importing data to the address book</a></li>
 </ul>
 </li>
 </ul>
@@ -287,7 +302,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 2.1, &#8220;Architecture&#8221;</a>.</p>
 </li>
 <li>
-<p>Take a look at <a href="#GetStartedProgramming">Appendix A, <em>Suggested Programming Tasks to Get Started</em></a>.</p>
+<p>Take a look at <a href="#GetStartedProgramming">Appendix B, <em>Suggested Programming Tasks to Get Started</em></a>.</p>
 </li>
 </ol>
 </div>
@@ -808,7 +823,7 @@ Additionally, it implements the following operations:</p>
 <p>Given below is an example usage scenario and how the password mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user enters the password command with a password.</p>
+<p><strong>Step 1.</strong> The user enters the password command with a password.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -823,13 +838,13 @@ If the user enters a password which is non alpha-numeric, an error will be throw
 </table>
 </div>
 <div class="paragraph">
-<p>Step 2. The user closes the addressbook.</p>
+<p><strong>Step 2.</strong> The user closes the address book.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. The user re-opens the addressbook. No data will be shown as XML data file is technically not present in the data folder.</p>
+<p><strong>Step 3.</strong> The user re-opens the address book. No data will be shown as the <code>XML data file</code> is technically not present in the data folder.</p>
 </div>
 <div class="paragraph">
-<p>Step 4. The user enters the password command with the right password. Addressbook will be refreshed and restored back to its former state (before encryption).</p>
+<p><strong>Step 4.</strong> The user enters the password command with the right password. Address book will be refreshed and restored back to its former state (before encryption).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -838,7 +853,7 @@ If the user enters a password which is non alpha-numeric, an error will be throw
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the user enters the wrong password, an error will be thrown at the CommandResult box.
+If the user enters the wrong password , an error will be thrown at the CommandResult box.
 </td>
 </tr>
 </table>
@@ -848,8 +863,8 @@ If the user enters the wrong password, an error will be thrown at the CommandRes
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-encryption-and-decryption-is-done"><a class="link" href="#aspect-how-encryption-and-decryption-is-done">Aspect: How encryption and decryption is done</a></h5>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>The <code>PBEKeySpec</code> is first specified using the "PBEWithMD5AndDES" specification.</p>
 </li>
@@ -857,12 +872,12 @@ If the user enters the wrong password, an error will be thrown at the CommandRes
 <p>A secret key is generated from <code>SecretKeyFactory</code> using "PBEWithMD5AndDES" cipher.</p>
 </li>
 <li>
-<p>Then a <code>Cipher</code> is used to encrypt or decrypt the file with a given password and key specifications.</p>
+<p>A <code>Cipher</code> is then used to encrypt or decrypt the file with a given password and key specifications.</p>
 </li>
 <li>
 <p>Additional salt is used in the password to ensure that the password cannot be easily broken down by dictionary attacks.</p>
 </li>
-</ul>
+</ol>
 </div>
 </div>
 <div class="sect4">
@@ -876,6 +891,65 @@ If the user enters the wrong password, an error will be thrown at the CommandRes
 <p>Cons: Data will be <strong>permanently</strong> lost if you forget the password.</p>
 </li>
 </ul>
+</div>
+<div class="sect5">
+<h6 id="encrypting-the-address-book"><a class="link" href="#encrypting-the-address-book">Encrypting the address book:</a></h6>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>password test</code> to encrypt the address book with <code>test</code> as the password.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> <code>PasswordCommandParser</code> checks for the validity of the input password (if its alpha-numeric)<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> If the password is acceptable, it is parsed to the <code>PasswordCommand</code> object<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> Within the <code>PasswordCommand</code> object, a new <code>FileEncryptor</code> object is created and it will check <strong>if</strong> the address book is currently in a locked state<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> If it is not currently locked, it will create a cipher and begin encrypting the address book with the input password.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> Previous <code>addressbook.xml</code> will be deleted whereas a new <code>addressbook.xml.encrypted</code> file will be created.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> A new <code>emptyPredicate</code> object will be instantiated and <code>model.updateFilteredPersonList(emptyPredicate)</code> will be called to clear the address book list.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 8.</strong> A <code>CommandResult</code> object will be created to notify the user that the encryption was successful<br></p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="accessing-commands-post-encryption"><a class="link" href="#accessing-commands-post-encryption">Accessing commands post encryption:</a></h6>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>list</code> to list out all the contacts in the address book.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is parsed by <code>AddressBookParser</code> which creates a new <code>ListCommandParser</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> The arguments are then parsed by the <code>ListCommandParser</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>ListCommandParser</code> then checks the validity of the arguments before it creates the <code>ListCommand</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>ListCommand</code> creates a <code>FileEncryptor</code> object to check if the address book is in a locked state by calling the <code>islocked()</code> method.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> isLocked() will return true.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> A <code>CommandException</code> will be thrown to warn the user that the address book is in a locked state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/passwordCommand_seq.png" alt="passwordCommand seq" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 1. Interactions inside the logic component for the <code>password</code> command.</p>
+</div>
 </div>
 </div>
 </div>
@@ -925,23 +999,14 @@ If the user enters the wrong password, an error will be thrown at the CommandRes
 </div>
 </div>
 <div class="sect2">
-<h3 id="text-prediction"><a class="link" href="#text-prediction">3.5. Text prediction</a></h3>
+<h3 id="text-prediction"><a class="link" href="#text-prediction">3.5. Text Prediction</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The low level implementation of text prediction is done in <code>Trie</code>. The internal data structure is a <em>Tree</em> structure where each character is stored as a node and strings built into a single tree.</p>
-</div>
-<div class="paragraph">
-<p>A node has a <code>endNode</code> flag that determines if that node represents the last character of the predicted string value. If such a node is reached, the entire string value is appended to the prediction list.</p>
-</div>
-<div class="paragraph">
-<p>The data structure can be visualised in the diagram below:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/text_prediction_general.png" alt="text prediction general" width="800">
-</div>
+<p>The text prediction feature is facilitated mainly by 2 classes, <code>CommandCompleter</code> and <code>Trie</code>. <code>Trie</code> contains the underlying data structure with a set of operations that allows predictions to be retrieved. <code>CommandCompleter</code> manages several instances of that data structure such that predictions of different attributes (name, email, address, etc.) and command keywords (add, edit, etc.) can be made.<br></p>
 </div>
 <div class="paragraph">
-<p>In addition, <code>Trie</code> implements the following main operations:</p>
+<p>For <code>Trie</code>, following operations are implemented:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -952,129 +1017,547 @@ If the user enters the wrong password, an error will be thrown at the CommandRes
 <p><code>Trie#remove(String value)</code>&#8201;&#8212;&#8201;removes a string from the data structure.</p>
 </li>
 <li>
-<p><code>Trie#getPredictList(String prefix)</code>&#8201;&#8212;&#8201;retrieve a list of predicted string values that completes the prefix.</p>
+<p><code>Trie#getPredictList(String prefix)</code>&#8201;&#8212;&#8201;retrieves a list of predicted string values that completes the prefix.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The prediction implementation is achieved by utilising depth first search (DFS) in the data structure, starting from the node representing the last character of the prefix.</p>
-</div>
-<div class="paragraph">
-<p>The prediction algorithm is illustrated with the help of the following diagram:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/text_prediction_predict.png" alt="text prediction predict" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>For example, we call the method <code>getPredictList("wom")</code>.</p>
-</div>
-<div class="paragraph">
-<p>The algorithm works by first traversing the route (green circles) that represents <code>"wom"</code> and stopping at the <code>m</code> node (red circle). The algorithm procedes to DFS from that node and explore all it&#8217;s children nodes (blue circles).</p>
-</div>
-<div class="paragraph">
-<p>Hence, calling <code>getPredictList("wom")</code> will return a list containing the elements:</p>
+<p>For <code>CommandCompleter</code>, following operations are implemented:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>"en"</code></p>
+<p><code>CommandCompleter#insertPerson()</code>&#8201;&#8212;&#8201;inserts a Person’s attributes into respective data structure instances.</p>
 </li>
 <li>
-<p><code>"ble"</code></p>
+<p><code>CommandCompleter#removePerson()</code>&#8201;&#8212;&#8201;removes a Person’s attributes from respective data structure instances.</p>
+</li>
+<li>
+<p><code>CommandCompleter#editPerson()</code>&#8201;&#8212;&#8201;edits a Person’s attributes in each data structure instances.</p>
+</li>
+<li>
+<p><code>CommandCompleter#predictText()</code>&#8201;&#8212;&#8201;predicts a list of possible text outputs that will complete and append to the given text input.</p>
+</li>
+<li>
+<p><code>CommandCompleter#clearData()</code>&#8201;&#8212;&#8201;clears all data structure instances of their data.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the text prediction mechanism behaves on a high level. For low level implementation details, refer to <a href="#TextPredictionDetails">Appendix A, <em>Text Prediction low level details</em></a>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 1.</strong> User launches the application. <code>CommandCompleter</code> is instantiated and will initialise all <code>Trie</code> instances with all command keywords and every existing contact’s (aka Person) attributes (name, phone, address, etc.).</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user keys in <code>find n/Al</code> into the command box and presses <kbd>Tab</kbd>. This will invoke <code>predictText()</code>. The method will subsequently determine (assisted by several helper classes) which <code>Trie</code> instance to retrieve the predictions from. That <code>Trie</code> instance then returns a list of possible predictions, in this case, a list containing <code>ex Yeoh</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> The user decides to add a new contact with the name <em>Alex Tan</em> using the <code>add</code> command. In the <code>add</code> logic, the method <code>Model#insertPersonIntoPrediction(Person person)</code> will be called which will call the <code>insertPerson()</code> method. This method inserts the contact’s (Alex Tan) attributes into the respective <code>Trie</code> instances.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> The user decides to predict <code>find n/Al</code> again. The logic sequence is similar to Step 2. However, since a new contact was added in Step 3, instead of returning <code>ex Yeoh</code> only, the returning list will contain both <code>ex Yeoh</code> and <code>ex Tan</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> The user now decides to remove the contact with the name <em>Alex Yeoh</em> from the address book using the <code>delete 1</code> command. The <code>removePerson()</code> method will be called and removes that contact’s (Alex Yeoh) attributes from the respective <code>Trie</code> instances.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> The user decides to predict <code>find n/Al</code> again. Similar to Step 4 except that Alex Yeoh has been removed, the list returned will contain only <code>ex Tan</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> The user decides to clear the address book with <code>clear</code> command which invokes <code>clearData()</code> method. This clears all attributes data in all <code>Trie</code> instances.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 8.</strong> The user wants to predict <code>find n/Al</code> again. However since all data were cleared, the returned predictions list contains no entries. No predictions are displayed in feedback panel.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below demonstrates how the <code>predictText()</code> method will work:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/predictText_sequence.png" alt="predictText sequence">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-used-to-support-text-prediction"><a class="link" href="#aspect-data-structure-used-to-support-text-prediction">Aspect: Data structure used to support text prediction</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a Directed Acyclic Graph to store strings.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Results in greater computational efficiency than the naive approach (Alternative 2).</p>
+</li>
+<li>
+<p>Cons: Much more difficult to implement and prone to bugs.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a simple list to store strings.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Much more easier and simple to implement.</p>
+</li>
+<li>
+<p>Cons: Inefficient and takes longer time to retrive the strings. Since the address book can potentially contain large number of contacts, retrieval of strings may take too long, which results in a slow application.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 </div>
+</div>
+</div>
 <div class="sect2">
-<h3 id="back-up-and-restore"><a class="link" href="#back-up-and-restore">3.6. Back Up and Restore</a></h3>
+<h3 id="email-contacts"><a class="link" href="#email-contacts">3.6. Email Contacts</a></h3>
 <div class="sect3">
-<h4 id="back-up"><a class="link" href="#back-up">3.6.1. Back Up</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>Creation of backups is done in <code>BackUpCommand</code> class. It extends the <code>Command</code> class with an overriding execute function.<br>
-The execute function does the following operations:<br>
-Step 1. The <code>BackUpCommand</code> class will check if a <code>.backup</code> directory exist. If it does not, a <code>.backup</code> will be created.<br>
-Step 2. The <code>backUpAddressbook()</code> method will be called on the current model.<br>
-Step 3. The <code>ModelManager</code> will read the current address book into a <code>ReadOnlyAddressbook</code><br>
-Step 4. A <code>XmlAddressBookStorage</code> will be initialised with the path of <code>.backup</code> and the file name. The file name will be that of the time in milliseconds since epoch (1970).<br>
-Step 5. A new <code>.xml</code> file will be saved in the path by invoking <code>saveAddressBook()</code> on the <code>ReadOnlyAddessbook</code> created.<br></p>
+<p>The email feature is facilitated by the <code>MailCommand</code> class. It is assisted by the <code>MailCommandParser</code> class to determine the <code>mailType</code> (who to email to) based on the user input. It is also supported by the Java built-in <code>Desktop</code> class to open the user system’s email application using the mail type as the recipients. It implements the following operation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MailCommand#execute()</code> - opens user system’s email application based on the <code>mailType</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the email mechanism behaves at each step:<br></p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user selects contact with the index 1 using the <code>select</code> command.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user inputs <code>mail</code> into the command box and executes the command. <code>execute()</code> checks if the user system is supported by the Java <em>Desktop</em> library and throws an exception if unsupported. In this case, the <code>mailType</code> is contacts selection type. Hence, <code>MailCommand#mailToSelection()</code> is invoked. The Uniform Resource Identifier (URI) is built and <code>Desktop#mail(URI uri)</code> is called, which opens up the system’s email application.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the user decides to email all contacts with the tag <code>coworker</code> instead, the user will execute <code>mail t/coworker</code> in the command box. Similar to Step 2, except that the logic calls <code>MailCommand#mailToGroups(Model model, Tag tag)</code> with the input tag as parameter. URI is built with contacts containing the specified tag and the email application opens up.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="back-up-and-restore"><a class="link" href="#back-up-and-restore">3.7. Back Up and Restore</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-of-backup"><a class="link" href="#current-implementation-of-backup">3.7.1. Current implementation of backup</a></h4>
+<div class="paragraph">
+<p>Creation of backups is done in <code>BackUpCommand</code> class. It extends the <code>Command</code> class with an overriding execute function.<br></p>
+</div>
+<div class="sect4">
+<h5 id="model"><a class="link" href="#model">Model</a></h5>
+<div class="paragraph">
+<p>This feature implements a new method in <code>Model</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#backUpAddressbook(Path)</code>&#8201;&#8212;&#8201;Saves a copy of the address book into the path in a <code>XML</code> format.<br></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-of-backup-snapshots"><a class="link" href="#listing-of-backup-snapshots">3.6.2. Listing of backup snapshots</a></h4>
+<h4 id="current-implementation-of-listing-of-backup-snapshots"><a class="link" href="#current-implementation-of-listing-of-backup-snapshots">3.7.2. Current implementation of Listing of backup snapshots</a></h4>
 <div class="paragraph">
-<p>Listing of the snapshots of backups is done with the <code>RestoreSnapshotsCommand</code> class. It also extends the <code>Command</code> class.<br>
-The execute function does the following operations:<br>
-Step 1. Checks the <code>.backup</code> folder for all the snapshots and stores them in a <code>BackupList</code> class. Throws an exception if <code>.backup</code> does not exist or is empty.<br>
-Step 2. Converts the names of file into the format DATE TIME and saves it in an array.<br>
-Step 3. Iterate through the array and form a string to print.<br>
-Step 4. Prints the string.<br></p>
+<p>Listing of the snapshots of backups is done with the <code>RestoreSnapshotsCommand</code> class. It also extends the <code>Command</code> class.<br></p>
 </div>
+<div class="sect4">
+<h5 id="backuplist"><a class="link" href="#backuplist">BackupList</a></h5>
 <div class="paragraph">
 <p>The <code>BackupList</code> object holds a map of files with indexes as its keys. It also has an array of <code>String</code>. The position of the strings corresponds to the index of the file it represents in the map.<br></p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>BackupList#getFileName()</code>&#8201;&#8212;&#8201;returns a list of the names of the snapshots.<br></p>
+</li>
+<li>
+<p><code>BackupList#getFileMap()</code>&#8201;&#8212;&#8201;returns a map of the snapshots, each denoted with an <code>INDEX</code><br></p>
+</li>
+<li>
+<p><code>BackupList#millisToDateAndTime(String fileName)</code>&#8201;&#8212;&#8201;converts a timestamp in milliseconds to a formatted date and time format.<br></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="restoring-from-the-list"><a class="link" href="#restoring-from-the-list">3.6.3. Restoring from the list</a></h4>
+<h4 id="current-implementation-of-restoring-from-the-list"><a class="link" href="#current-implementation-of-restoring-from-the-list">3.7.3. Current implementation of Restoring from the list</a></h4>
 <div class="paragraph">
-<p>The restoration of backup snapshots is done in the <code>RestoreCommand</code> class. It extends the <code>Command</code> class with an overriding execute function.<br>
-The execute method will do the following operation:<br>
-Step 1. <code>BackupList</code> and an <code>INDEX</code> input by the user.<br>
-Step 2. The <code>BackupList</code> contains a map of <code>File</code> with an <code>INDEX</code> attached to it.<br>
-Step 3. The chosen file based on the index will be converted in to a path and the current data in the address book will be replaced by the chosen file.</p>
+<p>The restoration of backup snapshots is done in the <code>RestoreCommand</code> class. It extends the <code>Command</code> class with an overriding execute function.<br></p>
+</div>
+<div class="sect4">
+<h5 id="model-2"><a class="link" href="#model-2">Model</a></h5>
+<div class="paragraph">
+<p>This feature implements a new method in <code>Model</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model#replaceData(Path path)</code>&#8201;&#8212;&#8201;Overrides the current address book information with another <code>XML</code> file.<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="usage-scenarios"><a class="link" href="#usage-scenarios">3.7.4. Usage Scenarios</a></h4>
+<div class="paragraph">
+<p>Given below is the sequence of actions done by the address book when you back up and restore your data.<br></p>
+</div>
+<div class="sect4">
+<h5 id="saving-a-backup"><a class="link" href="#saving-a-backup">Saving a Backup</a></h5>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>backup</code> to create a backup snapshot<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>BackupCommand</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> <code>BackupCommand</code> is executed and calls <code>Model#backUpAddressbook(Path)</code> with the path of the <code>.backup</code> folder as the argument. This creates a copy of the address book data in the folder as an <code>XML</code> file.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> An <code>AddressBookStorage</code> will be created in the <code>Model#backUpAddressbook(Path)</code> method which facilitates the saving of the data of address book.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>saveAddressBook()</code> will be called to save the data of the address book.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>AddressBookStorage</code> will check if the <code>.backup</code> folder exists. If not it will create the folder.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following sequence diagrams shows you how the add operation works:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/backupSequenceDiagramLogic.png" alt="backupSequenceDiagramLogic" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 1. Interactions inside the Logic component for the <code>backup</code> command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/backupSequenceDiagramStorage.png" alt="backupSequenceDiagramStorage">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 2. Interactions inside the Storage component for the <code>backup</code> command.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="listing-all-the-snapshots"><a class="link" href="#listing-all-the-snapshots">Listing all the snapshots</a></h5>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>restore-snapshots</code> to get a list of all backup snapshots<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>RestoreSnapshotsCommand</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> <code>RestoreSnapshotsCommand</code> is executed and calls <code>readBackupList(String)</code> with the directory of the <code>.backup</code> folder as the argument. This reads a <code>BackupList</code> from the given destination path. A list of formatted file names will be created which will be shown to the user.<br></p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagrams shows you how the add operation works:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/restoreSnapshotsSequenceDiagramLogic.png" alt="restoreSnapshotsSequenceDiagramLogic" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 3. Interactions inside the Logic component for the <code>restore-snapshots</code> command.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="restoring-from-a-backup"><a class="link" href="#restoring-from-a-backup">Restoring from a backup</a></h5>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>restore 1</code> to restore their data with a backup snapshot denoted by an <code>index of 1</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>RestoreCommandParser</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> The argument, <code>1</code>, is then parsed by <code>RestoreCommandParser</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>RestoreCommandParser</code> checks the validity of the index as input by the user. It then creates a
+<code>BackupList</code> object.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the index is not valid, an error would be returned to the user instead of creating a <code>RestoreCommand</code> object.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>RestoreCommandParser</code> then creates a new <code>RestoreCommand</code> with the <code>BackupList</code> and index as its arguments.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> <code>RestoreCommand</code> is executed and calls <code>Model#replaceData(Path)</code> which replaces the data of the address book with the <code>XML</code> file denoted by the <code>Path</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before calling <code>Model#replaceData(Path path)</code>, the address book is checked if it is encrypted with a password, via <code>FileEncryptor</code>.
+It the address book is locked, an error would be displayed to the user instead of carrying on with the command.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> A <code>XmlAddressBookStorage</code> will be initialised which helps to read the data of the <code>XML</code> file.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 8.</strong> The address book will be overwritten with the new data by calling <code>resetData</code> with the new data as its argument.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/restoreSequenceDiagramLogic.png" alt="restoreSequenceDiagramLogic" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 4. Interactions inside the Logic component for the <code>restore 1</code> command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/restoreSequenceDiagramStorage.png" alt="restoreSequenceDiagramStorage">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 5. Interactions inside the Storage component for the <code>restore 1</code> command.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-and-import"><a class="link" href="#export-and-import">3.7. Export and Import</a></h3>
+<h3 id="export-and-import"><a class="link" href="#export-and-import">3.8. Export and Import</a></h3>
 <div class="sect3">
-<h4 id="export-to-csv"><a class="link" href="#export-to-csv">3.7.1. Export to CSV</a></h4>
+<h4 id="current-implementation-of-export"><a class="link" href="#current-implementation-of-export">3.8.1. Current implementation of Export</a></h4>
 <div class="paragraph">
-<p>The export function is facilitated by the <code>ExportCommand</code> class. It extends the <code>Command</code> class wit an overriding execute function.<br>
-The execute method will do the following operation:<br>
-Step 1. The current address book information will be instantiated into a new <code>ReadOnlyAddressbook</code> object.<br>
-Step 2. An <code>ObservableList&lt;Person&gt;</code> will be obtained from the address book.<br>
-Step 3. The <code>ObservableList&lt;Person&gt;</code> will be written onto a CSV file via the CsvWriter object.<br></p>
+<p>The export function is facilitated by the <code>ExportCommand</code> class. It extends the <code>Command</code> class wit an overriding execute function.<br></p>
 </div>
+<div class="sect4">
+<h5 id="csvwriter"><a class="link" href="#csvwriter">CsvWriter</a></h5>
 <div class="paragraph">
 <p><code>CsvWriter</code> is an object that takes in a path of where the export is to be saved and write a CSV file into the said path.<br>
 The conversion is as follows:<br>
-Step 1. The constructor converts an <code>ObservableList&lt;Person&gt;</code> into a <code>List&lt;Person&gt;</code>
-Step 2. The <code>convertToCsv()</code> method will be called in <code>ExportCommand</code> and a new CSV file will be written with the content of the created <code>List&lt;Person&gt;</code>.<br>
-Step 3. This file will be created in the path.<br></p>
+<strong>Step 1.</strong> The constructor converts an <code>ObservableList&lt;Person&gt;</code> into a <code>List&lt;Person&gt;</code>
+<strong>Step 2.</strong> The <code>convertToCsv()</code> method will be called in <code>ExportCommand</code> and a new CSV file will be written with the content of the created <code>List&lt;Person&gt;</code>.<br>
+<strong>Step 3.</strong> This file will be created in the path.<br></p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="import-csv-to-address-book"><a class="link" href="#import-csv-to-address-book">3.8. Import CSV to address book</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-of-import"><a class="link" href="#current-implementation-of-import">3.8.2. Current implementation of Import</a></h4>
 <div class="paragraph">
-<p>The import function is implemented with the <code>ImportCommand</code> class. It extends the <code>Command</code> class with an overriding execute method.<br>
-The execute method will fo the following operation:<br>
-Step 1. A <code>CsvReader</code> will be instantiated with the file corresponding to the path of CSV file provided by the user.<br>
-Step 2. The <code>CsvReader</code> will call the <code>convertToList</code> method which returns a <code>List&lt;Person&gt;</code>.<br>
-Step 3. It will then iterate through the <code>List&lt;Person&gt;</code> and add <code>Person</code> one by one into the <code>Model</code>. If there are any duplicates it will be skipped.<br></p>
+<p>The import function is implemented with the <code>ImportCommand</code> class. It extends the <code>Command</code> class with an overriding execute method.<br></p>
 </div>
+<div class="sect4">
+<h5 id="csvreader"><a class="link" href="#csvreader">CsvReader</a></h5>
 <div class="paragraph">
 <p><code>CsvReader</code> is an object that takes in a CSV file and converts it into a  list of persons.<br>
 The conversion is as follows:<br>
-Step 1. The constructor reads a CSV file line by line.<br>
-Step 2. The <code>convertToList</code> method formats the file into a <code>Model</code> friendly format.<br>
-Step 3. It then converts the strings into a persons.<br>
-Step 4. These persons are then stored in a <code>List&lt;Person&gt;</code> and returned.<br></p>
+<strong>Step 1.</strong> The constructor reads a CSV file line by line.<br>
+<strong>Step 2.</strong> The <code>convertToList</code> method formats the file into a <code>Model</code> friendly format.<br>
+<strong>Step 3.</strong> It then converts the strings into a persons.<br>
+<strong>Step 4.</strong> These persons are then stored in a <code>List&lt;Person&gt;</code> and returned.<br></p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="usage-scenarios-2"><a class="link" href="#usage-scenarios-2">3.8.3. Usage Scenarios</a></h4>
+<div class="paragraph">
+<p>Given below is the sequence of actions done by the address book when you export and import an address book.<br></p>
+</div>
+<div class="sect4">
+<h5 id="exporting-your-address-book"><a class="link" href="#exporting-your-address-book">Exporting your address book</a></h5>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>export d/C:\Users\USER\Desktop\DemoExport f/test</code> to export their data to the directory with the file name the user wants.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>ExportCommandParser</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> The argument, <code>d/C:\Users\USER\Desktop\DemoExport f/test</code>, is then parsed by <code>ExportCommandParser</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>ExportCommandParser</code> checks the validity of the directory as input by the user. It then creates a
+<code>ExportCommand</code> object with the directory and file name as its arguments.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the directory is not valid or a file with the same file name exists in the directory, an error would be returned to the user instead of creating a <code>ExportCommand</code> object.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>ExportCommand</code> is executed and creates a <code>CsvWriter</code> object. The <code>CsvWriter</code> object is created with a copy of the address book taken from <code>Model</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> <code>convertToCsv(String directory)</code> is called with the full directory as the argument which writes the data of the address book to a file of <code>CSV</code> format.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before calling <code>convertToCsv(String directory)</code>, the address book is checked if it is encrypted with a password, via <code>FileEncryptor</code>.
+It the address book is locked, an error would be displayed to the user instead of carrying on with the command.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following sequence diagrams shows you how the add operation works:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/exportSequenceDiagramLogic.png" alt="exportSequenceDiagramLogic" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 1. Interactions inside the Logic component for the <code>export d/C:\Users\USER\Desktop\DemoExport f/test</code> command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/exportSequenceDiagramStorage.png" alt="exportSequenceDiagramStorage">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 2. Interactions inside the Storage component for the <code>export d/C:\Users\USER\Desktop\DemoExport f/test</code> command.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="importing-to-your-address-book"><a class="link" href="#importing-to-your-address-book">Importing to your address book</a></h5>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>import d/C:\Users\USER\Desktop\DemoExport f/test</code> to import their data from the directory with the name of the file.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>ImportCommandParser</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> The argument, <code>d/C:\Users\USER\Desktop\DemoExport f/test</code>, is then parsed by <code>ImportCommandParser</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>ImportCommandParser</code> checks the validity of the directory as input by the user. It then creates a
+<code>ImportCommand</code> object with the directory and file.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the directory is not valid or a file with the name does not exists in the directory, an error would be returned to the user instead of creating a <code>ImportCommand</code> object.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the file is of the wrong format, an error would also be returned to the user instead of creating a <code>ImportCommand</code> object.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>ImportCommand</code> is executed and creates a <code>CsvReader</code> object. The <code>CsvReader</code> object is created with the file identified<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> <code>convertToList()</code> is called which creates a list of persons that can be added.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before calling <code>convertToList()</code>, the address book is checked if it is encrypted with a password, via <code>FileEncryptor</code>.
+It the address book is locked, an error would be displayed to the user instead of carrying on with the command.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> There is a loop that iterates through the list and add the persons into the address book. All duplicated persons will be skipped.<br></p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagrams shows you how the add operation works:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/importSequenceDiagramLogic.png" alt="importSequenceDiagramLogic" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 1. Interactions inside the Logic component for the <code>import d/C:\Users\USER\Desktop\DemoExport f/test</code> command.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="find-and-search"><a class="link" href="#find-and-search">3.9. Find and Search</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.9.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The find function has been revamped to support prioritisation of search similarity.<br>
-<code>FindCommand</code> is now backed up by the <code>ClosestMatchList</code> class which uses <code>LevenshteinDistanceUtil</code> to generate an ordered set of Person names ordered by similarity.</p>
+<p>The find function has been revamped to support search guessing and search by attributes.<br>
+<code>FindCommand</code> is now backed up by the <code>ClosestMatchList</code> class which uses <code>LevenshteinDistanceUtil</code> and <code>HammingDistanceUtil</code> to generate an ordered set of <code>Person</code> attributes ordered by similarity.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.9.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-find-command-executes"><a class="link" href="#aspect-how-find-command-executes">Aspect: How find command executes</a></h5>
 <div class="ulist">
@@ -1093,11 +1576,24 @@ Step 4. These persons are then stored in a <code>List&lt;Person&gt;</code> and r
 </div>
 </li>
 <li>
-<p><strong>Alternative 2 (current choice):</strong> Store the search results in a <code>treeMap</code> ordered by their Levenshtein distances from the search keyword</p>
+<p><strong>Alternative 2:</strong> Store the search results in a <code>treeMap</code> ordered by their Levenshtein or Hamming distances from the search keyword</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Will also consider searches that are similar to what we want and will account for typos or incomplete keywords</p>
+</li>
+<li>
+<p>Cons: Added complexities in finding and searching, can be vague when searching for number attributes</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3 (current choice):</strong> Same as alternative 2 but we use <strong>Hamming distance</strong> for phone numbers and KPI attributes instead.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Phone number and KPI searches are now more precise</p>
 </li>
 <li>
 <p>Cons: Added complexities in finding and searching</p>
@@ -1157,11 +1653,57 @@ Step 4. These persons are then stored in a <code>List&lt;Person&gt;</code> and r
 <div class="sect4">
 <h5 id="aspect-data-structure-to-support-the-revamped-find-command"><a class="link" href="#aspect-data-structure-to-support-the-revamped-find-command">Aspect: Data structure to support the revamped Find command</a></h5>
 <div class="paragraph">
-<p><code>treeMap</code> was used to store the search results ordered by their Levenshtein distances.<br>
+<p><code>treeMap</code> was used to store the search results ordered by their Levenshtein or Hamming distances.<br>
 The results are then filtered and
 results furthest away from the top few are ignored. The searches will then be passed thru their respective predicates
 (<code>NameContainsKeywordsPredicate</code>, <code>AddressContainsKeywordsPredicate</code>, <code>EmailContainsKeywordsPredicate</code>, <code>KpiContainsKeywordPredicate</code>, <code>NoteContainsKeywordsPredicate</code>, <code>PhoneContainsKeywordPredicate</code>, <code>PositionContainsKeywordsPredicate</code>, <code>TagContainsKeywordsPredicate</code>)
 before filtering the list.</p>
+</div>
+<div class="sect5">
+<h6 id="searching-for-a-contact"><a class="link" href="#searching-for-a-contact">Searching for a contact:</a></h6>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>find a/Clementi t/owesMoney</code> to find all contacts staying in Clementi and bearing the <code>owesMoney</code> tag.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is parsed by <code>AddressBookParser</code> which creates a new <code>FindCommandParser</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> The arguments <code>a/Clementi t/owesMoney</code> are then parsed by the <code>FindCommandParser</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>FindCommandParser</code> then checks the validity of the arguments before it creates the <code>FindCommand</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>FindCommand</code> then proceeds to create <code>ClosestMatchList</code> objects.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> It uses the list of keywords obtained from <code>ClosestMatchList</code> to create <code>AddressContainsKeywordsPredicate</code> and <code>TagContainsKeywordsPredicate</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> These predicates are combined into a <code>combinedPredicate</code> object using the "AND" operation.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 8.</strong> The model is then updated by calling <code>model.updateFilteredPersonList(combinedPredicate)</code> together with the combined predicate obtained in <strong>Step 8.</strong><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 9.</strong> A <code>CommandResult</code> object will be created and an internal method <code>findActualMatches()</code> will be called to generate a string of keywords that are exact matches and keywords that are guessed.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/findFeature_seq.png" alt="findFeature seq" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 1. Interactions inside the logic component for the <code>find a/Clementi t/owesMoney</code> command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/closestMatchList_seq.png" alt="closestMatchList seq" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 2. Interactions inside the <code>ClosestMatchList</code> class</p>
+</div>
 </div>
 </div>
 </div>
@@ -1169,16 +1711,16 @@ before filtering the list.</p>
 <div class="sect2">
 <h3 id="schedule"><a class="link" href="#schedule">3.10. Schedule</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.10.1. Current implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.10.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>Updating the Schedule is facilitated by the <code>ScheduleCommand</code> class which extends the <code>Command</code> class.
+<p>Updating the <strong>Schedule</strong> is facilitated by the <code>ScheduleCommand</code> class which extends the <code>Command</code> class.
 <code>ScheduleAddCommand</code>, <code>ScheduleEditCommand</code> and <code>ScheduleDeleteCommand</code> further extends <code>ScheduleCommand</code> to add, edit and
-delete entries in the Schedule respectively.</p>
+delete entries in the <strong>Schedule</strong> respectively.</p>
 </div>
 <div class="sect4">
 <h5 id="activity"><a class="link" href="#activity">Activity</a></h5>
 <div class="paragraph">
-<p>Each entry in the Schedule is an <code>Activity</code>. It consist of a <code>String</code> which takes the name of the activity
+<p>Each entry in the <strong>Schedule</strong> is an <code>Activity</code>. It consists of a <code>String</code> which takes the name of the activity
 and the <code>Date</code>, of which the activity is due.</p>
 </div>
 </div>
@@ -1194,13 +1736,16 @@ date, as its <code>value</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Schedule#add()</code>&#8201;&#8212;&#8201;Add an <code>Activity</code> to <code>schedule</code>.<br></p>
+<p><code>Schedule#add(Activity activity)</code>&#8201;&#8212;&#8201;Add an <code>Activity</code> to <code>schedule</code>.<br></p>
 </li>
 <li>
-<p><code>Schedule#delete()</code>&#8201;&#8212;&#8201;Deletes an <code>Activity</code> from <code>schedule</code>.<br></p>
+<p><code>Schedule#delete(Activity activity)</code>&#8201;&#8212;&#8201;Deletes an <code>Activity</code> from <code>schedule</code>.<br></p>
 </li>
 <li>
-<p><code>Schedule#setSchedule</code>&#8201;&#8212;&#8201;Sets <code>schedule</code> from a <code>list</code> of activities. This operation is executed when importing data from an <code>XML</code> file.
+<p><code>Schedule#update(Activity target, Activity editedActivity)</code>&#8201;&#8212;&#8201;Updates/edits an <code>Activity</code> in the <code>schedule</code>. <code>target</code> is the activity to be edited. <code>editedActivity</code> is the new, changed, activity.<br></p>
+</li>
+<li>
+<p><code>Schedule#setSchedule(List&lt;Activity&gt; activities)</code>&#8201;&#8212;&#8201;Sets <code>schedule</code> from a <code>list</code> of activities. This operation is executed when importing data from an <code>XML</code> file.
 This happens when you first start <strong>CorpPro</strong>.</p>
 </li>
 <li>
@@ -1214,14 +1759,13 @@ This happens when you first start <strong>CorpPro</strong>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Model#addActivity()</code>&#8201;&#8212;&#8201;Exposes <code>Schedule#add()</code> .</p>
+<p><code>Model#addActivity(Activity activity)</code>&#8201;&#8212;&#8201;Exposes <code>Schedule#add(Activity activity)</code> .</p>
 </li>
 <li>
-<p><code>Model#deleteActivity()</code>&#8201;&#8212;&#8201;Exposes <code>Schedule#delete()</code>.</p>
+<p><code>Model#deleteActivity(Activity activity)</code>&#8201;&#8212;&#8201;Exposes <code>Schedule#delete(Activity activity)</code>.</p>
 </li>
 <li>
-<p><code>Model#updateActivity()</code>&#8201;&#8212;&#8201;This operation edits an <code>Activity</code> in <code>schedule</code> by first executing <code>Schedule#delete()</code>, followed
-by <code>Schedule#add()</code>.</p>
+<p><code>Model#updateActivity(Activity target, Activity editedActivity)</code>&#8201;&#8212;&#8201;Exposes <code>Schedule#update(Activity target, Activity editedActivity)</code>.</p>
 </li>
 <li>
 <p><code>Model#getSchedule()</code>&#8201;&#8212;&#8201;Exposes <code>Schedule#getSchedule()</code>.</p>
@@ -1238,9 +1782,9 @@ whenever you update it. This is facilitated by <code>XmlAdaptedActivity</code> w
 </div>
 </div>
 <div class="sect4">
-<h5 id="usage-scenarios"><a class="link" href="#usage-scenarios">Usage scenarios</a></h5>
+<h5 id="usage-scenarios-3"><a class="link" href="#usage-scenarios-3">Usage scenarios</a></h5>
 <div class="paragraph">
-<p>Given below is are examples of usage scenarios of how the schedule behaves when you carry out <code>schedule</code> commands.<br></p>
+<p>Given below are examples of usage scenarios of how the schedule behaves when you carry out <code>schedule</code> commands.<br></p>
 </div>
 <div class="sect5">
 <h6 id="adding-an-activity"><a class="link" href="#adding-an-activity">Adding an activity:</a></h6>
@@ -1257,16 +1801,43 @@ whenever you update it. This is facilitated by <code>XmlAdaptedActivity</code> w
 <p><strong>Step 4.</strong> <code>ScheduleAddCommandParser</code> checks the validity of the date and activity as input by the user. It then creates an
 <code>Activity</code> object.<br></p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the date or the activity name is not valid, an error would be returned to the user instead of creating an <code>Activity</code> object.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p><strong>Step 5.</strong> <code>ScheduleAddCommandParser</code> then creates a new <code>ScheduleAddCommand</code> with the <code>activity</code> as its argument.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 6.</strong> <code>ScheduleAddCommand</code> calls <code>Model#addActivity()</code> which creates the <code>activity</code> in the <code>schedule</code>.
-<code>indicateAddressBookChanged()</code> is called within <code>Model#addActivity()</code> to raise an <code>AddressBookChangedEvent</code> that the information within the
+<p><strong>Step 6.</strong> <code>ScheduleAddCommand</code> is executed and calls <code>Model#addActivity(activity)</code> which creates the <code>activity</code> in the <code>schedule</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before calling <code>Model#addActivity(activity)</code>, the address book is checked if it is encrypted with a password, via <code>FileEncryptor</code>.
+It the address book is locked, an error would be displayed to the user instead of carrying on with the command.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> <code>indicateAddressBookChanged()</code> is called within <code>Model#addActivity(activity)</code> to raise an <code>AddressBookChangedEvent</code>, that the information within the
 address book is changed. <br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 7.</strong> The <code>UI</code> object, <code>schedulePanel</code> which is subscribed to the event, receives this updated information and updates
+<p><strong>Step 8.</strong> The <code>UI</code> object, <code>schedulePanel</code> which is subscribed to the event, receives this updated information and updates
 the display to show the correct information to the user.<br></p>
 </div>
 <div class="paragraph">
@@ -1278,7 +1849,7 @@ the display to show the correct information to the user.<br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Figure 1. Interactions inside the Logic component for the <code>schedule-add d/01/01/2018 a/Complete report.</code> command</p>
+<p>Figure 1. Interactions inside the Logic component for the <code>schedule-add d/01/01/2018 a/Complete report.</code> command.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1292,6 +1863,14 @@ The figure above illustrates the sequence from <strong>Step 1.</strong> to <stro
 </tr>
 </table>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/scheduleAddSequenceDiagramStorage.png" alt="scheduleAddSequenceDiagramStorage" width="650">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 2. Interactions inside the Storage component for the <code>schedule-add d/01/01/2018 a/Complete report.</code> command.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1299,18 +1878,18 @@ The figure above illustrates the sequence from <strong>Step 1.</strong> to <stro
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the date or the activity name is not valid, an error would be returned to the user instead of creating an <code>Activity</code> object.
+The figure above illustrates the sequence of <strong>Step 6.</strong> and <strong>Step 7.</strong><br>
 </td>
 </tr>
 </table>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/scheduleAddSequenceDiagramStorage.png" alt="scheduleAddSequenceDiagramStorage" width="800">
+<img src="images/scheduleAddSequenceDiagramEvent.png" alt="scheduleAddSequenceDiagramEvent" width="650">
 </div>
 </div>
 <div class="paragraph">
-<p>Figure 2. Interactions inside the Storage component for the <code>schedule-add d/01/01/2018 a/Complete report.</code> command</p>
+<p>Figure 3. Interactions between the <code>EventCenter</code>, <code>UI</code> and <code>Storage</code> components for the <code>schedule-add d/01/01/2018 a/Complete report.</code> command.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1319,18 +1898,124 @@ If the date or the activity name is not valid, an error would be returned to the
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The figure above illustrates the sequence of <strong>Step 6.</strong><br>
+The figure above illustrates the sequence of <strong>Step 8.</strong><br>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Storage of each activity is facilitated by <code>XmlAdaptedActivity</code> which stores an <code>Activity</code> in an <code>XML</code> format. <code>XmlSerializableAddressBook</code> then appends each <code>XmlAdaptedActivity</code> into a list and is saved in <code>addressbook.xml</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect5">
+<h6 id="editing-an-activity"><a class="link" href="#editing-an-activity">Editing an activity:</a></h6>
+<div class="paragraph">
+<p><strong>Step 1.</strong> The user executes <code>schedule-edit 2 a/Interview intern.</code> to edit an activity at <code>INDEX 2</code> in their schedule.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>ScheduleEditCommandParser</code> object.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3.</strong> The arguments, <code>2 a/Interview intern.</code>, are then parsed by <code>ScheduleEditCommandParser</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4.</strong> <code>ScheduleEditCommandParser</code> checks the validity of the index and activity as input by the user.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the activity name or index is not valid, an error would be returned to the user instead of editing
+an activity.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Step 5.</strong> <code>ScheduleEditCommandParser</code> then creates a new <code>ScheduleEditCommand</code> with the <code>INDEX</code> and the new activity
+ <code>String</code> as its argument.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 6.</strong> <code>ScheduleEditCommand</code> gets <code>target</code>, the activity to be edited, via <code>ScheduleCommand#getActivityFromIndex(model, index)</code> and creates <code>editedActivity</code>, the new activity.
+ It then calls <code>Model#updateActivity(target, editedActivity)</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the index is not valid, i.e. out of range of the displayed schedule, an error would be returned to the user instead of editing
+an activity.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before calling <code>Model#updateActivity(target, editedActivity)</code>, the address book is checked if it is encrypted with a password, via <code>FileEncryptor</code>.
+It the address book is locked, an error would be displayed to the user instead of carrying on with the command.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Step 7.</strong> <code>Model#updateActivity(target, editedActivity)</code> updates the corresponding <code>activity</code> in the <code>schedule</code>.
+<code>indicateAddressBookChanged()</code> is called within <code>Model#updateActivity(target, editedActivity)</code> to raise an <code>AddressBookChangedEvent</code> that the information within the
+address book is changed. <br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 8.</strong> The <code>UI</code> object, <code>schedulePanel</code> which is subscribed to the event, receives this updated information and
+updates the display to show the correct information to the user.<br></p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagrams shows how the edit operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/scheduleEditSequenceDiagramLogic.png" alt="scheduleEditSequenceDiagramLogic" width="900">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 4. Interactions inside the Logic component for the <code>schedule-edit 2 a/Interview intern.</code> command.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The figure above illustrates the sequence from <strong>Step 1.</strong> to <strong>Step 6.</strong><br>
 </td>
 </tr>
 </table>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/scheduleAddSequenceDiagramEvent.png" alt="scheduleAddSequenceDiagramEvent" width="800">
+<img src="images/scheduleEditSequenceDiagramStorage.png" alt="scheduleEditSequenceDiagramStorage" width="650">
 </div>
 </div>
 <div class="paragraph">
-<p>Figure 3. Interactions between the <code>EventCenter</code>, <code>UI</code> and <code>Storage</code> components for the <code>schedule-add d/01/01/2018 a/Complete report.</code> command</p>
+<p>Figure 5. Interactions inside the Model component for the <code>schedule-edit 2 a/Interview intern.</code> command.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1339,22 +2024,13 @@ The figure above illustrates the sequence of <strong>Step 6.</strong><br>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The figure above illustrates the sequence of <strong>Step 7.</strong><br>
+The figure above illustrates the sequence of  <strong>Step 7.</strong><br>
 </td>
 </tr>
 </table>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Storage of each activity is facilitated by <code>XmlAdaptedActivity</code> which stores an <code>Activity</code> in an <code>XML</code> format. <code>XmlSerializableAddressBook</code> then appends each <code>XmlAdaptedActivity</code> into a list and is saved in <code>addressbook.xml</code>
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>The interactions between the <code>EventCenter</code>, <code>UI</code> and <code>Storage</code> components for <code>editing an activity</code> (<strong>Step 8.</strong>) are similar to <strong>adding an activity</strong> (see <strong>Figure 3.</strong>).</p>
 </div>
 </div>
 <div class="sect5">
@@ -1372,12 +2048,38 @@ Storage of each activity is facilitated by <code>XmlAdaptedActivity</code> which
 <p><strong>Step 4.</strong> <code>ScheduleDeleteCommandParser</code> then creates a new <code>ScheduleDeleteCommand</code> with the <code>INDEX</code> as its argument.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 5.</strong> <code>ScheduleDeleteCommand</code> checks if the <code>INDEX</code> given is valid (within the size of the listed schedule) and calls
-<code>Model#deleteActivity()</code></p>
+<p><strong>Step 5.</strong> <code>ScheduleDeleteCommand</code> gets the <code>activity</code>, to be deleted, via <code>ScheduleCommand#getActivityFromIndex(model, index)</code> and calls
+<code>Model#deleteActivity(activity)</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the index is not valid, i.e. out of range of the displayed schedule, an error would be returned to the user instead of deleting
+an activity.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before calling <code>Model#deleteActivity(activity)</code>, the address book is checked if it is encrypted with a password, via <code>FileEncryptor</code>.
+It the address book is locked, an error would be displayed to the user instead of carrying on with the command.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p><strong>Step 6.</strong> <code>Model#deleteActivity</code> deletes the corresponding <code>activity</code> from the <code>schedule</code>. <code>indicateAddressBookChanged()</code> is called
-within <code>Model#deleteActivity()</code> to raise an <code>AddressBookChangedEvent</code>, that the information within the
+<p><strong>Step 6.</strong> <code>Model#deleteActivity(activity)</code> deletes the corresponding <code>activity</code> from the <code>schedule</code>. <code>indicateAddressBookChanged()</code> is called
+within <code>Model#deleteActivity(activity)</code> to raise an <code>AddressBookChangedEvent</code>, that the information within the
 address book is changed. <br></p>
 </div>
 <div class="paragraph">
@@ -1385,162 +2087,16 @@ address book is changed. <br></p>
 the display to show the correct information to the user.<br></p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagrams shows you how the delete operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/scheduleDeleteSequenceDiagramLogic.png" alt="scheduleDeleteSequenceDiagramLogic" width="900">
-</div>
+<p>The sequence of deleting an activity is similar to editing an activity. Instead of updating the activity , it is deleted (see <strong>Figure 4.</strong> and <strong>Figure 5.</strong>).</p>
 </div>
 <div class="paragraph">
-<p>Figure 4. Interactions inside the Logic component for the <code>schedule-delete 2</code> command</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The figure above illustrates the sequence from <strong>Step 1.</strong> to <strong>Step 5.</strong><br>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the index is not valid, i.e. out of range, an error would be returned to the user instead of deleting an activity.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/scheduleDeleteSequenceDiagramStorage.png" alt="scheduleDeleteSequenceDiagramStorage" width="900">
-</div>
-</div>
-<div class="paragraph">
-<p>Figure 5. Interactions inside the Model component for the <code>schedule-delete 2</code> command</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The figure above illustrates the sequence of <strong>Step 6.</strong><br>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The interactions between the <code>EventCenter</code>, <code>UI</code> and <code>Storage</code> components for the <code>schedule-delete 2</code> command (<strong>Step 7.</strong>) are similar to <strong>adding
-an activity</strong> (see <strong>Figure 3.</strong>)</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="editing-an-activity"><a class="link" href="#editing-an-activity">Editing an activity:</a></h6>
-<div class="paragraph">
-<p><strong>Step 1.</strong> The user executes <code>schedule-edit 2 a/Interview intern.</code> to edit an activity at <code>INDEX 2</code> in their schedule.<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 2.</strong> The user input is first parsed by <code>AddressBookParser</code> which creates a new <code>ScheduleEditCommandParser</code> object.<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 3.</strong> The arguments, <code>2 a/Interview intern.</code>, are then parsed by <code>ScheduleEditCommandParser</code>.<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 4.</strong> <code>ScheduleEditCommandParser</code> checks the validity of the index and activity as input by the user.<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 5.</strong> <code>ScheduleEditCommandParser</code> then creates a new <code>ScheduleEditCommand</code> with the <code>INDEX</code> and the activity
- <code>String</code> as its argument.<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 6.</strong> <code>ScheduleEditCommand</code> checks if the <code>INDEX</code> given is valid (within the size of the listed schedule) and calls
-<code>Model#updateActivity()</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 7.</strong> <code>Model#updateActivity()</code> updates the corresponding <code>activity</code> in the <code>schedule</code>.
-<code>indicateAddressBookChanged()</code> is called within <code>Model#updateActivity()</code> to raise an <code>AddressBookChangedEvent</code> that the information within the
-address book is changed. <br></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 8.</strong> The <code>UI</code> object, <code>schedulePanel</code> which is subscribed to the event, receives this updated information and
-updates the display to show the correct information to the user.<br></p>
-</div>
-<div class="paragraph">
-<p>The following sequence diagrams shows you how the edit operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/scheduleEditSequenceDiagramLogic.png" alt="scheduleEditSequenceDiagramLogic" width="900">
-</div>
-</div>
-<div class="paragraph">
-<p>Figure 6. Interactions inside the Logic component for the <code>schedule-edit 2 a/Interview intern.</code> command</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The figure above illustrates the sequence from <strong>Step 1.</strong> to <strong>Step 6.</strong><br>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the activity name or index is not valid, i.e. out of range, an error would be returned to the user instead of editing
-an activity.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/scheduleEditSequenceDiagramStorage.png" alt="scheduleEditSequenceDiagramStorage" width="900">
-</div>
-</div>
-<div class="paragraph">
-<p>Figure 7. Interactions inside the Model component for the <code>schedule-edit 2 a/Interview intern.</code> command</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The figure above illustrates the sequence of  <strong>Step 7.</strong><br>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The interactions between the <code>EventCenter</code>, <code>UI</code> and <code>Storage</code> components for the <code>schedule-edit 2 a/Interview intern.</code>
-command (<strong>Step 8.</strong>) are similar to <strong>adding
-an activity</strong> (see <strong>Figure 3.</strong>)</p>
+<p>The interactions between the <code>EventCenter</code>, <code>UI</code> and <code>Storage</code> components for <strong>deleting an activity</strong> (<strong>Step 7.</strong>) are similar to <strong>adding an activity</strong> (see <strong>Figure 3.</strong>).</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.10.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.10.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-of-schedule"><a class="link" href="#aspect-data-structure-of-schedule">Aspect: Data structure of Schedule</a></h5>
 <div class="ulist">
@@ -1598,7 +2154,7 @@ an activity</strong> (see <strong>Figure 3.</strong>)</p>
 <p>Cons: Need to implement comparators to sort the dates of activity.</p>
 </li>
 <li>
-<p>Cons: Not flexible. Unable to include and sort by time in future implementations</p>
+<p>Cons: Not flexible. Unable to include and sort by time in future implementations.</p>
 </li>
 </ul>
 </div>
@@ -2021,7 +2577,72 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect1">
-<h2 id="GetStartedProgramming"><a class="link" href="#GetStartedProgramming">Appendix A: Suggested Programming Tasks to Get Started</a></h2>
+<h2 id="TextPredictionDetails"><a class="link" href="#TextPredictionDetails">Appendix A: Text Prediction low level details</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The low level implementation of text prediction is done in <code>Trie</code>. The internal data structure is a <em>Tree</em> structure where each character is stored as a node and strings built into a single tree.</p>
+</div>
+<div class="paragraph">
+<p>A node has a <code>endNode</code> flag that determines if that node represents the last character of the predicted string value. If such a node is reached, the entire string value is appended to the prediction list.</p>
+</div>
+<div class="paragraph">
+<p>The data structure can be visualised in the diagram below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/text_prediction_general.png" alt="text prediction general" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>In addition, <code>Trie</code> implements the following main operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Trie#insert(String value)</code>&#8201;&#8212;&#8201;inserts a string into the data structure.</p>
+</li>
+<li>
+<p><code>Trie#remove(String value)</code>&#8201;&#8212;&#8201;removes a string from the data structure.</p>
+</li>
+<li>
+<p><code>Trie#getPredictList(String prefix)</code>&#8201;&#8212;&#8201;retrieve a list of predicted string values that completes the prefix.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The prediction implementation is achieved by utilising depth first search (DFS) algorithm in the data structure, starting from the node representing the last character of the prefix.</p>
+</div>
+<div class="paragraph">
+<p>The prediction algorithm is illustrated with the help of the following diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/text_prediction_predict.png" alt="text prediction predict" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>For example, we call the method <code>getPredictList("wom")</code>.</p>
+</div>
+<div class="paragraph">
+<p>The algorithm works by first traversing the route (green circles) that represents <code>"wom"</code> and stopping at the <code>m</code> node (red circle). The algorithm proceeds to DFS from that node and explore all it&#8217;s children nodes (blue circles).</p>
+</div>
+<div class="paragraph">
+<p>Hence, calling <code>getPredictList("wom")</code> will return a list containing the elements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"en"</code></p>
+</li>
+<li>
+<p><code>"ble"</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="GetStartedProgramming"><a class="link" href="#GetStartedProgramming">Appendix B: Suggested Programming Tasks to Get Started</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Suggested path for new programmers:</p>
@@ -2029,15 +2650,15 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <a href="#GetStartedProgramming-EachComponent">Section A.1, &#8220;Improving each component&#8221;</a>.</p>
+<p>First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <a href="#GetStartedProgramming-EachComponent">Section B.1, &#8220;Improving each component&#8221;</a>.</p>
 </li>
 <li>
-<p>Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <a href="#GetStartedProgramming-RemarkCommand">Section A.2, &#8220;Creating a new command: <code>remark</code>&#8221;</a> explains how to go about adding such a feature.</p>
+<p>Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <a href="#GetStartedProgramming-RemarkCommand">Section B.2, &#8220;Creating a new command: <code>remark</code>&#8221;</a> explains how to go about adding such a feature.</p>
 </li>
 </ol>
 </div>
 <div class="sect2">
-<h3 id="GetStartedProgramming-EachComponent"><a class="link" href="#GetStartedProgramming-EachComponent">A.1. Improving each component</a></h3>
+<h3 id="GetStartedProgramming-EachComponent"><a class="link" href="#GetStartedProgramming-EachComponent">B.1. Improving each component</a></h3>
 <div class="paragraph">
 <p>Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).</p>
 </div>
@@ -2447,7 +3068,7 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 </div>
 </div>
 <div class="sect2">
-<h3 id="GetStartedProgramming-RemarkCommand"><a class="link" href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a></h3>
+<h3 id="GetStartedProgramming-RemarkCommand"><a class="link" href="#GetStartedProgramming-RemarkCommand">B.2. Creating a new command: <code>remark</code></a></h3>
 <div class="paragraph">
 <p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
 </div>
@@ -2455,7 +3076,7 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <p><strong>Scenario:</strong> You are a software maintainer for <code>addressbook</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
 </div>
 <div class="sect3">
-<h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
+<h4 id="description"><a class="link" href="#description">B.2.1. Description</a></h4>
 <div class="paragraph">
 <p>Edits the remark for a person specified in the <code>INDEX</code>.<br>
 Format: <code>remark INDEX r/[REMARK]</code></p>
@@ -2477,7 +3098,7 @@ Removes the remark for the first person.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></h4>
+<h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">B.2.2. Step-by-step Instructions</a></h4>
 <div class="sect4">
 <h5 id="step-1-logic-teach-the-app-to-accept-remark-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-remark-which-does-nothing">[Step 1] Logic: Teach the app to accept 'remark' which does nothing</a></h5>
 <div class="paragraph">
@@ -2728,7 +3349,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="full-solution"><a class="link" href="#full-solution">A.2.3. Full Solution</a></h4>
+<h4 id="full-solution"><a class="link" href="#full-solution">B.2.3. Full Solution</a></h4>
 <div class="paragraph">
 <p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/599">PR</a> for the step-by-step solution.</p>
 </div>
@@ -2737,7 +3358,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="product-scope"><a class="link" href="#product-scope">Appendix B: Product Scope</a></h2>
+<h2 id="product-scope"><a class="link" href="#product-scope">Appendix C: Product Scope</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Target user profile</strong>:</p>
@@ -2767,7 +3388,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="user-stories"><a class="link" href="#user-stories">Appendix C: User Stories</a></h2>
+<h2 id="user-stories"><a class="link" href="#user-stories">Appendix D: User Stories</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code><br></p>
@@ -2910,7 +3531,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="use-cases"><a class="link" href="#use-cases">Appendix D: Use Cases</a></h2>
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix E: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
@@ -2988,6 +3609,49 @@ Use case ends.</p>
 <p>2a. The list is empty.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-find-persons" class="discrete">Use case: Find persons</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to search by address</p>
+</li>
+<li>
+<p>Address book shows a list of persons living under that address</p>
+</li>
+<li>
+<p>User requests to search for a specific tag and the previous address</p>
+</li>
+<li>
+<p>Address book refines the search results by displaying people who live in the specified address and is tagged</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. No similar keywords within the address book.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. Address book shows list of persons with similar keywords to the one originally searched.</p>
+<div class="paragraph">
+<p>Use case resumes at step 3.</p>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ul>
@@ -3184,7 +3848,7 @@ Use case ends.</p>
 </li>
 </ul>
 </div>
-<h3 id="use-case-encrypt-addressbook" class="discrete">Use case: Encrypt addressbook</h3>
+<h3 id="use-case-lock-address-book" class="discrete">Use case: Lock address book</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3194,7 +3858,7 @@ Use case ends.</p>
 <p>User requests to encrypt addressbook with password</p>
 </li>
 <li>
-<p>Addressbook shows encrypted message</p>
+<p>Address book shows encrypted message</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3207,7 +3871,7 @@ Use case ends.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. Addressbook is already encrypted.</p>
+<p>1a. Address book is already encrypted.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -3221,17 +3885,17 @@ Use case ends.</p>
 </li>
 </ul>
 </div>
-<h3 id="use-case-decrypt-addressbook" class="discrete">Use case: Decrypt addressbook</h3>
+<h3 id="use-case-unlock-address-book" class="discrete">Use case: Unlock address book</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to decrypt addressbook with password</p>
+<p>User requests to decrypt address book with password</p>
 </li>
 <li>
-<p>Addressbook shows decrypted message</p>
+<p>Address book shows decrypted message</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3244,7 +3908,7 @@ Use case ends.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. Addressbook is already decrypted.</p>
+<p>1a. Address book is already decrypted.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -3258,7 +3922,7 @@ Use case ends.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1b1. Addressbook will display incorrect password message.</p>
+<p>1b1. Address book will display incorrect password message.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3339,10 +4003,113 @@ Use case ends.</p>
 </li>
 </ul>
 </div>
+<h3 id="use-case-add-an-activity-to-the-schedule" class="discrete">Use case: Add an activity to the schedule</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add an activity to the schedule.<br></p>
+</li>
+<li>
+<p>Address book adds the activity to the schedule<br>
+Use case ends.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. Input command has invalid format.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. Address book displays format error.<br>
+Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="use-case-edit-an-activity-in-the-schedule"><a class="link" href="#use-case-edit-an-activity-in-the-schedule">E.1. Use case: Edit an activity in the schedule</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to edit an activity in the schedule.<br></p>
+</li>
+<li>
+<p>Address book edits the activity in the schedule<br>
+Use case ends.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. Input command has invalid format.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. Address book displays format error.<br>
+Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-delete-an-activity-from-the-schedule"><a class="link" href="#use-case-delete-an-activity-from-the-schedule">E.2. Use case: Delete an activity from the schedule</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to delete an activity from the schedule.<br></p>
+</li>
+<li>
+<p>Address book delete the activity from the schedule<br>
+Use case ends.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. Input command has invalid format.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. Address book displays format error.<br>
+Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></h2>
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix F: Non Functional Requirements</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -3375,7 +4142,7 @@ Use case ends.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="glossary"><a class="link" href="#glossary">Appendix F: Glossary</a></h2>
+<h2 id="glossary"><a class="link" href="#glossary">Appendix G: Glossary</a></h2>
 <div class="sectionbody">
 <div class="dlist">
 <dl>
@@ -3388,43 +4155,6 @@ Use case ends.</p>
 <p>A contact detail that is not meant to be shared with others</p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix G: Product Survey</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Product Name</strong></p>
-</div>
-<div class="paragraph">
-<p>Author: &#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -3447,54 +4177,299 @@ These instructions only provide a starting point for testers to work on; testers
 </table>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">H.1. Launch and Shutdown</a></h3>
+<h3 id="adding-a-person"><a class="link" href="#adding-a-person">H.1. Adding a person</a></h3>
+<div class="paragraph">
+<p>Adding a person to the address book.<br>
+Prerequisites: Carry out the following commands sequentially:</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Initial launch</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Download the jar file and copy into an empty folder</p>
+<p>Test case: <code>add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2</code><br>
+Expected: The person is added to the contact list.</p>
 </li>
 <li>
-<p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+<p>Test case: <code>add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2</code><br>
+Expected: No person is added as the person "Alexia Tok" is already in the contact list. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>add n/Bob Teo p/23q e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2</code><br>
+Expected: No person is added as the phone number is invalid. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>add n/Bob Teo p/99008800 e/ATexamplecom a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2</code><br>
+Expected: No person is added as the email is invalid. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/&#8230;&#8203; k/4.5 d/AT is a good friend t/friend t/colleague 2</code><br>
+Expected: No person is added as the position is invalid. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/6 d/AT is a good friend t/friend t/colleague 2</code><br>
+Expected: No person is added as the kpi is invalid. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/?#$% t/friend t/colleague 2</code><br>
+Expected: No person is added as the note is invalid. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Test case: <code>add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 3</code><br>
+Expected: No person is added as the tag is invalid. Error details shown in the status message.</p>
 </li>
 </ol>
-</div>
-</li>
-<li>
-<p>Saving window preferences</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
-</li>
-<li>
-<p>Re-launch the app by double-clicking the jar file.<br>
-Expected: The most recent window size and location is retained.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">H.2. Deleting a person</a></h3>
+<h3 id="editing-a-person"><a class="link" href="#editing-a-person">H.2. Editing a person</a></h3>
+<div class="paragraph">
+<p>Editing a person in the address book.<br>
+Prerequisites: There are multiple persons in the contact list.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Test case: <code>edit 1 p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2</code><br>
+Expected: The first person in the contact list is edited.</p>
 </li>
+<li>
+<p>Test case: <code>edit 0 p/12345678</code><br>
+Expected: No person is edited. Error details shown in status message.</p>
+</li>
+<li>
+<p>Test case: <code>edit all/ n/Hercules fatty</code><br>
+Expected: No persons is edited. Error details shown in status message.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-persons"><a class="link" href="#listing-persons">H.3. Listing persons</a></h3>
+<div class="paragraph">
+<p>Listing persons in the address book.<br>
+Prerequisites: There are multiple persons in the contact list.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Test case: <code>list</code><br>
+Expected: All contacts in the address book will be listed and shown in the contacts panel.</p>
+</li>
+<li>
+<p>Test case: <code>list t/colleagues</code><br>
+Expected: All contacts with the tag <code>colleagues</code> will be listed and shown.</p>
+</li>
+<li>
+<p>Test case: <code>list k/5.0</code><br>
+Expected: All contacts with KPI value of <code>5.0</code> will be listed and shown.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-persons"><a class="link" href="#selecting-persons">H.4. Selecting persons</a></h3>
+<div class="paragraph">
+<p>Selecting persons in the address book.<br>
+Prerequisites: There are at least 7 persons in the contacts list.<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Test case: <code>select 1</code><br>
+Expected: First contact will be highlighted in the contacts panel and information shown in information panel.</p>
+</li>
+<li>
+<p>Test case: <code>select 1 2 3</code><br>
+Expected: First three contacts will be highlighted.</p>
+</li>
+<li>
+<p>Test case: <code>select 1-3, 5-7</code><br>
+Expected: First three and 5th to 7th contacts will be highlighted.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="predicting-text"><a class="link" href="#predicting-text">H.5. Predicting text</a></h3>
+<div class="paragraph">
+<p>Invoking text prediction in the address book.<br>
+Prerequisites: There are the sample contacts in the address book.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Test case: <code>f</code> and press <kbd>Tab</kbd>.<br>
+Expected: The command box should automatically be filled to the command `find `.</p>
+</li>
+<li>
+<p>Test case: Continuing from previous test case, append with <code>n/Al</code> and press <kbd>Tab</kbd>.<br>
+Expected: The command box should be automatically filled to <code>find n/Alex Yeoh</code>.</p>
+</li>
+<li>
+<p>Other commands to try: <code>add</code>, <code>delete</code>, <code>password</code>.<br></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Some arguments do not work since they are unsupported. Refer to <a href="UserGuide.html#text-prediction">Text Prediction</a> in the User Guide for more details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="searching-for-a-person"><a class="link" href="#searching-for-a-person">H.6. Searching for a person</a></h3>
+<div class="paragraph">
+<p>Finding a person in the address book.<br>
+Prerequisites: The following commands must be entered, "Alexia Tok" and "Marcus Tok" must exist within the contact list:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2</code><br></p>
+</li>
+<li>
+<p><code>add n/Marcus Tok p/12341234 e/MT@example.com a/123, Admiraly, 1234665 r/Cleaner k/4.0 d/MT is a bad cleaner t/notFriend t/colleague 2</code><br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Test case: <code>find n/Tok</code><br>
+Expected: "Marcus Tok" and "Alexia Tok" will show up in the contacts panel.</p>
+</li>
+<li>
+<p>Test case: <code>find k/4.0</code><br>
+Expected: "Marcus Tok" will show up in the contacts panel.</p>
+</li>
+<li>
+<p>Test case: <code>find k/4</code><br>
+Expected: "Marcus Tok" and "Alexia Tok" will show up in the contacts panel.</p>
+</li>
+<li>
+<p>Test case: <code>find r/bass</code><br>
+Expected: "Alexia Tok" with position "Boss" will show up in the contacts panel. <code>Keywords guessed: {Boss}</code> will show at the status message as "bass" is a closer match to "Boss"</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locking-and-unlocking"><a class="link" href="#locking-and-unlocking">H.7. Locking and unlocking</a></h3>
+<div class="paragraph">
+<p>Locking and unlocking of the address book.<br>
+Prerequisites: Address book should not be locked. Check path at <code>./data/addressbook.xml</code> to ensure that it is not encrypted: <code>addressbook.xml.encrypted</code> and that <code>addressbook.xml</code> exists.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Test case: <code>password hello</code><br>
+Expected: A status message "File encrypted!" will be displayed to the user and the contacts panel will be cleared. All further commands at this point will show a message "Address book is locked, please key in password".<br></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Schedule panel will still be visible and not cleared. But the user will not be able to update it. Closing and re-opening the address book will clear it.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Test case: <code>password test</code><br>
+Prerequisites: This test case should be carried out after the previous test case.<br>
+Expected: A status message "Password mismatch!" will be displayed to the user and the address book will remain locked.</p>
+</li>
+<li>
+<p>Test case: <code>password hello</code><br>
+Prerequisites: This test case should be carried out after the previous test case <strong>1.</strong><br>
+Expected: A status message "File decrypted!" will be displayed to the user, the contacts panel and schedule will be refreshed to show the data that was encrypted.<br></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">H.8. Deleting a person</a></h3>
+<div class="paragraph">
+<p>Deleting a person while all persons are listed.<br>
+Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Test case: <code>delete 1</code><br>
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1 2 3</code><br>
+Expected: First three contacts will be deleted.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1-3, 5-7</code><br>
+Expected: First three and 5th to 7th contacts will be deleted.</p>
+</li>
+<li>
+<p>Test case: <code>delete 0</code><br>
+Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="updating-the-schedule"><a class="link" href="#updating-the-schedule">H.9. Updating the Schedule</a></h3>
+<div class="paragraph">
+<p>Updating activities in the schedule.<br>
+Prerequisites: Carry out the following commands sequentially:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Test case: <code>schedule-add d/30/10/2018 a/Attend meeting with Alex.</code><br>
+Expected: activity "Attend meeting with Alex." is added to the schedule.</p>
+</li>
+<li>
+<p>Test case: <code>schedule-add d/30/10/2018 a/Attend meeting with Alex.</code><br>
+Expected: another activity, "Attend meeting with Alex.", is added to the schedule.</p>
+</li>
+<li>
+<p>Test case: <code>schedule-edit 2 a/Attend meeting with Alexia.</code><br>
+Expected: The second activity is edited to "Attend meeting with Alexia.".</p>
+</li>
+<li>
+<p>Test case: <code>schedule-edit 0 a/Test bugs</code><br>
+Expected: No activity is edited. Error details shown in the status message. Schedule panel remains the same.</p>
+</li>
+<li>
+<p>Test case: <code>schedule-delete 1</code><br>
+Expected: First activity is deleted from the schedule.</p>
+</li>
+<li>
+<p>Test case: <code>schedule-delete 0</code><br>
+Expected: No activity is deleted. Error details shown in the status message.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">H.10. Saving data</a></h3>
+<div class="paragraph">
+<p>Dealing with missing/corrupted data files.<br>
+Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Test case: <code>delete 1</code><br>
 Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
@@ -3504,37 +4479,78 @@ Expected: First contact is deleted from the list. Details of the deleted contact
 Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size)<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.3. Saving data</a></h3>
+<h3 id="backing-up-and-restoring-data-in-the-address-book"><a class="link" href="#backing-up-and-restoring-data-in-the-address-book">H.11. Backing up and restoring data in the address book</a></h3>
+<div class="paragraph">
+<p>Backing up and restoring data in the address book.<br>
+Prerequisites: Make a backup with the <code>backup</code> command.<br></p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Dealing with missing/corrupted data files</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>Test case: <code>restore-snapshot</code><br>
+Expected: One snapshot will be shown on the screen if this is your first backup. If this is not your first backup, the list will be populated with older snapshots.<br></p>
+</li>
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Test case: <code>restore 0</code><br>
+Expected: No data restored. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect restore commands to try: <code>restore</code>, <code>delete x</code> (where x is larger than the list size)<br>
+Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-</li>
-</ol>
 </div>
+<div class="sect2">
+<h3 id="exporting-data-from-the-address-book"><a class="link" href="#exporting-data-from-the-address-book">H.12. Exporting data from the address book</a></h3>
 <div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+<p>Exporting data from the address book. Prerequisites: Make sure the address book is populated with people<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Test case: <code>export</code><br>
+Expected: A copy of the contacts in <code>CSV</code> format will be created in a <code>exports</code> folder in the root directory<br></p>
+</li>
+<li>
+<p>Test case: <code>export DIRECTORY FILENAME</code><br>
+Expected: A copy of the contacts in <code>CSV</code> format will be created in the designated folder with the designated name.</p>
+</li>
+<li>
+<p>Any directory or file name that does not exist: <code>export FALSE_DIRECTORY FILENAME</code>, <code>export DIRECTORY FALSE_FILENAME</code>.<br>
+Expected: Nothing will be created. An error will be thrown to the user. Status bar will remain the same.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-data-to-the-address-book"><a class="link" href="#importing-data-to-the-address-book">H.13. Importing data to the address book</a></h3>
+<div class="paragraph">
+<p>Importing data from the address book.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Test case: <code>import DIRECTORY FILENAME</code><br>
+Expected: A copy of the contacts in <code>CSV</code> format will be created in the designated folder with the designated name.</p>
+</li>
+<li>
+<p>Test case: <code>import</code><br>
+Expected: Nothing will be created. An error will be thrown to the user. Status bar will remain the same.</p>
+</li>
+<li>
+<p>Any directory or file name that does not exist: <code>import FALSE_DIRECTORY FILENAME</code>, <code>import DIRECTORY FALSE_FILENAME</code>.<br>
+Expected: Similar to previous</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 04:53:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:04:18 UTC</div></div></div></body></html>

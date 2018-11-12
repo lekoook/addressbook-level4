@@ -11,15 +11,15 @@
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#quick-start">2. Quick Start</a></li>
-<li><a href="#Features">3. Command Summary</a></li>
-<li><a href="#features">4. Features</a>
+<li><a href="#command-summary">3. Command Summary</a></li>
+<li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-a-person-code-add-code">4.2. Adding a person: <code>add</code></a></li>
 <li><a href="#listing-all-persons-code-list-code">4.3. Listing all persons : <code>list</code></a></li>
 <li><a href="#editing-a-person-code-edit-code">4.4. Editing a person : <code>edit</code></a></li>
 <li><a href="#finding-persons-by-attribute-code-find-code">4.5. Finding persons by attribute : <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">4.6. Deleting a person : <code>delete</code></a></li>
+<li><a href="#selecting-a-person-code-delete-code">4.6. Selecting a person : <code>delete</code></a></li>
 <li><a href="#selecting-a-person-code-select-code">4.7. Selecting a person : <code>select</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">4.8. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">4.9. Undoing previous command : <code>undo</code></a></li>
@@ -97,15 +97,18 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </li>
 <li>
-<p>Refer to <a href="#Features">Section 3, &#8220;Command Summary&#8221;</a> for details of each command.</p>
+<p>Refer to <a href="#Features">Section 4, &#8220;Features&#8221;</a> for details of each command.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Features"><a class="link" href="#Features">3. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">3. Command Summary</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This section shows you usage example(s) of each command. For detailed explanations refer to <a href="#Features">Section 4, &#8220;Features&#8221;</a>.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -199,7 +202,7 @@ e.g. <code>mail all/</code> or <code>mail t/TAG</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="features"><a class="link" href="#features">4. Features</a></h2>
+<h2 id="Features"><a class="link" href="#Features">4. Features</a></h2>
 <div class="sectionbody">
 <div class="exampleblock">
 <div class="content">
@@ -227,13 +230,14 @@ e.g. <code>mail all/</code> or <code>mail t/TAG</code></p>
 <div class="sect2">
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
-<p>Format: <code>help</code></p>
+<p>Opens the User Guide window.<br>
+Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">4.2. Adding a person: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds a person to the address book<br>
+<p>Adds a contact to the address book<br>
 Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/POSITION] [k/KPI] [d/NOTE] [t/TAG [PRIORITY]]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
@@ -278,10 +282,10 @@ A person can have any number of tags (including 0). Priorities, high(2) or mediu
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Secretary k/4.99 d/John is forgetful t/friends t/owesMoney 2</code></p>
+<p><code>add n/John Doe p/98765432 e/johnd@nus.com a/311, Clementi Ave 2, #02-25 r/Secretary k/4.99 d/John is forgetful t/Accounting t/To Liase 2</code></p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/prisoner t/criminal</code></p>
+<p><code>add n/Betsy Crowe t/same office e/betsycrowe@microhard.com a/Microhard p/1234567 r/CEO t/boss</code></p>
 </li>
 </ul>
 </div>
@@ -306,8 +310,14 @@ Format: <code>list</code> or <code>list t/TAG</code> or <code>list k/KPI</code><
 </ul>
 </div>
 <div class="paragraph">
-<p>Example:<br>
-You can input <code>list t/friends</code> to display all persons with that tag in your address book.</p>
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can input <code>list t/HumanResource</code> to display all persons with <code>HumanResource</code> tag in your address book.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -351,16 +361,16 @@ Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/POSITION] [
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+<p><code>edit 1 p/91234567 e/johndoe@nus.com</code><br>
+Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@nus.com</code> respectively.</p>
 </li>
 <li>
 <p><code>edit 2 n/Betsy Crower r/ t/</code><br>
 Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears current position and all existing tags.</p>
 </li>
 <li>
-<p><code>edit all/ t/friends k/1.0</code><br>
-Replaces all listed persons' tag to be <code>friends</code> and edits their KPI to be <code>1.0</code>.<br></p>
+<p><code>edit all/ t/HR k/1.0</code><br>
+Replaces all listed persons' tag to be <code>HR</code> and edits their KPI to be <code>1.0</code>.<br></p>
 </li>
 </ul>
 </div>
@@ -415,17 +425,25 @@ Displays any person having names <code>Betsy</code>, <code>Tim</code>, or <code>
 Displays any person having the email <code>example@domain.com</code></p>
 </li>
 <li>
-<p><code>find p/912311231</code><br>
-Displays any person having the phone number <code>912311231</code></p>
-</li>
-<li>
-<p><code>find r/secretary</code><br>
-Displays any person who holds a <code>secretary</code> position</p>
-</li>
-<li>
 <p><code>find a/jurong west ave</code><br>
-Displays any person who lives in <code>jurong west ave</code></p>
+Displays any person who lives in <code>jurong</code>, <code>west</code>, <code>ave</code>.</p>
 </li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To better your experience with <strong>search</strong>, you should search for specific keywords to get to your results faster. Words such as <code>Jurong</code> would yield closer results compared to <code>Jurong West Ave</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p><code>find k/4.0</code><br>
 Displays any person who has a KPI of <code>4.0</code></p>
@@ -435,8 +453,8 @@ Displays any person who has a KPI of <code>4.0</code></p>
 Displays any person who has a note containing <code>John is forgetful</code></p>
 </li>
 <li>
-<p><code>find t/friends</code><br>
-Displays any person who is tagged as <code>friends</code></p>
+<p><code>find t/tester</code><br>
+Displays any person who is tagged as <code>tester</code></p>
 </li>
 <li>
 <p><code>find n/John Betsy r/secretary a/jurong west ave</code><br>
@@ -444,31 +462,18 @@ Displays any person having names <code>John</code> and <code>Betsy</code> who is
 </li>
 </ul>
 </div>
-<div class="sect4">
-<h5 id="search-guessing"><a class="link" href="#search-guessing">Search guessing</a></h5>
+<div class="sect3">
+<h4 id="search-guessing"><a class="link" href="#search-guessing">4.5.1. Search guessing</a></h4>
 <div class="paragraph">
-<p>This feature will also display actual keyword matches to give you a good indicator of which words are guessed.</p>
+<p>This feature will also display actual <strong>Keywords matched</strong> and <strong>Keywords guessed</strong> to give you a good indicator of which results were guessed.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/find_results1.png" alt="width">
+<img src="images/find_feature1.png" alt="find feature1" width="250">
 </div>
 </div>
 <div class="paragraph">
-<p>From the above, we can see that <code>Marcuu</code> was not matched and thus it is not shown in the output for keyword(s) matched.<br>
-Despite not matching the actual name, person <code>Marcus Phua Zheng Jie</code> will still be shown as search will attempt to guess the next closest keyword to the one you entered.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the keywords entered bears no similarity with any keywords among the contacts in your address book, it will list all your contacts.
-</td>
-</tr>
-</table>
+<p>From the above results we can see that <code>Bernicc</code> yields <code>Keywords guessed: {Bernice}</code> whereas <code>Alex</code> yields <code>Keywords matched: {Alex}</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -477,30 +482,45 @@ If the keywords entered bears no similarity with any keywords among the contacts
 <ul>
 <li>
 <p><code>find p/9123</code><br>
-Displays any person having the phone number similar to <code>9123</code> eg. <code>91231231</code>, <code>91231234</code>, and so on. But it will show <code>0 keyword(s) matched</code>.</p>
+Displays any person having the phone number similar to <code>9123</code> eg. <code>91231231</code>, <code>91231234</code>, and so on.</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To narrow down your searches, try to be more specific in the phone number you wish to search for.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">4.6. Deleting a person : <code>delete</code></a></h3>
+<h3 id="selecting-a-person-code-delete-code"><a class="link" href="#selecting-a-person-code-delete-code">4.6. Selecting a person : <code>delete</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified person from the address book.<br>
-Format: <code>delete INDEX</code></p>
+<p>Deletes a single or multiple contacts identified by their index number in the contacts list displayed on the left.<br>
+Format: <code>delete INDEX</code> or <code>delete START_INDEX - END_INDEX</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Deletes the person at the specified <code>INDEX</code>.</p>
+<p>Deletes the contact at the specified <code>INDEX</code>.</p>
 </li>
 <li>
-<p>The <code>INDEX</code> refers to the index number shown in the displayed person list.</p>
+<p>The <code>INDEX</code> refers to the index number to left of each contact entry shown in the displayed person list.</p>
 </li>
 <li>
-<p>The <code>INDEX</code> <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>You <strong>must enter positive integers</strong> <code>1, 2, 3, &#8230;&#8203;</code> for the <code>INDEX</code>.</p>
+</li>
+<li>
+<p>In the case of multiple deletions, the range is denoted with a dash  ( - ) and you can separate multiple ranges with comma ( , ).</p>
 </li>
 </ul>
 </div>
@@ -514,12 +534,22 @@ Format: <code>delete INDEX</code></p>
 <li>
 <p><code>list</code><br>
 <code>delete 2</code><br>
-Deletes the 2nd person in the address book.</p>
+Deletes the 2nd contact in the address book.</p>
 </li>
 <li>
-<p><code>find Betsy</code><br>
+<p><code>list</code><br>
+<code>delete 1 - 3</code><br>
+Deletes the 1st to the 3rd contact in the address book.</p>
+</li>
+<li>
+<p><code>list</code><br>
+<code>delete 1 - 3, 6 - 9</code><br>
+Deletes the 1st to the 3rd contact and 6th to the 9th contact in the address book.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
 <code>delete 1</code><br>
-Deletes the 1st person in the results of the <code>find</code> command.</p>
+Deletes the 1st contact in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
@@ -527,7 +557,7 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 <div class="sect2">
 <h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">4.7. Selecting a person : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Selects a single or multiple persons identified by their index number in the persons list displayed on the left.<br>
+<p>Selects a single or multiple contacts identified by their index number in the contacts list displayed on the left.<br>
 Format: <code>select INDEX</code> or <code>select START_INDEX - END_INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -535,13 +565,13 @@ Format: <code>select INDEX</code> or <code>select START_INDEX - END_INDEX</code>
 <div class="ulist">
 <ul>
 <li>
-<p>The person you selected will have their information loaded in the information panel displayed in the centre.</p>
+<p>The contact you selected will have their information loaded in the information panel displayed in the centre.</p>
 </li>
 <li>
-<p>The <code>INDEX</code> refers to the index number to left of each person entry shown in the displayed person list.</p>
+<p>The <code>INDEX</code> refers to the index number to left of each contact entry shown in the displayed person list.</p>
 </li>
 <li>
-<p>You <strong>must enter positive integers</strong> <code>1, 2, 3, &#8230;&#8203;</code> for the index.</p>
+<p>You <strong>must enter positive integers</strong> <code>1, 2, 3, &#8230;&#8203;</code> for the <code>INDEX</code>.</p>
 </li>
 <li>
 <p>In the case of multiple selections, the range is denoted with a dash  ( - ) and you can separate multiple ranges with comma ( , ).</p>
@@ -558,22 +588,22 @@ Format: <code>select INDEX</code> or <code>select START_INDEX - END_INDEX</code>
 <li>
 <p><code>list</code><br>
 <code>select 2</code><br>
-Selects the 2nd person in the address book.</p>
+Selects the 2nd contact in the address book.</p>
 </li>
 <li>
 <p><code>list</code><br>
 <code>select 1 - 3</code><br>
-Selects from the 1st to the 3rd person in the address book.</p>
+Selects the 1st to the 3rd contact in the address book.</p>
 </li>
 <li>
 <p><code>list</code><br>
 <code>select 1 - 3, 6 - 9</code><br>
-Selects from the 1st to the 3rd person and 6th to the 9th person in the address book.</p>
+Selects the 1st to the 3rd contact and 6th to the 9th contact in the address book.</p>
 </li>
 <li>
 <p><code>find n/Betsy</code><br>
 <code>select 1</code><br>
-Selects the 1st person in the results of the <code>find</code> command.</p>
+Selects the 1st contact in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
@@ -686,24 +716,30 @@ Format: <code>backup</code><br></p>
 <div class="sect2">
 <h3 id="restore-data-from-backup-code-restore-code"><a class="link" href="#restore-data-from-backup-code-restore-code">4.12. Restore data from backup : <code>restore</code></a></h3>
 <div class="paragraph">
-<p>The restore feature allows you to revert your address book back to a specific state int time (provided you backed up the state).<br>
+<p>The restore feature allows you to revert your address book back to a specific state in time (provided you backed up the state).<br>
 To list out all the available backups from latest to earliest:<br>
 Format: <code>restore-snapshots</code><br></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The time of backup is in the format of <code>INDEX</code> d MMM uuuu HH:mm:ss.</p>
+<p>The time of backup is in the format of <code>INDEX</code> <code>d MMM uuuu HH:mm:ss</code>.</p>
 </li>
 <li>
 <p>Example: 1. 29 Oct 2018 00:16:31</p>
 </li>
 </ul>
 </div>
+</div>
+</div>
 <div class="paragraph">
-<p>To restore your address book to the snapshot denoted by the <code>INDEX</code><br>
+<p>To restore your address book to the snapshot denoted by the <code>INDEX</code>,<br>
 Format: <code>restore INDEX</code></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -715,12 +751,16 @@ Format: <code>restore INDEX</code></p>
 </ul>
 </div>
 </div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="exports-the-address-book-to-a-directory-code-export-code"><a class="link" href="#exports-the-address-book-to-a-directory-code-export-code">4.13. Exports the address book to a directory : <code>export</code></a></h3>
 <div class="paragraph">
 <p>You can export your address book contacts into a CSV file into any existing directory.<br>
 Format: <code>export [d/ OUTPUT_PATH] [f/ NAME_OF_FILE]</code></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -737,6 +777,8 @@ Format: <code>export [d/ OUTPUT_PATH] [f/ NAME_OF_FILE]</code></p>
 </li>
 </ul>
 </div>
+</div>
+</div>
 <div class="paragraph">
 <p>Refer to <a href="#CSVFormat">Appendix A, <em>Format of an exported CSV file</em></a> for details of an exported CSV file.</p>
 </div>
@@ -747,6 +789,8 @@ Format: <code>export [d/ OUTPUT_PATH] [f/ NAME_OF_FILE]</code></p>
 <p>You can import a CSV file and append it to your current address book.<br>
 Format: <code>import d/ TARGET_PATH f/ NAME_OF_FILE</code></p>
 </div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -756,6 +800,8 @@ Format: <code>import d/ TARGET_PATH f/ NAME_OF_FILE</code></p>
 <p><code>NAME_OF_FILE</code> is the name of the CSV file you want to import.</p>
 </li>
 </ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -768,14 +814,55 @@ Format: <code>clear</code></p>
 <div class="sect2">
 <h3 id="encrypting-data-files-code-password-code"><a class="link" href="#encrypting-data-files-code-password-code">4.16. Encrypting data files : <code>password</code></a></h3>
 <div class="paragraph">
-<p>Encrypts the data file with your password.<br>
-Format: <code>password YOURPASSWORD</code><br>
-All commands will be disabled during encryption, your data will be safely protected.</p>
+<p>Encrypts the data file with your password. All commands will be disabled during encryption, your data will be safely protected.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>password YOURPASSWORD</code><br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can use the same command to decrypt the file, just hit <code>password</code> and your correct password.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="safe-analogy"><a class="link" href="#safe-analogy">4.16.1. Safe analogy</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/safe.png" alt="safe" width="150">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This feature does not actually store passwords. You will have to secure it with a password again after decryption to secure it.<br>
+Passwords can only be alpha-numeric.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Treat this feature as if it is a <strong>safe</strong>, once you have locked it, you have to remember the password in order to unlock it again.<br>
+And once you have unlocked it, you are free to set a new password.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Note: You can use the same command to decrypt the file, just hit <code>password</code> and your correct password.</p>
+<p><code>password helloworld</code><br>
+Locks address book with a password string and clears all data.</p>
 </li>
 </ul>
 </div>
@@ -786,31 +873,17 @@ All commands will be disabled during encryption, your data will be safely protec
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This feature does not actually store passwords. You will have to reenter the command followed by a password again after decryption to secure it.
+Entering <code>password helloworld</code> again unlocks the  address book and restores all data.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>password helloworld</code><br>
-Locks addressbook and clears all data.</p>
-</li>
-<li>
-<p><code>password helloworld</code><br>
-Unlocks addressbook and restores all data.</p>
-</li>
-</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="email-contacts-code-mail-code"><a class="link" href="#email-contacts-code-mail-code">4.17. Email contacts : <code>mail</code></a></h3>
 <div class="paragraph">
-<p>Opens your system&#8217;s default email application.<br>
+<p>Opens your system&#8217;s default email application with specified contacts as recipients.<br>
 Format: <code>mail all/</code> or <code>mail t/TAG</code> or <code>mail</code></p>
 </div>
 <div class="ulist">
@@ -822,7 +895,7 @@ Format: <code>mail all/</code> or <code>mail t/TAG</code> or <code>mail</code></
 <p><code>t/TAG</code> flag can be specified with a tag to open the email applications with <em>all contacts belonging to that tag</em> as recipients.<br></p>
 </li>
 <li>
-<p>If no flags are specified, selected contacts are chosen as recipients.</p>
+<p>If no flags are specified, contacts selected with <code>select</code> command are chosen as recipients.</p>
 </li>
 </ul>
 </div>
@@ -832,13 +905,17 @@ Format: <code>mail all/</code> or <code>mail t/TAG</code> or <code>mail</code></
 <div class="ulist">
 <ul>
 <li>
+<p><code>mail all/</code><br>
+opens your email application with all contacts as recipients.<br></p>
+</li>
+<li>
 <p><code>mail t/accountant</code><br>
-opens your email application with all accountants as recipients.<br></p>
+opens your email application with contacts tagged with <code>accountant</code> as recipients.<br></p>
 </li>
 <li>
 <p><code>select 3</code><br>
 <code>mail</code><br>
-opens your email application with person (3rd person in the list panel) as recipient.</p>
+opens your email application with person (3rd person in the list panel) as recipient.<br></p>
 </li>
 </ul>
 </div>
@@ -911,8 +988,8 @@ Format: <code>schedule-edit INDEX a/ACTIVITY</code><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Example: <code>schedule-edit 1 a/Attend meeting with Alexia.</code><br>
-To edit the following activity at <code>INDEX 1</code>:</p>
+<p>Example: <code>schedule-edit 2 a/Attend meeting with Alexia.</code><br>
+To edit the following activity "Attend meeting." at index <code>2</code>:</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/scheduleEditExample.png" alt="scheduleEditExample" width="400">
@@ -954,7 +1031,7 @@ Format: <code>schedule-delete INDEX</code><br></p>
 <ul>
 <li>
 <p>Example: <code>schedule-delete 1</code><br>
-Deletes the following activity at <code>INDEX 1</code> in your schedule:</p>
+Deletes the following activity, "Do report", at index <code>1</code> in your schedule:</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/scheduleDeleteExample.png" alt="scheduleDeleteExample" width="400">
@@ -993,15 +1070,35 @@ Typing <code>m</code> in the box and pressing <em>Tab</em> will auto complete to
 <div class="ulist">
 <ul>
 <li>
-<p>This feature does not work with some flag arguments when used with certain commands.<br>
-E.g. <code>add n/&#8230;&#8203;</code><br>
-If text prediction returns no predictions, it means text prediction is unsupported in that context.</p>
+<p>If there are multiple predicted values, they will be listed down.</p>
 </li>
 <li>
-<p>If there are multiple predicted values, they will be listed down.<br></p>
+<p>If no argument flags are specified, the default value predicted is based on the command&#8217;s default argument.</p>
 </li>
 <li>
-<p>If no argument flags are specified, the default value predicted is based on the command&#8217;s default argument.<br></p>
+<p>This feature does not work with some flag arguments when used with certain commands.
+E.g. <code>add n/Alex</code>.<br>
+If text prediction returns no predictions, it means text prediction is unsupported in that context.
+For full list, refer below.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>List of commands and it&#8217;s arguments prefix supported:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code> : <code>t/</code>, <code>k/</code><br></p>
+</li>
+<li>
+<p><code>find</code> : <code>n/</code>, <code>e/</code>, <code>p/</code>, <code>a/</code>, <code>t/</code>, <code>k/</code>, <code>r/</code></p>
+</li>
+<li>
+<p><code>mail</code> : <code>t/</code>, <code>all/</code></p>
+</li>
+<li>
+<p>For the remaining commands, all <strong>command keywords are supported</strong> but their <strong>arguments are unsupported</strong>.</p>
 </li>
 </ul>
 </div>
@@ -1046,26 +1143,35 @@ Secondly, with the all new backup/restore feature, you can backup your address b
 <p><strong>Q</strong>: What happens if I forget my password?<br>
 <strong>A</strong>: Your Address book will not be recoverable. You will have to delete addressbook.xml.encrypted and choose a backup to restore from.</p>
 </div>
+<div class="paragraph">
+<p><strong>Q</strong>: Strange&#8230;&#8203; sometimes the text prediction doesn&#8217;t seem to work?<br>
+<strong>A</strong>: All command keywords are supported by text prediction. However, some command&#8217;s arguments are <em>not</em> supported. Check <a href="#text-prediction">Section 4.19, &#8220;Text prediction&#8221;</a> for more details.<br></p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="CSVFormat"><a class="link" href="#CSVFormat">Appendix A: Format of an exported CSV file</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For more information about CSV files, you can refer to <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV file</a></p>
+<p>For more information about <code>CSV</code> files, you can refer to <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV file</a></p>
 </div>
 <div class="paragraph">
 <p>When an address book is exported, it will be exported into a CSV file which can be read by excel or spreadsheet applications.</p>
 </div>
 <div class="paragraph">
 <p>Each row refers to a person.<br>
-Each column refers to a separate field of the person.<br>
-If a compulsory field is left blank, the address book will not allow the CSV file to be imported.<br></p>
+Each column refers to a separate field of the person.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/CSV_Format.png" alt="CSV Format" width="790">
 </div>
+</div>
+<div class="paragraph">
+<p>Figure 1. Sample of a <code>CSV</code> file.</p>
+</div>
+<div class="paragraph">
+<p>If a compulsory field is left blank, the address book will not allow the CSV file to be imported.<br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1079,4 +1185,4 @@ If a compulsory field is left blank, the address book will not allow the CSV fil
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 04:53:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:04:18 UTC</div></div></div></body></html>
