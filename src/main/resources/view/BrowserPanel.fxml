@@ -144,7 +144,7 @@
             </VBox>
             <VBox alignment="CENTER" style="-fx-background-color: #eeeff1; -fx-background-radius: 5 5 5 5; -fx-border-radius: 5 5 5 5;" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" text="Welcome to CorpProC" />
+                  <Label alignment="CENTER" text="Welcome to CorpPro" />
                </children>
             </VBox>
          </children>
