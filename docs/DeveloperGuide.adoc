@@ -8,6 +8,7 @@
 :stylesDir: stylesheets
 :xrefstyle: full
 :experimental:
+:linkattrs:
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -420,6 +421,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+// tag::textprediction[]
 === Text Prediction
 
 ==== Current Implementation
@@ -439,25 +441,24 @@ For `CommandCompleter`, following operations are implemented:
 * `CommandCompleter#editPerson()` -- edits a Person’s attributes in each data structure instances.
 * `CommandCompleter#predictText()` -- predicts a list of possible text outputs that will complete and append to the given text input.
 * `CommandCompleter#clearData()` -- clears all data structure instances of their data.
-* `CommandCompleter#reinitialise()` -- replace all data structure instances with data from the given list of persons.
 
 Given below is an example usage scenario and how the text prediction mechanism behaves on a high level. For low level implementation details, refer to <<TextPredictionDetails>>. +
 
-Step 1. User launches the application. `CommandCompleter` is instantiated and will initialise all data structure `Trie` instances with all command keywords and every existing contact’s (aka Person) attributes (name, phone, address, etc.).
+**Step 1.** User launches the application. `CommandCompleter` is instantiated and will initialise all `Trie` instances with all command keywords and every existing contact’s (aka Person) attributes (name, phone, address, etc.).
 
-Step 2. The user keys in `find n/Al` into the command box and presses kbd:[Tab]. This will invoke `predictText()`. The method will subsequently determine (assisted by several helper classes) which Trie instance to retrieve the predictions from. That Trie instance then returns a list of possible predictions, in this case, a list containing `ex Yeoh`.
+**Step 2.** The user keys in `find n/Al` into the command box and presses kbd:[Tab]. This will invoke `predictText()`. The method will subsequently determine (assisted by several helper classes) which `Trie` instance to retrieve the predictions from. That `Trie` instance then returns a list of possible predictions, in this case, a list containing `ex Yeoh`.
 
-Step 3. The user decides to add a new contact with the name _Alex Tan_ using the `add` command. In the `add` logic, the method `Model#insertPersonIntoPrediction(Person person)` will be called which will call the `insertPerson()` method. This method inserts the contact’s (Alex Tan) attributes into the respective Trie instances.
+**Step 3.** The user decides to add a new contact with the name _Alex Tan_ using the `add` command. In the `add` logic, the method `Model#insertPersonIntoPrediction(Person person)` will be called which will call the `insertPerson()` method. This method inserts the contact’s (Alex Tan) attributes into the respective `Trie` instances.
 
-Step 4. The user decides to predict `find n/Al` again. The logic sequence is similar to Step 2. However, since a new contact was added in Step 3, instead of returning `ex Yeoh` only, the returning list will contain both `ex Yeoh` and `ex Tan`.
+**Step 4.** The user decides to predict `find n/Al` again. The logic sequence is similar to Step 2. However, since a new contact was added in Step 3, instead of returning `ex Yeoh` only, the returning list will contain both `ex Yeoh` and `ex Tan`.
 
-Step 5. The user now decides to remove the contact with the name _Alex Yeoh_ from the address book using the `delete 1` command. The `removePerson()` method will be called and removes that contact’s (Alex Yeoh) attributes from the respective Trie instances.
+**Step 5.** The user now decides to remove the contact with the name _Alex Yeoh_ from the address book using the `delete 1` command. The `removePerson()` method will be called and removes that contact’s (Alex Yeoh) attributes from the respective `Trie` instances.
 
-Step 6. The user decides to predict `find n/Al` again. Similar to Step 4 except that Alex Yeoh has been removed, the list returned will contain only `ex Tan`.
+**Step 6.** The user decides to predict `find n/Al` again. Similar to Step 4 except that Alex Yeoh has been removed, the list returned will contain only `ex Tan`.
 
-Step 7. The user decides to clear the address book with `clear` command which invokes `clearData()` method. This clears all attributes data in all Trie instances.
+**Step 7.** The user decides to clear the address book with `clear` command which invokes `clearData()` method. This clears all attributes data in all `Trie` instances.
 
-Step 8. The user wants to predict `find n/Al` again. However since all data were cleared, the returned predictions list contains no entries. No predictions are displayed in feedback panel.
+**Step 8.** The user wants to predict `find n/Al` again. However since all data were cleared, the returned predictions list contains no entries. No predictions are displayed in feedback panel.
 
 The sequence diagram below demonstrates how the `predictText()` method will work:
 
@@ -473,78 +474,25 @@ image::predictText_sequence.png[]
 * **Alternative 2:** Use a simple list to store strings.
 ** Pros: Much more easier and simple to implement.
 ** Cons: Inefficient and takes longer time to retrive the strings. Since the address book can potentially contain large number of contacts, retrieval of strings may take too long, which results in a slow application.
+// end::textprediction[]
 
+// tag::mail[]
 === Email Contacts
 
 ==== Current Implementation
 
-The email feature is facilitated by the `MailCommand` class. It is assisted by the `MailCommandParser` class to determine the mail type (who to email to) based on the user input. It is also supported by the Java built-in `Desktop` class to open the user system’s email application using the mail type as the recipients. It implements the following operation:
+The email feature is facilitated by the `MailCommand` class. It is assisted by the `MailCommandParser` class to determine the `mailType` (who to email to) based on the user input. It is also supported by the Java built-in `Desktop` class to open the user system’s email application using the mail type as the recipients. It implements the following operation:
 
-* `MailCommand#execute()` - opens user system’s email application based on the mail type.
+* `MailCommand#execute()` - opens user system’s email application based on the `mailType`.
 
-Given below is an example usage scenario and how the email mechanism behaves at each step. +
+Given below is an example usage scenario and how the email mechanism behaves at each step: +
 
 Step 1. The user selects contact with the index 1 using the `select` command.
 
-Step 2. The user inputs `mail` into the command box and executes the command. `execute()` checks if the user system is supported by the Java _Desktop_ library and throws an exception if unsupported. In this case, the mail type is contacts selection type. Hence, `MailCommand#mailToSelection()` is invoked. The Uniform Resource Identifier (URI) is built and `Desktop#mail(URI uri)` is called, which opens up the system’s email application.
+Step 2. The user inputs `mail` into the command box and executes the command. `execute()` checks if the user system is supported by the Java _Desktop_ library and throws an exception if unsupported. In this case, the `mailType` is contacts selection type. Hence, `MailCommand#mailToSelection()` is invoked. The Uniform Resource Identifier (URI) is built and `Desktop#mail(URI uri)` is called, which opens up the system’s email application.
 
-Step 3. The user decides to email all contacts with the tag `coworker` and executes `mail t/coworker` in the command box. Similar to Step 2, except that the logic calls `MailCommand#mailToGroups(Model model, Tag tag)` with the input tag as parameter. URI is built with contacts containing the specified tag and the email application opens up.
-
-=== Text prediction
-
-==== Current Implementation
-
-The text prediction feature is fascilitated mainly by 2 classes, `CommandCompleter` and `Trie`. `Trie` contains the underlying data structure with a set of operations that allows predictions to be retrieved. `CommandCompleter` manages several instances of that data structure (`Trie`) such that predictions of different attributes (name, email, address, etc.) and command keywords (add, edit, etc.) can be made. +
-
-For `Trie`, following operations are implemented:
-
-* `Trie#insert(String value)` -- inserts a string into the data structure.
-* `Trie#remove(String value)` -- removes a string from the data structure.
-* `Trie#getPredictList(String prefix)` -- retrieve a list of predicted string values that completes the prefix.
-
-For `CommandCompleter`, following operations are implemented:
-
-* `CommandCompleter#insertPerson(Person person)` -- inserts a Person’s attributes into respective data structure instances.
-* `CommandCompleter#removePerson(Person person)` -- removes a Person’s attributes from respective data structure instances.
-* `CommandCompleter#editPerson(Person personToEdit, Person editedPerson)` -- edits a Person’s attributes in each data structure instances.
-* `CommandCompleter#predictText(String textInput)` -- predicts  a list of possible text outputs that will complete and append to the given `textInput`.
-* `CommandCompleter#clearData()` -- clears all data structure instances of their data.
-* `CommandCompleter#reinitialise(List<Person> personList)` -- replace all data structure instances with data from the given `personList`.
-
-The above operations for `CommandCompleter` are exposed in the `Text Prediction` interface.
-
-Given below is an example usage scenario and how the text prediction mechanism beahves at each step. +
-
-Step 1. The user launches the application. `CommandCompleter` is instantiated and will initialise all data structure instances (`Trie`) with all command keywords and every contact’s (aka Person) attributes (name, phone, address, etc.). Command keywords and each contact attribute using one instance of `Trie`. All of which are managed through the `CommandCompleter`.
-
-Step 2. The user keys in `find n/Al` into the command box and presses kbd:[Tab]. The kbd:[Tab] press will invoke `getCmdPrediction` method exposed by `Logic` interface of which `predictText` exposed by `Text Prediction` will then be invoked. `predictText` will subsequently determine (assisted by several helper classes) if a command keyword or a contact attribute should be predicted. In this case, name attribute (`n/`) is determined. Once determined, the respective `Trie` (underlying data structure) instance’s `getPredictList(String prefix)`  will be called with `Al` input by the user being the `prefix`. +
-
-`getPredictList(String prefix)` then executes a sequence of logic (see Appendix __ for low level implementation details) to return a list of possible predictions, in this case `ex Yeoh`, back to `CommandCompleter`. This list of predictions is then displayed on the feedback panel.
-
-Step 3. The user decides to add a new contact with the name `Alex Tan` using the `add` command. In the `add` logic, the method `Model#insertPersonIntoPrediction(Person person)` will be called which will call the `TextPrediction#insertPerson(Person person)` method. This method inserts each attribute of the contact (Alex Tan) into the respective Trie instances.
-
-Step 4. The user decides to predict `find n/Al` again, similar to Step 2. The logic sequence that follows is the same as Step 2. However, since a new contact was added in Step 3, the name (Alex Tan) was inserted into the name attribute Trie instance as well. Thus, instead of returning `ex Yeoh` only, the returning list will contain both `ex Yeoh` and `ex Tan`. Which will be displayed in the feedback panel.
-
-Step 5. The user now decides to remove the contact with the name `Alex Yeoh` from the address book using the `delete1 command. In the `delete` logic, the method `Model#removePersonFromPrediction(Person person)` will be called which will call the `TextPrediction#removePerson(Person person)` methid. This method removes each attribute of the contact (Alex Yeoh) from the respective Trie instances.
-
-Step 6. The user decides to predict `find n/Al` again. Similar to Step 4, except that Alex Yeoh has been removed, the list returned will contain only `ex Tan`.
-
-Step 7. The user decides to clear the address book with `clear` command which invokes the `Model#clearInPrediction()` which then invokes `TextPrediction#clearData()`. This clears all attributes data in each Trie instances.
-
-Step 8. The user wants to predict `find n/Al` again. However since all data are clear, the returned predictions list contains no entries. No predictions are displayed in feedback panel.
-
-==== Design Considerations
-
-===== Aspect: How to determine which attribute to predict
-
-===== Aspect: Data structure to support text prediction
-
-* **Alternative 1 (current choice):** Use a Directed Acyclic Graph to store strings.
-** Pros: Results in greater computational efficiency than the naive approach (Alternative 2).
-** Cons: Much more difficult to implement and prone to bugs.
-* **Alternative 2:** Use a list to store strings.
-** Pros: Much more easier and simple to implement.
-** Cons: Inefficient and takes longer time to retrive the strings. Since the address book can potentially contain a large number of contacts, retrieval of strings may take too long, which results in a slow application.
+NOTE: If the user decides to email all contacts with the tag `coworker` instead, the user will execute `mail t/coworker` in the command box. Similar to Step 2, except that the logic calls `MailCommand#mailToGroups(Model model, Tag tag)` with the input tag as parameter. URI is built with contacts containing the specified tag and the email application opens up.
+// end::mail[]
 
 // tag::backuprestore[]
 === Back Up and Restore
@@ -577,7 +525,7 @@ This feature implements a new method in `Model` +
 ==== Usage Scenarios
 Given below is the sequence of actions done by the address book when you back up and restore your data. +
 
-====== Saving a Backup
+===== Saving a Backup
 *Step 1.* The user executes `backup` to create a backup snapshot +
 
 *Step 2.* The user input is first parsed by `AddressBookParser` which creates a new `BackupCommand` object. +
@@ -611,7 +559,7 @@ The following sequence diagrams shows you how the add operation works: +
 image::restoreSnapshotsSequenceDiagramLogic.png[width="900"]
 Figure 3. Interactions inside the Logic component for the `restore-snapshots` command.
 
-====== Restoring from a backup
+===== Restoring from a backup
 *Step 1.* The user executes `restore 1` to restore their data with a backup snapshot denoted by an `index of 1` +
 
 *Step 2.* The user input is first parsed by `AddressBookParser` which creates a new `RestoreCommandParser` object. +
@@ -670,7 +618,7 @@ The conversion is as follows: +
 ==== Usage Scenarios
 Given below is the sequence of actions done by the address book when you export and import an address book. +
 
-====== Exporting your address book
+===== Exporting your address book
 *Step 1.* The user executes `export d/C:\Users\USER\Desktop\DemoExport f/test` to export their data to the directory with the file name the user wants. +
 
 *Step 2.* The user input is first parsed by `AddressBookParser` which creates a new `ExportCommandParser` object. +
@@ -699,7 +647,7 @@ Figure 1. Interactions inside the Logic component for the `export d/C:\Users\USE
 image::exportSequenceDiagramStorage.png[Height="200"]
 Figure 2. Interactions inside the Storage component for the `export d/C:\Users\USER\Desktop\DemoExport f/test` command.
 
-====== Importing to your address book
+===== Importing to your address book
 *Step 1.* The user executes `import d/C:\Users\USER\Desktop\DemoExport f/test` to import their data from the directory with the name of the file. +
 
 *Step 2.* The user input is first parsed by `AddressBookParser` which creates a new `ImportCommandParser` object. +
@@ -1872,127 +1820,193 @@ Given below are instructions to test the app manually.
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
 === Adding a person
-. Adding a person to the address book.
-   Prerequisites: Carry out the following commands sequentially:
-.. Test case: `add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
-   Expected: The person is added to the contact list.
-.. Test case: `add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
-   Expected: No person is added as the person "Alexia Tok" is already in the contact list. Error details shown in the status message.
-.. Test case: `add n/Bob Teo p/23q e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
-   Expected: No person is added as the phone number is invalid. Error details shown in the status message.
-.. Test case: `add n/Bob Teo p/99008800 e/ATexamplecom a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
-   Expected: No person is added as the email is invalid. Error details shown in the status message.
-.. Test case: `add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/... k/4.5 d/AT is a good friend t/friend t/colleague 2` +
-   Expected: No person is added as the position is invalid. Error details shown in the status message.
-.. Test case: `add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/6 d/AT is a good friend t/friend t/colleague 2` +
-   Expected: No person is added as the kpi is invalid. Error details shown in the status message.
-.. Test case: `add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/?#$% t/friend t/colleague 2` +
-   Expected: No person is added as the note is invalid. Error details shown in the status message.
-.. Test case: `add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 3` +
-   Expected: No person is added as the tag is invalid. Error details shown in the status message.
+
+Adding a person to the address book. +
+Prerequisites: Carry out the following commands sequentially:
+
+. Test case: `add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
+Expected: The person is added to the contact list.
+. Test case: `add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
+Expected: No person is added as the person "Alexia Tok" is already in the contact list. Error details shown in the status message.
+. Test case: `add n/Bob Teo p/23q e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
+Expected: No person is added as the phone number is invalid. Error details shown in the status message.
+. Test case: `add n/Bob Teo p/99008800 e/ATexamplecom a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
+Expected: No person is added as the email is invalid. Error details shown in the status message.
+. Test case: `add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/... k/4.5 d/AT is a good friend t/friend t/colleague 2` +
+Expected: No person is added as the position is invalid. Error details shown in the status message.
+. Test case: `add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/6 d/AT is a good friend t/friend t/colleague 2` +
+Expected: No person is added as the kpi is invalid. Error details shown in the status message.
+. Test case: `add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/?#$% t/friend t/colleague 2` +
+Expected: No person is added as the note is invalid. Error details shown in the status message.
+. Test case: `add n/Bob Teo p/99008800 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 3` +
+Expected: No person is added as the tag is invalid. Error details shown in the status message.
 
 === Editing a person
-. Editing a person in the address book.
-    Prerequisites: There are multiple persons in the contact list.
-.. Test case: `edit 1 p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
-   Expected: The first person in the contact list is edited.
-.. Test case: `edit 0 p/12345678` +
-   Expected: No person is edited. Error details shown in status message.
-.. Test case: `edit all/ n/Hercules fatty` +
-   Expected: No persons is edited. Error details shown in status message.
 
+Editing a person in the address book. +
+Prerequisites: There are multiple persons in the contact list.
+
+. Test case: `edit 1 p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
+Expected: The first person in the contact list is edited.
+. Test case: `edit 0 p/12345678` +
+Expected: No person is edited. Error details shown in status message.
+. Test case: `edit all/ n/Hercules fatty` +
+Expected: No persons is edited. Error details shown in status message.
+
+=== Listing persons
+
+Listing persons in the address book. +
+Prerequisites: There are multiple persons in the contact list.
+
+. Test case: `list` +
+Expected: All contacts in the address book will be listed and shown in the contacts panel.
+
+. Test case: `list t/colleagues` +
+Expected: All contacts with the tag `colleagues` will be listed and shown.
+
+. Test case: `list k/5.0` +
+Expected: All contacts with KPI value of `5.0` will be listed and shown.
+
+=== Selecting persons
+
+Selecting persons in the address book. +
+Prerequisites: There are at least 7 persons in the contacts list. +
+
+. Test case: `select 1` +
+Expected: First contact will be highlighted in the contacts panel and information shown in information panel.
+
+. Test case: `select 1 2 3` +
+Expected: First three contacts will be highlighted.
+
+. Test case: `select 1-3, 5-7` +
+Expected: First three and 5th to 7th contacts will be highlighted.
+
+=== Predicting text
+
+Invoking text prediction in the address book. +
+Prerequisites: There are the sample contacts in the address book.
+
+. Test case: `f` and press kbd:[Tab]. +
+Expected: The command box should automatically be filled to the command `find `.
+
+. Test case: Continuing from previous test case, append with `n/Al` and press kbd:[Tab]. +
+Expected: The command box should be automatically filled to `find n/Alex Yeoh`.
+
+. Other commands to try: `add`, `delete`, `password`. +
+
+NOTE: Some arguments do not work since they are unsupported. Refer to <<UserGuide.adoc#text-prediction,Text Prediction>> in the User Guide for more details.
 
 === Searching for a person
-. Finding a person in the address book.
-    Prerequisites: The following commands must be entered, "Alexia Tok" and "Marcus Tok" must exist within the contact list: +
-    `add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
-    `add n/Marcus Tok p/12341234 e/MT@example.com a/123, Admiralty, 1234665 r/Cleaner k/4.0 d/MT is a bad cleaner t/notFriend t/colleague 2`
 
-.. Test case: `find n/Tok` +
-    Expected: "Marcus Tok" and "Alexia Tok" will show up in the contacts panel.
-.. Test case: `find k/4.0` +
-    Expected: "Marcus Tok" will show up in the contacts panel.
-.. Test case: `find k/4` +
-    Expected: "Marcus Tok" and "Alexia Tok" will show up in the contacts panel.
-.. Test case: `find r/bass` +
-    Expected: "Alexia Tok" with position "Boss" will show up in the contacts panel. `Keywords guessed: {Boss}` will show at the status message as "bass" is a closer match to "Boss"
+Finding a person in the address book. +
+Prerequisites: The following commands must be entered, "Alexia Tok" and "Marcus Tok" must exist within the contact list: +
+
+* `add n/Alexia Tok p/22224444 e/AT@example.com a/123, Potong Pasir, 1234665 r/Boss k/4.5 d/AT is a good friend t/friend t/colleague 2` +
+* `add n/Marcus Tok p/12341234 e/MT@example.com a/123, Admiraly, 1234665 r/Cleaner k/4.0 d/MT is a bad cleaner t/notFriend t/colleague 2` +
+
+. Test case: `find n/Tok` +
+Expected: "Marcus Tok" and "Alexia Tok" will show up in the contacts panel.
+. Test case: `find k/4.0` +
+Expected: "Marcus Tok" will show up in the contacts panel.
+. Test case: `find k/4` +
+Expected: "Marcus Tok" and "Alexia Tok" will show up in the contacts panel.
+. Test case: `find r/bass` +
+Expected: "Alexia Tok" with position "Boss" will show up in the contacts panel. `Keywords guessed: {Boss}` will show at the status message as "bass" is a closer match to "Boss"
 
 === Locking and unlocking
-. Locking and unlocking of the address book.
-    Prerequisites: Address book should not be locked. Check path at `./data/addressbook.xml` to ensure that it is not encrypted: `addressbook.xml.encrypted` and that `addressbook.xml` exists.
-.. Test case: `password hello` +
-    Expected: A status message "File encrypted!" will be displayed to the user and the contacts panel will be cleared. All further commands at this point will show a message "Address book is locked, please key in password". +
+
+Locking and unlocking of the address book. +
+Prerequisites: Address book should not be locked. Check path at `./data/addressbook.xml` to ensure that it is not encrypted: `addressbook.xml.encrypted` and that `addressbook.xml` exists.
+
+. Test case: `password hello` +
+Expected: A status message "File encrypted!" will be displayed to the user and the contacts panel will be cleared. All further commands at this point will show a message "Address book is locked, please key in password". +
 +
 NOTE: Schedule panel will still be visible and not cleared. But the user will not be able to update it. Closing and re-opening the address book will clear it.
 
-.. Test case: `password test` +
-    Prerequisites: This test case should be carried out after the previous test case. +
-    Expected: A status message "Password mismatch!" will be displayed to the user and the address book will remain locked.
+. Test case: `password test` +
+Prerequisites: This test case should be carried out after the previous test case. +
+Expected: A status message "Password mismatch!" will be displayed to the user and the address book will remain locked.
 
-.. Test case: `password hello` +
-    Prerequisites: This test case should be carried out after the previous test case *a.* +
-    Expected: A status message "File decrypted!" will be displayed to the user, the contacts panel and schedule will be refreshed to show the data that was encrypted. +
+. Test case: `password hello` +
+Prerequisites: This test case should be carried out after the previous test case *1.* +
+Expected: A status message "File decrypted!" will be displayed to the user, the contacts panel and schedule will be refreshed to show the data that was encrypted. +
 
 === Deleting a person
 
-. Deleting a person while all persons are listed
+Deleting a person while all persons are listed. +
+Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
-   Expected: Similar to previous.
+. Test case: `delete 1` +
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+. Test case: `delete 1 2 3` +
+Expected: First three contacts will be deleted.
+. Test case: `delete 1-3, 5-7` +
+Expected: First three and 5th to 7th contacts will be deleted.
+. Test case: `delete 0` +
+Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
+Expected: Similar to previous.
+
+=== Updating the Schedule
+
+Updating activities in the schedule. +
+Prerequisites: Carry out the following commands sequentially:
+
+. Test case: `schedule-add d/30/10/2018 a/Attend meeting with Alex.` +
+Expected: activity "Attend meeting with Alex." is added to the schedule.
+. Test case: `schedule-add d/30/10/2018 a/Attend meeting with Alex.` +
+Expected: another activity, "Attend meeting with Alex.", is added to the schedule.
+. Test case: `schedule-edit 2 a/Attend meeting with Alexia.` +
+Expected: The second activity is edited to "Attend meeting with Alexia.".
+. Test case: `schedule-edit 0 a/Test bugs` +
+Expected: No activity is edited. Error details shown in the status message. Schedule panel remains the same.
+. Test case: `schedule-delete 1` +
+Expected: First activity is deleted from the schedule.
+. Test case: `schedule-delete 0` +
+Expected: No activity is deleted. Error details shown in the status message.
+
+=== Saving data
+
+Dealing with missing/corrupted data files. +
+Prerequisites: List all persons using the `list` command. Multiple persons in the list. +
+
+. Test case: `delete 1` +
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+. Test case: `delete 0` +
+Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
+Expected: Similar to previous.
 
 === Backing up and restoring data in the address book
 
-Backing up and restoring data in the address book.
+Backing up and restoring data in the address book. +
+Prerequisites: Make a backup with the `backup` command. +
 
-. Prerequisites: Make a backup with the `backup` command. +
 . Test case: `restore-snapshot` +
-   Expected: One snapshot will be shown on the screen if this is your first backup. If this is not your first backup, the list will be populated with older snapshots. +
+Expected: One snapshot will be shown on the screen if this is your first backup. If this is not your first backup, the list will be populated with older snapshots. +
 . Test case: `restore 0` +
-   Expected: No data restored. Error details shown in the status message. Status bar remains the same.
+Expected: No data restored. Error details shown in the status message. Status bar remains the same.
 . Other incorrect restore commands to try: `restore`, `delete x` (where x is larger than the list size) +
-   Expected: Similar to previous.
+Expected: Similar to previous.
 
 === Exporting data from the address book
 
-Exporting data from the address book.
+Exporting data from the address book. Prerequisites: Make sure the address book is populated with people +
 
-. Prerequisites: Make sure the address book is populated with people +
 . Test case: `export` +
-   Expected: A copy of the contacts in `CSV` format will be created in a `exports` folder in the root directory +
+Expected: A copy of the contacts in `CSV` format will be created in a `exports` folder in the root directory +
 . Test case: `export DIRECTORY FILENAME` +
-   Expected: A copy of the contacts in `CSV` format will be created in the designated folder with the designated name.
+Expected: A copy of the contacts in `CSV` format will be created in the designated folder with the designated name.
 . Any directory or file name that does not exist: `export FALSE_DIRECTORY FILENAME`, `export DIRECTORY FALSE_FILENAME`. +
-   Expected: Nothing will be created. An error will be thrown to the user. Status bar will remain the same.
+Expected: Nothing will be created. An error will be thrown to the user. Status bar will remain the same.
 
 === Importing data to the address book
 
 Importing data from the address book.
 
 . Test case: `import DIRECTORY FILENAME` +
-   Expected: A copy of the contacts in `CSV` format will be created in the designated folder with the designated name.
+Expected: A copy of the contacts in `CSV` format will be created in the designated folder with the designated name.
 . Test case: `import` +
-   Expected: Nothing will be created. An error will be thrown to the user. Status bar will remain the same.
+Expected: Nothing will be created. An error will be thrown to the user. Status bar will remain the same.
 . Any directory or file name that does not exist: `import FALSE_DIRECTORY FILENAME`, `import DIRECTORY FALSE_FILENAME`. +
-   Expected: Similar to previous
-
-=== Updating the Schedule
-
-. Updating activities in the schedule
-    Prerequisites: Carry out the following commands sequentially:
-.. Test case: `schedule-add d/30/10/2018 a/Attend meeting with Alex.` +
-   Expected: activity "Attend meeting with Alex." is added to the schedule.
-.. Test case: `schedule-add d/30/10/2018 a/Attend meeting with Alex.` +
-   Expected: another activity, "Attend meeting with Alex.", is added to the schedule.
-.. Test case: `schedule-edit 2 a/Attend meeting with Alexia.` +
-   Expected: The second activity is edited to "Attend meeting with Alexia.".
-.. Test case: `schedule-edit 0 a/Test bugs` +
-   Expected: No activity is edited. Error details shown in the status message. Schedule panel remains the same.
-.. Test case: `schedule-delete 1` +
-   Expected: First activity is deleted from the schedule.
-.. Test case: `schedule-delete 0` +
-   Expected: No activity is deleted. Error details shown in the status message.
+Expected: Similar to previous
