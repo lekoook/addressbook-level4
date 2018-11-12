@@ -4,14 +4,14 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by Team W12-3.
+CorpPro was developed by Team W12-3.
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
 === Lee Kok Teng
 image::lekoook.png[width="150", align="left"]
-{empty}[https://github.com/lekoook[github]]
+{empty}[https://github.com/lekoook[GitHub]][<<lekoook#, Portfolio>>]
 
 Role: Developer, Team Lead +
 Responsibilities: Scheduling and Tracking
@@ -20,7 +20,7 @@ Responsibilities: Scheduling and Tracking
 
 === Lim Ming Hong
 image::limminghong.png[width="150", align="left"]
-{empty}[https://github.com/Limminghong[github]][<<limminghong#, portfolio>>]
+{empty}[https://github.com/Limminghong[GitHub]][<<limminghong#, Portfolio>>]
 
 Role: Developer +
 Responsibilities: Code quality assurance
@@ -29,7 +29,7 @@ Responsibilities: Code quality assurance
 
 === Lim Pei Ying
 image::peiying98.png[width="150", align="left"]
-{empty}[http://github.com/m133225[github]]
+{empty}[http://github.com/m133225[GitHub]]
 
 Role: Developer +
 Responsibilities: Documentation
@@ -38,7 +38,7 @@ Responsibilities: Documentation
 
 === Low Gin Wee
 image::lowginwee.png[width="150", align="left"]
-{empty}[https://github.com/LowGinWee[github]][<<lowginwee#, portfolio>>]
+{empty}[https://github.com/LowGinWee[GitHub]][<<lowginwee#, Portfolio>>]
 
 Role: Developer +
 Responsibilities: Deliverables and deadline
@@ -46,7 +46,7 @@ Responsibilities: Deliverables and deadline
 '''
 === Ler Wei Sheng
 image::lws803.png[width="150", align="left"]
-{empty}[https://github.com/lws803[github]][<<lws803#, portfolio>>]
+{empty}[https://github.com/lws803[GitHub]][<<lws803#, Portfolio>>]
 
 Role: Developer +
 Responsibilities: Testing, Integration

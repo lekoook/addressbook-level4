@@ -1965,18 +1965,6 @@ Expected: First activity is deleted from the schedule.
 . Test case: `schedule-delete 0` +
 Expected: No activity is deleted. Error details shown in the status message.
 
-=== Saving data
-
-Dealing with missing/corrupted data files. +
-Prerequisites: List all persons using the `list` command. Multiple persons in the list. +
-
-. Test case: `delete 1` +
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-. Test case: `delete 0` +
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
-Expected: Similar to previous.
-
 === Backing up and restoring data in the address book
 
 Backing up and restoring data in the address book. +

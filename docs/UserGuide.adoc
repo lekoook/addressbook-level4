@@ -492,7 +492,7 @@ image::scheduleDeleteExample.png[width="400"]
 === Text prediction
 
 Text prediction feature allows you to complete your command faster with less typing. +
-Invoke this feature by pressing the _Tab_ key on the keyboard. +
+Invoke this feature by pressing the kbd:[Tab] key on the keyboard. +
 
 You can invoke this feature on _most_ command keywords and arguments: +
 
@@ -502,8 +502,8 @@ You can invoke this feature on _most_ command keywords and arguments: +
 For example, given an address book consisting of a contact with the name _Alex Yeoh_: +
 Typing `m` in the box and pressing _Tab_ will auto complete to the `mail` command. Then, typing `mail n/A` and pressing _Tab_ will auto complete to `mail n/Alex Yeoh` for you. +
 
-Note: +
-
+[NOTE]
+====
 * If there are multiple predicted values, they will be listed down.
 * If no argument flags are specified, the default value predicted is based on the command's default argument.
 * This feature does not work with some flag arguments when used with certain commands.
@@ -517,6 +517,7 @@ List of commands and it's arguments prefix supported: +
 * `find` : `n/`, `e/`, `p/`, `a/`, `t/`, `k/`, `r/`
 * `mail` : `t/`, `all/`
 * For the remaining commands, all *command keywords are supported* but their *arguments are unsupported*.
+====
 // end::textprediction[]
 
 === Custom XML path
