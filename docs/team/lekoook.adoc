@@ -1,0 +1,74 @@
+= Lee Kok Teng - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: CorpPro
+
+---
+
+== Overview
+CorpPro is an address book application that allows you as a corporate user to better manage your contacts and assist in your daily work tasks. The primary interaction between you and application is done through a command line interface that is designed to allow you to do more with less typing. It also has a graphical user interface that provides you with intuitive visual feedbacks. The application is written in Java and JavaFX. This portfolio is to document the contributions I have made to this address book project. It contains descriptions and explanations of various features I have implemented and enhanced.
+
+== Summary of contributions
+
+* *Major enhancement 1*: Added predictive text typing to allow faster commands input.
+** What it does: Allows users to complete a single line of command by predicting the next sequence of texts.
+** Justification: Some commands may be long winded (eg. a particularly long name) and users may take longer time to type character by character. This feature will allow users to save a lot of time by eliminating such long winded typing.
+** Highlights: This feature is designed to work with the existing commands as well as commands that could be added in future. It utilises data structure concepts I have learned in other university modules to solve the problem of predictive typing.
+** Credits: This feature was inspired by the tab completion feature that exists in bash shell programs.
+* *Major enhancement 2*: Added ability to email contacts so user can communicate with them via email.
+** What it does: Allows users to email your contacts using a dedicated email application in their computer.
+** Justification: Corportate users regularly need to communicate with their colleagues/clients through email. This feature enables the user to quickly email the target recipients from the address book.
+** Highlights: This feature will work on various common and mainstream operating systems and opens the email application the use commonly uses. This feature gave the opportunity for me to learn and use several built-in Java library classes.
+
+* *Minor enhancements*:
+** Improved the `select` command so users can select a single or multiple contacts.
+** Improved the `delete` command so users can delete a single or multiple contacts.
+** Improved the `list` command so users can list contacts filtered by certain attributes.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=lekoook&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Reposense]][https://github.com/CS2113-AY1819S1-W12-3/main/pulls?utf8=%E2%9C%93&q=author%3Alekoook+[GitHub Pull Requests]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
+*** Drafted agendas and minutes for weekly meetings.
+*** Created project (user stories) in team's GitHub organisation page.
+** Documentation:
+*** Adapted original User Guide and Developer Guide to suit CorpPro.
+*** Updated Features section of User Guide with the minor enhancements (select, delete, list commands).
+** Community:
+*** Pull Requests reviewed (non trivial): [https://github.com/CS2113-AY1819S1-W12-3/main/pull/70[#70]][https://github.com/CS2113-AY1819S1-W12-3/main/pull/79[#79]]
+*** Issues reports and resolves: [https://github.com/CS2113-AY1819S1-W12-3/main/issues/33[#33]][https://github.com/CS2113-AY1819S1-W12-3/main/issues/64[#64]][https://github.com/CS2113-AY1819S1-W12-3/main/issues/135[#135]][more: https://github.com/CS2113-AY1819S1-W12-3/main/issues?utf8=%E2%9C%93&q=is%3Aissue+assignee%3Alekoook+[GitHub Issues tracker]]
+** Tools:
+*** Integrated a new Github plugin (Travis ci) to the team repo.
+*** Enabled auto publishing of documents in team repo.
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=list]
+
+include::../UserGuide.adoc[tag=select]
+
+include::../UserGuide.adoc[tag=delete]
+
+include::../UserGuide.adoc[tag=mail]
+
+include::../UserGuide.adoc[tag=textprediction]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=textprediction]
+
+include::../DeveloperGuide.adoc[tag=mail]
+
+

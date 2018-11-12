@@ -114,6 +114,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@nus.com a/311, Clementi Ave 2, #02-25 r/Secretary k/4.99 d/John is forgetful t/Accounting t/To Liase 2`
 * `add n/Betsy Crowe t/same office e/betsycrowe@microhard.com a/Microhard p/1234567 r/CEO t/boss`
 
+// tag::list[]
 === Listing all persons : `list`
 
 Displays a list of persons in your address book. +
@@ -128,6 +129,7 @@ Format: `list` or `list t/TAG` or `list k/KPI`
 Example:
 
 * You can input `list t/HumanResource` to display all persons with `HumanResource` tag in your address book.
+// end::list[]
 
 === Editing a person : `edit`
 
@@ -210,6 +212,7 @@ TIP: To narrow down your searches, try to be more specific in the phone number y
 
 // end::search[]
 
+// tag::delete[]
 === Selecting a person : `delete`
 
 Deletes a single or multiple contacts identified by their index number in the contacts list displayed on the left. +
@@ -236,7 +239,9 @@ Deletes the 1st to the 3rd contact and 6th to the 9th contact in the address boo
 * `find n/Betsy` +
 `delete 1` +
 Deletes the 1st contact in the results of the `find` command.
+// end::delete[]
 
+// tag::select[]
 === Selecting a person : `select`
 
 Selects a single or multiple contacts identified by their index number in the contacts list displayed on the left. +
@@ -263,6 +268,7 @@ Selects the 1st to the 3rd contact and 6th to the 9th contact in the address boo
 * `find n/Betsy` +
 `select 1` +
 Selects the 1st contact in the results of the `find` command.
+// end::select[]
 
 === Listing entered commands : `history`
 
@@ -408,6 +414,7 @@ NOTE: Entering `password helloworld` again unlocks the  address book and restore
 
 // end::dataencryption[]
 
+// tag::mail[]
 === Email contacts : `mail`
 
 Opens your system's default email application with specified contacts as recipients. +
@@ -430,6 +437,7 @@ opens your email application with contacts tagged with `accountant` as recipient
 * `select 3` +
 `mail` +
 opens your email application with person (3rd person in the list panel) as recipient. +
+// end::mail[]
 
 // tag::schedule[]
 === Schedule : `schedule`
@@ -480,6 +488,7 @@ Deletes the following activity, "Do report", at index `1` in your schedule:
 image::scheduleDeleteExample.png[width="400"]
 // end::schedule[]
 
+// tag::textprediction[]
 === Text prediction
 
 Text prediction feature allows you to complete your command faster with less typing. +
@@ -508,6 +517,7 @@ List of commands and it's arguments prefix supported: +
 * `find` : `n/`, `e/`, `p/`, `a/`, `t/`, `k/`, `r/`
 * `mail` : `t/`, `all/`
 * For the remaining commands, all *command keywords are supported* but their *arguments are unsupported*.
+// end::textprediction[]
 
 === Custom XML path
 All addressbook data is stored in addressbook.xml file located in *data/* folder in the same directory as your jar file.

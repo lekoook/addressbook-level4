@@ -421,6 +421,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+// tag::textprediction[]
 === Text Prediction
 
 ==== Current Implementation
@@ -473,7 +474,9 @@ image::predictText_sequence.png[]
 * **Alternative 2:** Use a simple list to store strings.
 ** Pros: Much more easier and simple to implement.
 ** Cons: Inefficient and takes longer time to retrive the strings. Since the address book can potentially contain large number of contacts, retrieval of strings may take too long, which results in a slow application.
+// end::textprediction[]
 
+// tag::mail[]
 === Email Contacts
 
 ==== Current Implementation
@@ -489,6 +492,7 @@ Step 1. The user selects contact with the index 1 using the `select` command.
 Step 2. The user inputs `mail` into the command box and executes the command. `execute()` checks if the user system is supported by the Java _Desktop_ library and throws an exception if unsupported. In this case, the `mailType` is contacts selection type. Hence, `MailCommand#mailToSelection()` is invoked. The Uniform Resource Identifier (URI) is built and `Desktop#mail(URI uri)` is called, which opens up the system’s email application.
 
 NOTE: If the user decides to email all contacts with the tag `coworker` instead, the user will execute `mail t/coworker` in the command box. Similar to Step 2, except that the logic calls `MailCommand#mailToGroups(Model model, Tag tag)` with the input tag as parameter. URI is built with contacts containing the specified tag and the email application opens up.
+// end::mail[]
 
 // tag::backuprestore[]
 === Back Up and Restore
