@@ -7,6 +7,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
+:experimental:
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -420,36 +421,75 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
-=== Text prediction
+=== Text Prediction
 
-The low level implementation of text prediction is done in `Trie`. The internal data structure is a _Tree_ structure where each character is stored as a node and strings built into a single tree.
+==== Current Implementation
 
-A node has a `endNode` flag that determines if that node represents the last character of the predicted string value. If such a node is reached, the entire string value is appended to the prediction list.
+The text prediction feature is facilitated mainly by 2 classes, `CommandCompleter` and `Trie`. `Trie` contains the underlying data structure with a set of operations that allows predictions to be retrieved. `CommandCompleter` manages several instances of that data structure such that predictions of different attributes (name, email, address, etc.) and command keywords (add, edit, etc.) can be made. +
 
-The data structure can be visualised in the diagram below:
-
-image::text_prediction_general.png[width="800"]
-
-In addition, `Trie` implements the following main operations:
+For `Trie`, following operations are implemented:
 
 * `Trie#insert(String value)` -- inserts a string into the data structure.
 * `Trie#remove(String value)` -- removes a string from the data structure.
-* `Trie#getPredictList(String prefix)` -- retrieve a list of predicted string values that completes the prefix.
+* `Trie#getPredictList(String prefix)` -- retrieves a list of predicted string values that completes the prefix.
 
-The prediction implementation is achieved by utilising depth first search (DFS) in the data structure, starting from the node representing the last character of the prefix.
+For `CommandCompleter`, following operations are implemented:
 
-The prediction algorithm is illustrated with the help of the following diagram:
+* `CommandCompleter#insertPerson()` -- inserts a Person’s attributes into respective data structure instances.
+* `CommandCompleter#removePerson()` -- removes a Person’s attributes from respective data structure instances.
+* `CommandCompleter#editPerson()` -- edits a Person’s attributes in each data structure instances.
+* `CommandCompleter#predictText()` -- predicts a list of possible text outputs that will complete and append to the given text input.
+* `CommandCompleter#clearData()` -- clears all data structure instances of their data.
+* `CommandCompleter#reinitialise()` -- replace all data structure instances with data from the given list of persons.
 
-image::text_prediction_predict.png[width="800"]
+Given below is an example usage scenario and how the text prediction mechanism behaves on a high level. For low level implementation details, refer to <<TextPredictionDetails>>. +
 
-For example, we call the method `getPredictList("wom")`.
+Step 1. User launches the application. `CommandCompleter` is instantiated and will initialise all data structure `Trie` instances with all command keywords and every existing contact’s (aka Person) attributes (name, phone, address, etc.).
 
-The algorithm works by first traversing the route (green circles) that represents `"wom"` and stopping at the `m` node (red circle). The algorithm procedes to DFS from that node and explore all it's children nodes (blue circles).
+Step 2. The user keys in `find n/Al` into the command box and presses kbd:[Tab]. This will invoke `predictText()`. The method will subsequently determine (assisted by several helper classes) which Trie instance to retrieve the predictions from. That Trie instance then returns a list of possible predictions, in this case, a list containing `ex Yeoh`.
 
-Hence, calling `getPredictList("wom")` will return a list containing the elements:
+Step 3. The user decides to add a new contact with the name _Alex Tan_ using the `add` command. In the `add` logic, the method `Model#insertPersonIntoPrediction(Person person)` will be called which will call the `insertPerson()` method. This method inserts the contact’s (Alex Tan) attributes into the respective Trie instances.
 
-* `"en"`
-* `"ble"`
+Step 4. The user decides to predict `find n/Al` again. The logic sequence is similar to Step 2. However, since a new contact was added in Step 3, instead of returning `ex Yeoh` only, the returning list will contain both `ex Yeoh` and `ex Tan`.
+
+Step 5. The user now decides to remove the contact with the name _Alex Yeoh_ from the address book using the `delete 1` command. The `removePerson()` method will be called and removes that contact’s (Alex Yeoh) attributes from the respective Trie instances.
+
+Step 6. The user decides to predict `find n/Al` again. Similar to Step 4 except that Alex Yeoh has been removed, the list returned will contain only `ex Tan`.
+
+Step 7. The user decides to clear the address book with `clear` command which invokes `clearData()` method. This clears all attributes data in all Trie instances.
+
+Step 8. The user wants to predict `find n/Al` again. However since all data were cleared, the returned predictions list contains no entries. No predictions are displayed in feedback panel.
+
+The sequence diagram below demonstrates how the `predictText()` method will work:
+
+image::predictText_sequence.png[]
+
+==== Design Considerations
+
+===== Aspect: Data structure used to support text prediction
+
+* **Alternative 1 (current choice):** Use a Directed Acyclic Graph to store strings.
+** Pros: Results in greater computational efficiency than the naive approach (Alternative 2).
+** Cons: Much more difficult to implement and prone to bugs.
+* **Alternative 2:** Use a simple list to store strings.
+** Pros: Much more easier and simple to implement.
+** Cons: Inefficient and takes longer time to retrive the strings. Since the address book can potentially contain large number of contacts, retrieval of strings may take too long, which results in a slow application.
+
+=== Email Contacts
+
+==== Current Implementation
+
+The email feature is facilitated by the `MailCommand` class. It is assisted by the `MailCommandParser` class to determine the mail type (who to email to) based on the user input. It is also supported by the Java built-in `Desktop` class to open the user system’s email application using the mail type as the recipients. It implements the following operation:
+
+* `MailCommand#execute()` - opens user system’s email application based on the mail type.
+
+Given below is an example usage scenario and how the email mechanism behaves at each step. +
+
+Step 1. The user selects contact with the index 1 using the `select` command.
+
+Step 2. The user inputs `mail` into the command box and executes the command. `execute()` checks if the user system is supported by the Java _Desktop_ library and throws an exception if unsupported. In this case, the mail type is contacts selection type. Hence, `MailCommand#mailToSelection()` is invoked. The Uniform Resource Identifier (URI) is built and `Desktop#mail(URI uri)` is called, which opens up the system’s email application.
+
+Step 3. The user decides to email all contacts with the tag `coworker` and executes `mail t/coworker` in the command box. Similar to Step 2, except that the logic calls `MailCommand#mailToGroups(Model model, Tag tag)` with the input tag as parameter. URI is built with contacts containing the specified tag and the email application opens up.
 
 // tag::backuprestore[]
 === Back Up and Restore
@@ -959,6 +999,39 @@ Here are the steps to create a new release.
 A project often depends on third-party libraries. For example, Address Book depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
+
+[[TextPredictionDetails]]
+[appendix]
+== Text Prediction low level details
+
+The low level implementation of text prediction is done in `Trie`. The internal data structure is a _Tree_ structure where each character is stored as a node and strings built into a single tree.
+
+A node has a `endNode` flag that determines if that node represents the last character of the predicted string value. If such a node is reached, the entire string value is appended to the prediction list.
+
+The data structure can be visualised in the diagram below:
+
+image::text_prediction_general.png[width="800"]
+
+In addition, `Trie` implements the following main operations:
+
+* `Trie#insert(String value)` -- inserts a string into the data structure.
+* `Trie#remove(String value)` -- removes a string from the data structure.
+* `Trie#getPredictList(String prefix)` -- retrieve a list of predicted string values that completes the prefix.
+
+The prediction implementation is achieved by utilising depth first search (DFS) algorithm in the data structure, starting from the node representing the last character of the prefix.
+
+The prediction algorithm is illustrated with the help of the following diagram:
+
+image::text_prediction_predict.png[width="800"]
+
+For example, we call the method `getPredictList("wom")`.
+
+The algorithm works by first traversing the route (green circles) that represents `"wom"` and stopping at the `m` node (red circle). The algorithm proceeds to DFS from that node and explore all it's children nodes (blue circles).
+
+Hence, calling `getPredictList("wom")` will return a list containing the elements:
+
+* `"en"`
+* `"ble"`
 
 [[GetStartedProgramming]]
 [appendix]
