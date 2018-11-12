@@ -32,9 +32,10 @@ CorpPro is an address book application that allows you as a corporate user to be
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
+*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub.
 *** Drafted agendas and minutes for weekly meetings.
 *** Created project (user stories) in team's GitHub organisation page.
+*** Managed Issue tracker and Pull Requests on GitHub.
 ** Documentation:
 *** Adapted original User Guide and Developer Guide to suit CorpPro.
 *** Updated Features section of User Guide with the minor enhancements (select, delete, list commands).
@@ -42,7 +43,7 @@ CorpPro is an address book application that allows you as a corporate user to be
 *** Pull Requests reviewed (non trivial): [https://github.com/CS2113-AY1819S1-W12-3/main/pull/70[#70]][https://github.com/CS2113-AY1819S1-W12-3/main/pull/79[#79]]
 *** Issues reports and resolves: [https://github.com/CS2113-AY1819S1-W12-3/main/issues/33[#33]][https://github.com/CS2113-AY1819S1-W12-3/main/issues/64[#64]][https://github.com/CS2113-AY1819S1-W12-3/main/issues/135[#135]][more: https://github.com/CS2113-AY1819S1-W12-3/main/issues?utf8=%E2%9C%93&q=is%3Aissue+assignee%3Alekoook+[GitHub Issues tracker]]
 ** Tools:
-*** Integrated a new Github plugin (Travis ci) to the team repo.
+*** Integrated a new Github plugin (Travis CI) to the team repo.
 *** Enabled auto publishing of documents in team repo.
 
 == Contributions to the User Guide
