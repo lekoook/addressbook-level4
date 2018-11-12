@@ -34,7 +34,7 @@ search for contacts who live in Jurong West and are tagged as friends.
 They can instead edit the preference file to change the name and location of their data storage file path.
 ** Highlights: This feature requires implementing the json reader in `UserPrefs` class and storing it as a public variable for other classes to access.
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=lws803&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Reposense]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=lws803[Reposense]]
 
 * *Other contributions*:
 

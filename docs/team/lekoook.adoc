@@ -27,7 +27,7 @@ CorpPro is an address book application that allows you as a corporate user to be
 ** Improved the `delete` command so users can delete a single or multiple contacts.
 ** Improved the `list` command so users can list contacts filtered by certain attributes.
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=lekoook&sort=displayName&since=2018-09-12&until=2018-11-05&timeframe=day&reverse=false&repoSort=true[Reposense]][https://github.com/CS2113-AY1819S1-W12-3/main/pulls?utf8=%E2%9C%93&q=author%3Alekoook+[GitHub Pull Requests]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=lekoook[Reposense]][https://github.com/CS2113-AY1819S1-W12-3/main/pulls?utf8=%E2%9C%93&q=author%3Alekoook+[GitHub Pull Requests]]
 
 * *Other contributions*:
 
